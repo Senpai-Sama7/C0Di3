@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C0Di3 - The Future of Autonomous Cybersecurity</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -19,6 +20,7 @@
             overflow-x: hidden;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         body::before {
@@ -28,7 +30,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('background.jpg') no-repeat center/cover;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 100, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 200, 255, 0.1) 0%, transparent 20%);
             opacity: 0.4;
             z-index: -3;
         }
@@ -71,6 +75,7 @@
             background: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             animation: float 8s infinite ease-in-out;
+            transition: transform 0.2s ease-out;
         }
 
         @keyframes float {
@@ -85,11 +90,18 @@
             }
         }
 
-        /* — Video Fade Effect — */
+        /* — Video Fade Effect & Visualizer — */
+        .video-section {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
         .video-container {
             position: relative;
             display: inline-block;
-            margin: 2rem auto;
+            margin: 0 auto;
             -webkit-mask-image: linear-gradient(
                 to right, 
                 transparent 0%, 
@@ -104,12 +116,65 @@
                 black 85%, 
                 transparent 100%
             );
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 150, 255, 0.4);
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .video-container:hover {
+            transform: perspective(1000px) rotateY(3deg) rotateX(1deg);
+            box-shadow: 0 0 50px rgba(0, 200, 255, 0.7);
+        }
+
+        .video-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0, 100, 255, 0.2), rgba(0, 200, 255, 0.1));
+            z-index: 1;
+            pointer-events: none;
         }
 
         .video-container video {
             display: block;
             max-width: 100%;
             height: auto;
+            border-radius: 12px;
+            transform: scale(1.02);
+        }
+
+        .visualizer {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            right: 0;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 3px;
+            z-index: 2;
+        }
+
+        .bar {
+            width: 4px;
+            height: 5px;
+            background: linear-gradient(to top, #00ffff, #0080ff);
+            border-radius: 2px 2px 0 0;
+            animation: pulse 1.2s infinite alternate;
+            animation-delay: calc(var(--i) * 0.1s);
+        }
+
+        @keyframes pulse {
+            to {
+                height: 30px;
+                opacity: 0.8;
+            }
         }
 
         /* — Glass-morphic form controls — */
@@ -126,26 +191,28 @@
             margin-bottom: 0.4rem;
             display: block;
             text-align: left;
+            text-shadow: 0 0 5px rgba(0, 200, 255, 0.5);
         }
 
         .form-input,
         .form-select {
             background: rgba(255, 255, 255, 0.05);
-            border: none;
+            border: 1px solid rgba(0, 150, 255, 0.3);
             outline: none;
             padding: 0.75rem 1rem;
             border-radius: 0.5rem;
             font-size: 1rem;
             color: #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(0, 150, 255, 0.2);
             backdrop-filter: blur(6px);
-            transition: box-shadow 0.25s ease, transform 0.25s ease;
+            transition: all 0.25s ease;
         }
 
         .form-input:focus,
         .form-select:focus {
-            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.6);
+            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.6), inset 0 0 15px rgba(0, 200, 255, 0.4);
             transform: translateY(-2px);
+            border-color: #00ffff;
         }
 
         .form-input::placeholder {
@@ -179,6 +246,14 @@
             z-index: 1000;
             padding: 1rem 0;
             transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
         }
 
         nav {
@@ -195,6 +270,12 @@
             font-weight: 700;
             color: #00ffff;
             text-decoration: none;
+            text-shadow: 0 0 10px rgba(0, 200, 255, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            text-shadow: 0 0 15px rgba(0, 255, 255, 1);
         }
 
         .logo-icon {
@@ -231,12 +312,16 @@
             color: #ffffff;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             position: relative;
+            padding: 5px 10px;
+            border-radius: 4px;
         }
 
         .nav-links a:hover {
             color: #00ffff;
+            background: rgba(0, 150, 255, 0.1);
+            text-shadow: 0 0 10px rgba(0, 200, 255, 0.7);
         }
 
         .nav-links a::after {
@@ -262,11 +347,14 @@
             text-align: center;
             position: relative;
             padding: 6rem 0;
+            perspective: 1000px;
         }
 
         .hero-content {
             max-width: 800px;
             z-index: 2;
+            position: relative;
+            transform-style: preserve-3d;
         }
 
         .hero h1 {
@@ -279,6 +367,7 @@
             background-clip: text;
             line-height: 1.2;
             animation: glow 3s ease-in-out infinite alternate;
+            transform: translateZ(20px);
         }
 
         @keyframes glow {
@@ -297,6 +386,7 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            transform: translateZ(10px);
         }
 
         .hero-stats {
@@ -304,6 +394,7 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
             margin: 3rem 0;
+            transform: translateZ(30px);
         }
 
         .stat-card {
@@ -313,12 +404,34 @@
             padding: 1.5rem;
             text-align: center;
             backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            perspective: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(0, 150, 255, 0.1), transparent);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
         }
 
         .stat-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) translateZ(10px);
             box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+            border-color: rgba(0, 255, 255, 0.5);
         }
 
         .stat-number {
@@ -326,6 +439,7 @@
             font-weight: 700;
             color: #00ffff;
             display: block;
+            text-shadow: 0 0 10px rgba(0, 200, 255, 0.7);
         }
 
         .stat-label {
@@ -344,6 +458,8 @@
             backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
+            transform-style: preserve-3d;
+            transform: translateZ(20px);
         }
 
         .cta-section::before {
@@ -376,6 +492,7 @@
             font-weight: 700;
             margin-bottom: 1rem;
             color: #ffffff;
+            text-shadow: 0 0 10px rgba(0, 200, 255, 0.7);
         }
 
         .cta-subtitle {
@@ -398,6 +515,8 @@
             letter-spacing: 1px;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 150, 255, 0.5);
+            transform: translateZ(10px);
         }
 
         .cta-button::before {
@@ -416,7 +535,7 @@
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
+            transform: translateY(-2px) translateZ(15px);
             box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
         }
 
@@ -439,6 +558,9 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            perspective: 1000px;
         }
 
         .feature-card::before {
@@ -458,7 +580,7 @@
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) translateZ(10px);
             border-color: rgba(0, 255, 255, 0.5);
             box-shadow: 0 20px 40px rgba(0, 255, 255, 0.1);
         }
@@ -473,6 +595,7 @@
             justify-content: center;
             margin-bottom: 1.5rem;
             font-size: 1.5rem;
+            box-shadow: 0 0 20px rgba(0, 200, 255, 0.4);
         }
 
         .feature-title {
@@ -480,6 +603,7 @@
             font-weight: 600;
             margin-bottom: 1rem;
             color: #ffffff;
+            text-shadow: 0 0 5px rgba(0, 200, 255, 0.5);
         }
 
         .feature-description {
@@ -496,6 +620,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            transform: translateZ(10px);
         }
 
         .section-subtitle {
@@ -504,6 +629,7 @@
             color: #b0b0b0;
             max-width: 600px;
             margin: 0 auto;
+            transform: translateZ(5px);
         }
 
         .tech-stack {
@@ -525,10 +651,11 @@
             padding: 1.5rem;
             text-align: center;
             transition: all 0.3s ease;
+            transform: translateZ(0);
         }
 
         .tech-item:hover {
-            transform: translateY(-3px);
+            transform: translateY(-3px) translateZ(5px);
             border-color: rgba(0, 255, 255, 0.5);
             box-shadow: 0 10px 25px rgba(0, 255, 255, 0.15);
         }
@@ -537,6 +664,7 @@
             font-weight: 600;
             color: #00ffff;
             margin-bottom: 0.5rem;
+            text-shadow: 0 0 5px rgba(0, 200, 255, 0.5);
         }
 
         .tech-description {
@@ -560,6 +688,7 @@
             display: flex;
             align-items: flex-start;
             gap: 1rem;
+            transform: translateZ(5px);
         }
 
         .benefit-icon {
@@ -572,6 +701,7 @@
             justify-content: center;
             flex-shrink: 0;
             margin-top: 2px;
+            box-shadow: 0 0 10px rgba(0, 200, 255, 0.5);
         }
 
         .benefit-text {
@@ -584,6 +714,8 @@
             padding: 3rem 0;
             text-align: center;
             border-top: 1px solid rgba(0, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
         }
 
         .footer-content {
@@ -596,6 +728,7 @@
         .footer-section h3 {
             color: #00ffff;
             margin-bottom: 1rem;
+            text-shadow: 0 0 5px rgba(0, 200, 255, 0.5);
         }
 
         .footer-section p,
@@ -604,10 +737,37 @@
             text-decoration: none;
             margin-bottom: 0.5rem;
             display: block;
+            transition: all 0.3s ease;
         }
 
         .footer-section a:hover {
             color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 200, 255, 0.7);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #00ffff;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: rgba(0, 150, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(0, 200, 255, 0.5);
         }
 
         .success-message {
@@ -618,6 +778,17 @@
             border-radius: 8px;
             margin-top: 1rem;
             display: none;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+        }
+
+        /* 3D effect on hover for cards */
+        .card-3d {
+            transition: transform 0.4s ease;
+            transform: perspective(1000px) rotateY(0) rotateX(0) translateZ(0);
+        }
+
+        .card-3d:hover {
+            transform: perspective(1000px) rotateY(5deg) rotateX(2deg) translateZ(10px);
         }
 
         @media (max-width: 768px) {
@@ -665,7 +836,9 @@
     <header>
         <nav class="container">
             <a href="#" class="logo">
-                <img src="C0Di3.PNG" alt="C0Di3" style="width: 150px; height: 150px;"/>
+                <div class="logo-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
                 C0Di3
             </a>
             <ul class="nav-links">
@@ -686,23 +859,25 @@
                         Meet C0Di3 - Your AI-powered cybersecurity sentinel that thinks, learns, and evolves like a seasoned expert, but never sleeps, never forgets, and never misses a pattern.
                     </p>
                     
-                    <!-- Video with fade effect -->
-                    <div class="video-container">
-                        <video width="300" height="auto" controls autoplay loop muted>
-                            <source src="video.mp4" type="video/mp4">
-                        </video>
+                    <div class="video-section">
+                        <div class="video-container card-3d">
+                            <img scr="video.gif" alt="Animated GIF" width="300" height="auto" autoplay loop>
+                                Your browser does not support the video tag.
+                            </div>
+                            <div class="visualizer" id="visualizer"></div>
+                        </div>
                     </div>
                     
                     <div class="hero-stats">
-                        <div class="stat-card">
+                        <div class="stat-card card-3d">
                             <span class="stat-number">47</span>
                             <span class="stat-label">Attacks Launched Every 3.2 Seconds</span>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card card-3d">
                             <span class="stat-number">87%</span>
                             <span class="stat-label">Reduction in Human Error</span>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card card-3d">
                             <span class="stat-number">24/7</span>
                             <span class="stat-label">Autonomous Protection</span>
                         </div>
@@ -781,7 +956,7 @@
                 </p>
                 
                 <div class="features-grid">
-                    <div class="feature-card">
+                    <div class="feature-card card-3d">
                         <div class="feature-icon">🧠</div>
                         <h3 class="feature-title">Multi-Layered AI Reasoning</h3>
                         <p class="feature-description">
@@ -789,7 +964,7 @@
                         </p>
                     </div>
                     
-                    <div class="feature-card">
+                    <div class="feature-card card-3d">
                         <div class="feature-icon">🔒</div>
                         <h3 class="feature-title">Complete Privacy Control</h3>
                         <p class="feature-description">
@@ -797,7 +972,7 @@
                         </p>
                     </div>
                     
-                    <div class="feature-card">
+                    <div class="feature-card card-3d">
                         <div class="feature-icon">🔍</div>
                         <h3 class="feature-title">Autonomous Threat Detection</h3>
                         <p class="feature-description">
@@ -805,7 +980,7 @@
                         </p>
                     </div>
                     
-                    <div class="feature-card">
+                    <div class="feature-card card-3d">
                         <div class="feature-icon">🛡️</div>
                         <h3 class="feature-title">Self-Healing Architecture</h3>
                         <p class="feature-description">
@@ -813,7 +988,7 @@
                         </p>
                     </div>
                     
-                    <div class="feature-card">
+                    <div class="feature-card card-3d">
                         <div class="feature-icon">📚</div>
                         <h3 class="feature-title">Expert Knowledge Base</h3>
                         <p class="feature-description">
@@ -821,7 +996,7 @@
                         </p>
                     </div>
                     
-                    <div class="feature-card">
+                    <div class="feature-card card-3d">
                         <div class="feature-icon">🎯</div>
                         <h3 class="feature-title">Adaptive Learning Missions</h3>
                         <p class="feature-description">
@@ -840,32 +1015,32 @@
                 </p>
                 
                 <div class="tech-grid">
-                    <div class="tech-item">
+                    <div class="tech-item card-3d">
                         <div class="tech-name">Gemma-2B Local LLM</div>
                         <div class="tech-description">Optimized for cybersecurity reasoning with sub-second response times</div>
                     </div>
                     
-                    <div class="tech-item">
+                    <div class="tech-item card-3d">
                         <div class="tech-name">Vector Memory System</div>
                         <div class="tech-description">Persistent threat intelligence with episodic, semantic, and procedural memory</div>
                     </div>
                     
-                    <div class="tech-item">
+                    <div class="tech-item card-3d">
                         <div class="tech-name">Integrated Security Tools</div>
                         <div class="tech-description">Nmap, Metasploit, Burp Suite, Wazuh, Suricata, and more</div>
                     </div>
                     
-                    <div class="tech-item">
+                    <div class="tech-item card-3d">
                         <div class="tech-name">Natural Language Interface</div>
                         <div class="tech-description">Conversational AI that understands security context and intent</div>
                     </div>
                     
-                    <div class="tech-item">
+                    <div class="tech-item card-3d">
                         <div class="tech-name">CAG Architecture</div>
                         <div class="tech-description">Cached Augmented Generation for 10x faster response times</div>
                     </div>
                     
-                    <div class="tech-item">
+                    <div class="tech-item card-3d">
                         <div class="tech-name">Real-time Analytics</div>
                         <div class="tech-description">ML-powered log analysis and threat correlation</div>
                     </div>
@@ -919,11 +1094,16 @@
                     <div class="footer-section">
                         <h3>Contact</h3>
                         <a href="mailto:C0Di3@proton.me">C0Di3@proton.me</a>
+                        <p>San Francisco, CA</p>
                     </div>
                     <div class="footer-section">
                         <h3>Follow Us</h3>
-                        <a href="https://www.instagram.com/c0di3_ai?igsh=MTExNWxhMDgxcHg3Zg%3D%3D&utm_source=qr">Instagram</a>
-                        <a href="#">LinkedIn</a>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
                     </div>
                 </div>
                 <p>© 2025 C0Di3. All rights reserved.</p>
@@ -932,24 +1112,126 @@
     </main>
         
     <script>
-      const emailInput = document.getElementById('email');
-      const replyToInput = document.getElementById('_replyto');
-
-      emailInput.addEventListener('input', () => {
-        replyToInput.value = emailInput.value;
-      });
-    </script>
-
-    <script>
-      const particleContainer = document.querySelector('.floating-particles');
-      for (let i = 0; i < 100; i++) {
-        const p = document.createElement('div');
-        p.className = 'particle';
-        p.style.left = `${Math.random() * 100}%`;
-        p.style.top = `${Math.random() * 100}%`;
-        p.style.animationDuration = `${6 + Math.random() * 4}s`;
-        particleContainer.appendChild(p);
-      }
+        // Enhanced particle system
+        const particleContainer = document.querySelector('.floating-particles');
+        const particles = [];
+        
+        for (let i = 0; i < 150; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            
+            // Random size and position
+            const size = Math.random() * 3 + 1;
+            p.style.width = `${size}px`;
+            p.style.height = `${size}px`;
+            
+            p.style.left = `${Math.random() * 100}%`;
+            p.style.top = `${Math.random() * 100}%`;
+            
+            // Random animation duration
+            const duration = 5 + Math.random() * 5;
+            p.style.animationDuration = `${duration}s`;
+            
+            // Random color
+            const blueValue = Math.floor(150 + Math.random() * 105);
+            p.style.backgroundColor = `rgba(0, ${blueValue}, 255, ${0.2 + Math.random() * 0.3})`;
+            
+            particleContainer.appendChild(p);
+            particles.push({
+                element: p,
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: size
+            });
+        }
+        
+        // Mouse interaction for particles
+        let mouseX = 0, mouseY = 0;
+        const mouseRadius = 100;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        
+        function animateParticles() {
+            particles.forEach(p => {
+                // Move particle
+                p.x += p.vx;
+                p.y += p.vy;
+                
+                // Bounce off edges
+                if (p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
+                if (p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
+                
+                // Mouse interaction
+                const dx = p.x - mouseX;
+                const dy = p.y - mouseY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < mouseRadius) {
+                    const angle = Math.atan2(dy, dx);
+                    const force = (mouseRadius - distance) / mouseRadius;
+                    
+                    p.vx += Math.cos(angle) * force * 0.5;
+                    p.vy += Math.sin(angle) * force * 0.5;
+                }
+                
+                // Update position
+                p.element.style.left = `${p.x}px`;
+                p.element.style.top = `${p.y}px`;
+            });
+            
+            requestAnimationFrame(animateParticles);
+        }
+        
+        animateParticles();
+        
+        // Visualizer effect
+        const visualizer = document.getElementById('visualizer');
+        
+        for (let i = 0; i < 40; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            bar.style.setProperty('--i', i);
+            visualizer.appendChild(bar);
+        }
+        
+        // Form email sync
+        const emailInput = document.getElementById('email');
+        const replyToInput = document.getElementById('_replyto');
+        
+        emailInput.addEventListener('input', () => {
+            replyToInput.value = emailInput.value;
+        });
+        
+        // 3D card effect on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.card-3d');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateY = (x - centerX) / 25;
+                const rotateX = (centerY - y) / 25;
+                
+                card.style.transform = `perspective(1000px) rotateY(${rotateY}deg) rotateX(${rotateX}deg) translateZ(10px)`;
+            });
+        });
+        
+        // Reset card positions when mouse leaves
+        document.addEventListener('mouseleave', () => {
+            const cards = document.querySelectorAll('.card-3d');
+            cards.forEach(card => {
+                card.style.transform = 'perspective(1000px) rotateY(0) rotateX(0) translateZ(0)';
+            });
+        });
     </script>
 </body>
 </html>
