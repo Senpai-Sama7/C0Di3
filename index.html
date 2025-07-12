@@ -861,13 +861,20 @@
                     
                     <div class="video-section">
                         <div class="video-container card-3d">
-                            <img scr="video.gif" alt="Animated GIF" width="300" height="auto" autoplay loop>
-                                Your browser does not support the video tag.
-                            </div>
+                            <img scr="video.gif" id="video.gif"; width="300" height="auto" autoplay loop>
+                        </div>
                             <div class="visualizer" id="visualizer"></div>
                         </div>
                     </div>
-                    
+                    <script>
+                        function toggleGif() {
+                            const gif = document.getElementById("animated-gif");
+                            const src = gif.src;
+                            gif.src = ""; // Pause
+                            setTimeout(() => { gif.src = src; }, 100); // Play
+                        }
+                    </script>
+                
                     <div class="hero-stats">
                         <div class="stat-card card-3d">
                             <span class="stat-number">47</span>
