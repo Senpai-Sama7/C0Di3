@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C0Di3 - The Future of Autonomous Cybersecurity</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -31,6 +30,31 @@
             overflow-y: auto;
         }
 
+        /* --- Video Background --- */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            overflow: hidden;
+        }
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Dark overlay for readability */
+            z-index: -2;
+        }
+
         /* --- Entrance Animation --- */
         #entrance-overlay {
             position: fixed;
@@ -43,7 +67,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 1s ease-out 2.5s;
+            transition: opacity 0.5s ease-out; /* Faster fade-out */
+            overflow: hidden;
         }
 
         #entrance-overlay.hidden {
@@ -55,17 +80,41 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0,0,0,0));
             background-repeat: repeat;
-            background-size: 200px 200px;
-            animation: zoom 2.5s ease-in-out forwards;
+            animation: zoom 2s ease-in-out forwards; /* Shortened animation time */
         }
+
+        .starfield-1 {
+            background-size: 200px 200px;
+            background-image: 
+                radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 50px 160px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 160px 120px, #ddd, rgba(0,0,0,0));
+            animation-duration: 2s;
+        }
+
+        .starfield-2 {
+            background-size: 300px 300px;
+            background-image:
+                radial-gradient(1px 1px at 50px 50px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 100px 100px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 200px 150px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 250px 90px, #fff, rgba(0,0,0,0));
+            animation-duration: 1.8s;
+        }
+
+        .starfield-3 {
+            background-size: 400px 400px;
+            background-image:
+                radial-gradient(2px 2px at 10px 200px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 300px 300px, #fff, rgba(0,0,0,0)),
+                radial-gradient(3px 3px at 150px 250px, #ddd, rgba(0,0,0,0));
+            animation-duration: 1.5s;
+        }
+
 
         @keyframes zoom {
             0% {
@@ -76,18 +125,18 @@
                 opacity: 1;
             }
             100% {
-                transform: scale(2);
+                transform: scale(2.5);
                 opacity: 0;
             }
         }
         
-        .parallax-window {
+        .page-content {
             transform: scale(0.95);
             opacity: 0;
-            transition: transform 1s ease-out 2s, opacity 1s ease-out 2s;
+            transition: transform 0.8s ease-out, opacity 0.8s ease-out; /* Removed delay */
         }
 
-        body.loaded .parallax-window {
+        body.loaded .page-content {
             transform: scale(1);
             opacity: 1;
         }
@@ -111,13 +160,6 @@
             padding: 0 1.5rem;
         }
 
-        .parallax-window {
-            min-height: 100vh;
-            background: transparent;
-            position: relative;
-            z-index: 1;
-        }
-
         .cyber-grid {
             position: fixed;
             top: 0;
@@ -128,7 +170,7 @@
                 linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
             background-size: 60px 60px;
-            z-index: -2;
+            z-index: -1; /* On top of video overlay */
             animation: gridMove 60s linear infinite;
         }
 
@@ -427,8 +469,8 @@
         .form-input,
         .form-select {
             width: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(10, 10, 10, 0.8); /* Darker background for readability */
+            border: 1px solid rgba(59, 130, 246, 0.4); /* Matching border */
             outline: none;
             padding: 0.75rem 1rem;
             border-radius: 0.5rem;
@@ -484,6 +526,19 @@
             margin-bottom: 1rem;
         }
 
+        .social-links {
+            margin-bottom: 1.5rem;
+        }
+        .social-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            margin: 0 0.75rem;
+            transition: color 0.3s ease;
+        }
+        .social-links a:hover {
+            color: #00ffff;
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -496,10 +551,19 @@
 </head>
 <body>
     <div id="entrance-overlay">
-        <div class="starfield"></div>
+        <div class="starfield starfield-1"></div>
+        <div class="starfield starfield-2"></div>
+        <div class="starfield starfield-3"></div>
     </div>
 
-    <div class="parallax-window" data-parallax="scroll" data-image-src="background.jpg">
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="video2.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="video-overlay"></div>
+    
+    <div class="page-content">
         <div class="cyber-grid"></div>
         
         <header>
@@ -635,6 +699,10 @@
                 <div class="footer-logo-container">
                     <img src="C0Di3.PNG" alt="C0Di3 Logo" style="width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 1rem;">
                 </div>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/c0di3_ai/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                    <a href="https://github.com/Senpai-Sama7/Project-C0Di3" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
                 <p>© 2024 C0Di3 Project. All Rights Reserved.</p>
                 <p style="margin-top: 0.5rem;">An open-source initiative by Douglas Mitchell.</p>
             </div>
@@ -648,16 +716,8 @@
             setTimeout(function() {
                 overlay.addClass('hidden');
                 $('body').addClass('loaded');
-            }, 2500);
+            }, 2000); // Shortened delay
 
-
-            // --- Parallax ---
-            $('.parallax-window').parallax({
-                imageSrc: 'background.jpg',
-                naturalWidth: 1920,
-                naturalHeight: 1080,
-                speed: 0.5
-            });
 
             // --- Scroll Animations ---
             const observer = new IntersectionObserver((entries) => {
