@@ -30,7 +30,7 @@
             overflow-y: auto;
         }
 
-        /* --- Video Background --- */
+        /* --- Video Background & Mobile Fallback --- */
         .video-background {
             position: fixed;
             top: 0;
@@ -39,12 +39,19 @@
             height: 100%;
             z-index: -3;
             overflow: hidden;
+            /* Static image fallback for mobile */
+            background: url('background.jpg') no-repeat center center/cover;
         }
         .video-background video {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+        /* Hide video element if it fails to play */
+        .video-failed .video-background video {
+            display: none;
+        }
+
         .video-overlay {
             position: fixed;
             top: 0;
@@ -67,7 +74,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.5s ease-out; /* Faster fade-out */
+            transition: opacity 0.5s ease-out;
             overflow: hidden;
         }
 
@@ -81,7 +88,7 @@
             width: 100%;
             height: 100%;
             background-repeat: repeat;
-            animation: zoom 2s ease-in-out forwards; /* Shortened animation time */
+            animation: zoom 2s ease-in-out forwards;
         }
 
         .starfield-1 {
@@ -133,7 +140,7 @@
         .page-content {
             transform: scale(0.95);
             opacity: 0;
-            transition: transform 0.8s ease-out, opacity 0.8s ease-out; /* Removed delay */
+            transition: transform 0.8s ease-out, opacity 0.8s ease-out;
         }
 
         body.loaded .page-content {
@@ -557,8 +564,9 @@
     </div>
 
     <div class="video-background">
-        <video autoplay muted loop playsinline>
+        <video id="video2" autoplay muted loop playsinline>
             <source src="video2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
         </video>
     </div>
     <div class="video-overlay"></div>
@@ -643,7 +651,7 @@
                      </p>
                      <div class="mastermind-section fly-in">
                          <a href="https://github.com/Senpai-Sama7" target="_blank" rel="noopener noreferrer" class="mastermind-card">
-                            <img src="C0Di3.PNG" alt="Douglas Mitchell">
+                            <img src="doug.png" alt="Douglas Mitchell">
                             <div>
                                 <h4 class="mastermind-name">Douglas Mitchell</h4>
                                 <p class="mastermind-title">Lead Developer & Visionary</p>
@@ -718,6 +726,18 @@
                 $('body').addClass('loaded');
             }, 2000); // Shortened delay
 
+            // --- Mobile Video Autoplay ---
+            const video = document.getElementById('background-video');
+            if (video) {
+                const promise = video.play();
+                if (promise !== undefined) {
+                    promise.catch(error => {
+                        // Autoplay was prevented.
+                        console.log("Autoplay blocked, showing fallback.");
+                        $('body').addClass('video-failed');
+                    });
+                }
+            }
 
             // --- Scroll Animations ---
             const observer = new IntersectionObserver((entries) => {
