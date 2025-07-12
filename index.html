@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C0Di3 - The Future of Autonomous Cybersecurity</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -13,24 +15,16 @@
 
         /* — Cosmic backdrop & grid — */
         body {
-            position: relative;
-            background: radial-gradient(ellipse at bottom, #0d0d22 0%, #000 100%);
+            background: #000; /* Fallback background */
             color: #fff;
             overflow-x: hidden;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
         }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('background.jpg') no-repeat center/cover;
-            opacity: 0.4;
-            z-index: -3;
+        
+        .parallax-window {
+            min-height: 100vh;
+            background: transparent;
         }
 
         .cyber-grid {
@@ -85,8 +79,8 @@
             }
         }
 
-        /* — Video Fade Effect — */
-        .video-container {
+        /* — GIF Fade Effect — */
+        .gif-container {
             position: relative;
             display: inline-block;
             margin: 2rem auto;
@@ -106,7 +100,7 @@
             );
         }
 
-        .video-container video {
+        .gif-container img {
             display: block;
             max-width: 100%;
             height: auto;
@@ -639,7 +633,7 @@
             .waitlist-form {
                 max-width: 100%;
             }
-            .video-container {
+            .gif-container {
                 -webkit-mask-image: linear-gradient(
                     to right, 
                     transparent 5%, 
@@ -659,277 +653,277 @@
     </style>
 </head>
 <body>
-    <div class="cyber-grid"></div>
-    <div class="floating-particles"></div>
-    
-    <header>
-        <nav class="container">
-            <a href="#" class="logo">
-                <img src="C0Di3.PNG" alt="C0Di3" style="width: 150px; height: 150px;"/>
-                C0Di3
-            </a>
-            <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#technology">Technology</a></li>
-                <li><a href="#access">Early Access</a></li>
-                <li><a href="#waitlist">Join Waitlist</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="parallax-window" data-parallax="scroll" data-image-src="background.jpg">
+        <div class="cyber-grid"></div>
+        <div class="floating-particles"></div>
+        
+        <header>
+            <nav class="container">
+                <a href="#" class="logo">
+                    <img src="C0Di3.PNG" alt="C0Di3" style="width: 150px; height: 150px;"/>
+                    C0Di3
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#technology">Technology</a></li>
+                    <li><a href="#access">Early Access</a></li>
+                    <li><a href="#waitlist">Join Waitlist</a></li>
+                </ul>
+            </nav>
+        </header>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1>The Future of Cybersecurity is Autonomous</h1>
-                    <p class="hero-subtitle">
-                        Meet C0Di3 - Your AI-powered cybersecurity sentinel that thinks, learns, and evolves like a seasoned expert, but never sleeps, never forgets, and never misses a pattern.
+        <main>
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>The Future of Cybersecurity is Autonomous</h1>
+                        <p class="hero-subtitle">
+                            Meet C0Di3 - Your AI-powered cybersecurity sentinel that thinks, learns, and evolves like a seasoned expert, but never sleeps, never forgets, and never misses a pattern.
+                        </p>
+                        
+                        <!-- GIF with fade effect -->
+                        <div class="gif-container">
+                            <img src="video.gif" alt="Cybersecurity Animation" width="300" height="auto"/>
+                        </div>
+                        
+                        <div class="hero-stats">
+                            <div class="stat-card">
+                                <span class="stat-number">47</span>
+                                <span class="stat-label">Attacks Launched Every 3.2 Seconds</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number">87%</span>
+                                <span class="stat-label">Reduction in Human Error</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number">24/7</span>
+                                <span class="stat-label">Autonomous Protection</span>
+                            </div>
+                        </div>
+
+                        <div class="cta-section" id="waitlist">
+                            <div class="cta-content">
+                                <h2 class="cta-title">Join the Cybersecurity Revolution</h2>
+                                <p class="cta-subtitle">Be among the first to experience autonomous cybersecurity. Get exclusive early access to C0Di3.</p>
+                                
+                                <form action="https://formspree.io/f/xzzgnqdp" id="waitlistForm" class="waitlist-form">
+                                    <div class="form-group">
+                                        <label for="name">Full Name</label>
+                                        <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="email">Email Address</label>
+                                        <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email address" required>
+                                    </div>
+                                    
+                                    <input type="hidden" name="_replyto" id="_replyto">
+                                    
+                                    <div class="form-group">
+                                        <label for="company">Company/Organization</label>
+                                        <input type="text" id="company" name="company" class="form-input" placeholder="Enter your company name">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="role">Your Role</label>
+                                        <select id="role" name="role" class="form-select">
+                                            <option value="">Select your role</option>
+                                            <option value="security-analyst">Security Analyst</option>
+                                            <option value="ciso">CISO/Security Manager</option>
+                                            <option value="it-admin">IT Administrator</option>
+                                            <option value="penetration-tester">Penetration Tester</option>
+                                            <option value="researcher">Security Researcher</option>
+                                            <option value="developer">Developer</option>
+                                            <option value="student">Student</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="interest">Primary Interest</label>
+                                        <select id="interest" name="interest" class="form-select">
+                                            <option value="">What interests you most?</option>
+                                            <option value="threat-detection">Automated Threat Detection</option>
+                                            <option value="penetration-testing">AI-Powered Penetration Testing</option>
+                                            <option value="incident-response">Intelligent Incident Response</option>
+                                            <option value="security-training">Interactive Security Training</option>
+                                            <option value="compliance">Compliance & Auditing</option>
+                                            <option value="research">Security Research</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <button type="submit" class="cta-button">
+                                        Secure My Early Access
+                                    </button>
+                                    
+                                    <div class="success-message" id="successMessage">
+                                        🎉 Success! You're now on the C0Di3 early access waitlist. Check your email for confirmation.
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features" id="features">
+                <div class="container">
+                    <h2 class="section-title">Revolutionary Capabilities</h2>
+                    <p class="section-subtitle">
+                        C0Di3 combines advanced AI reasoning with comprehensive cybersecurity expertise to deliver unprecedented protection.
                     </p>
                     
-                    <!-- Video with fade effect -->
-                    <div class="video-container">
-                        <video width="300" height="auto" controls autoplay loop muted>
-                            <source src="video.gif" type="animated GIF4">
-                        </video>
-                    </div>
-                    
-                    <div class="hero-stats">
-                        <div class="stat-card">
-                            <span class="stat-number">47</span>
-                            <span class="stat-label">Attacks Launched Every 3.2 Seconds</span>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🧠</div>
+                            <h3 class="feature-title">Multi-Layered AI Reasoning</h3>
+                            <p class="feature-description">
+                                Three-tier reasoning system: Zero-shot for simple queries, Darwin-Gödel Engine for complex scenarios, and Absolute Zero Reasoner for advanced threats.
+                            </p>
                         </div>
-                        <div class="stat-card">
-                            <span class="stat-number">87%</span>
-                            <span class="stat-label">Reduction in Human Error</span>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🔒</div>
+                            <h3 class="feature-title">Complete Privacy Control</h3>
+                            <p class="feature-description">
+                                Your data never leaves your infrastructure. Powered by local Gemma-2B model with zero external API dependencies.
+                            </p>
                         </div>
-                        <div class="stat-card">
-                            <span class="stat-number">24/7</span>
-                            <span class="stat-label">Autonomous Protection</span>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🔍</div>
+                            <h3 class="feature-title">Autonomous Threat Detection</h3>
+                            <p class="feature-description">
+                                ML-powered anomaly detection that learns your environment's unique fingerprint and identifies threats with 87% fewer false positives.
+                            </p>
                         </div>
-                    </div>
-
-                    <div class="cta-section" id="waitlist">
-                        <div class="cta-content">
-                            <h2 class="cta-title">Join the Cybersecurity Revolution</h2>
-                            <p class="cta-subtitle">Be among the first to experience autonomous cybersecurity. Get exclusive early access to C0Di3.</p>
-                            
-                            <form action="https://formspree.io/f/xzzgnqdp" id="waitlistForm" class="waitlist-form">
-                                <div class="form-group">
-                                    <label for="name">Full Name</label>
-                                    <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="email">Email Address</label>
-                                    <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email address" required>
-                                </div>
-                                
-                                <input type="hidden" name="_replyto" id="_replyto">
-                                
-                                <div class="form-group">
-                                    <label for="company">Company/Organization</label>
-                                    <input type="text" id="company" name="company" class="form-input" placeholder="Enter your company name">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="role">Your Role</label>
-                                    <select id="role" name="role" class="form-select">
-                                        <option value="">Select your role</option>
-                                        <option value="security-analyst">Security Analyst</option>
-                                        <option value="ciso">CISO/Security Manager</option>
-                                        <option value="it-admin">IT Administrator</option>
-                                        <option value="penetration-tester">Penetration Tester</option>
-                                        <option value="researcher">Security Researcher</option>
-                                        <option value="developer">Developer</option>
-                                        <option value="student">Student</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="interest">Primary Interest</label>
-                                    <select id="interest" name="interest" class="form-select">
-                                        <option value="">What interests you most?</option>
-                                        <option value="threat-detection">Automated Threat Detection</option>
-                                        <option value="penetration-testing">AI-Powered Penetration Testing</option>
-                                        <option value="incident-response">Intelligent Incident Response</option>
-                                        <option value="security-training">Interactive Security Training</option>
-                                        <option value="compliance">Compliance & Auditing</option>
-                                        <option value="research">Security Research</option>
-                                    </select>
-                                </div>
-                                
-                                <button type="submit" class="cta-button">
-                                    Secure My Early Access
-                                </button>
-                                
-                                <div class="success-message" id="successMessage">
-                                    🎉 Success! You're now on the C0Di3 early access waitlist. Check your email for confirmation.
-                                </div>
-                            </form>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🛡️</div>
+                            <h3 class="feature-title">Self-Healing Architecture</h3>
+                            <p class="feature-description">
+                                Continuously monitors its own health, automatically diagnosing and resolving issues before they impact your operations.
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">📚</div>
+                            <h3 class="feature-title">Expert Knowledge Base</h3>
+                            <p class="feature-description">
+                                Integrated knowledge from authoritative cybersecurity books including "Black Hat Python", "The Hacker Playbook 3", and "RTFM".
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h3 class="feature-title">Adaptive Learning Missions</h3>
+                            <p class="feature-description">
+                                Personalized training scenarios that adapt to your skill level, from beginner to advanced red/blue team operations.
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="features" id="features">
-            <div class="container">
-                <h2 class="section-title">Revolutionary Capabilities</h2>
-                <p class="section-subtitle">
-                    C0Di3 combines advanced AI reasoning with comprehensive cybersecurity expertise to deliver unprecedented protection.
-                </p>
-                
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🧠</div>
-                        <h3 class="feature-title">Multi-Layered AI Reasoning</h3>
-                        <p class="feature-description">
-                            Three-tier reasoning system: Zero-shot for simple queries, Darwin-Gödel Engine for complex scenarios, and Absolute Zero Reasoner for advanced threats.
-                        </p>
-                    </div>
+            <section class="tech-stack" id="technology">
+                <div class="container">
+                    <h2 class="section-title">Cutting-Edge Technology Stack</h2>
+                    <p class="section-subtitle">
+                        Built on the latest AI and cybersecurity technologies for maximum performance and reliability.
+                    </p>
                     
-                    <div class="feature-card">
-                        <div class="feature-icon">🔒</div>
-                        <h3 class="feature-title">Complete Privacy Control</h3>
-                        <p class="feature-description">
-                            Your data never leaves your infrastructure. Powered by local Gemma-2B model with zero external API dependencies.
-                        </p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">🔍</div>
-                        <h3 class="feature-title">Autonomous Threat Detection</h3>
-                        <p class="feature-description">
-                            ML-powered anomaly detection that learns your environment's unique fingerprint and identifies threats with 87% fewer false positives.
-                        </p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">🛡️</div>
-                        <h3 class="feature-title">Self-Healing Architecture</h3>
-                        <p class="feature-description">
-                            Continuously monitors its own health, automatically diagnosing and resolving issues before they impact your operations.
-                        </p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">📚</div>
-                        <h3 class="feature-title">Expert Knowledge Base</h3>
-                        <p class="feature-description">
-                            Integrated knowledge from authoritative cybersecurity books including "Black Hat Python", "The Hacker Playbook 3", and "RTFM".
-                        </p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">🎯</div>
-                        <h3 class="feature-title">Adaptive Learning Missions</h3>
-                        <p class="feature-description">
-                            Personalized training scenarios that adapt to your skill level, from beginner to advanced red/blue team operations.
-                        </p>
+                    <div class="tech-grid">
+                        <div class="tech-item">
+                            <div class="tech-name">Gemma-2B Local LLM</div>
+                            <div class="tech-description">Optimized for cybersecurity reasoning with sub-second response times</div>
+                        </div>
+                        
+                        <div class="tech-item">
+                            <div class="tech-name">Vector Memory System</div>
+                            <div class="tech-description">Persistent threat intelligence with episodic, semantic, and procedural memory</div>
+                        </div>
+                        
+                        <div class="tech-item">
+                            <div class="tech-name">Integrated Security Tools</div>
+                            <div class="tech-description">Nmap, Metasploit, Burp Suite, Wazuh, Suricata, and more</div>
+                        </div>
+                        
+                        <div class="tech-item">
+                            <div class="tech-name">Natural Language Interface</div>
+                            <div class="tech-description">Conversational AI that understands security context and intent</div>
+                        </div>
+                        
+                        <div class="tech-item">
+                            <div class="tech-name">CAG Architecture</div>
+                            <div class="tech-description">Cached Augmented Generation for 10x faster response times</div>
+                        </div>
+                        
+                        <div class="tech-item">
+                            <div class="tech-name">Real-time Analytics</div>
+                            <div class="tech-description">ML-powered log analysis and threat correlation</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="tech-stack" id="technology">
-            <div class="container">
-                <h2 class="section-title">Cutting-Edge Technology Stack</h2>
-                <p class="section-subtitle">
-                    Built on the latest AI and cybersecurity technologies for maximum performance and reliability.
-                </p>
-                
-                <div class="tech-grid">
-                    <div class="tech-item">
-                        <div class="tech-name">Gemma-2B Local LLM</div>
-                        <div class="tech-description">Optimized for cybersecurity reasoning with sub-second response times</div>
-                    </div>
+            <section class="early-access" id="access">
+                <div class="container">
+                    <h2 class="section-title">Early Access Benefits</h2>
+                    <p class="section-subtitle">
+                        Join the exclusive group of security professionals shaping the future of autonomous cybersecurity.
+                    </p>
                     
-                    <div class="tech-item">
-                        <div class="tech-name">Vector Memory System</div>
-                        <div class="tech-description">Persistent threat intelligence with episodic, semantic, and procedural memory</div>
-                    </div>
-                    
-                    <div class="tech-item">
-                        <div class="tech-name">Integrated Security Tools</div>
-                        <div class="tech-description">Nmap, Metasploit, Burp Suite, Wazuh, Suricata, and more</div>
-                    </div>
-                    
-                    <div class="tech-item">
-                        <div class="tech-name">Natural Language Interface</div>
-                        <div class="tech-description">Conversational AI that understands security context and intent</div>
-                    </div>
-                    
-                    <div class="tech-item">
-                        <div class="tech-name">CAG Architecture</div>
-                        <div class="tech-description">Cached Augmented Generation for 10x faster response times</div>
-                    </div>
-                    
-                    <div class="tech-item">
-                        <div class="tech-name">Real-time Analytics</div>
-                        <div class="tech-description">ML-powered log analysis and threat correlation</div>
+                    <div class="access-benefits">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <div class="benefit-text">Free access to C0Di3 during the entire beta period</div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <div class="benefit-text">Direct input on feature development and priorities</div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <div class="benefit-text">Exclusive webinars and training sessions with the development team</div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <div class="benefit-text">Priority support and direct communication channels</div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">✓</div>
+                            <div class="benefit-text">Early access to new features and updates</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="early-access" id="access">
-            <div class="container">
-                <h2 class="section-title">Early Access Benefits</h2>
-                <p class="section-subtitle">
-                    Join the exclusive group of security professionals shaping the future of autonomous cybersecurity.
-                </p>
-                
-                <div class="access-benefits">
-                    <div class="benefit-item">
-                        <div class="benefit-icon">✓</div>
-                        <div class="benefit-text">Free access to C0Di3 during the entire beta period</div>
+            <footer>
+                <div class="container">
+                    <div class="footer-content">
+                        <div class="footer-section">
+                            <h3>About C0Di3</h3>
+                            <p>Autonomous cybersecurity powered by advanced AI reasoning and expert knowledge.</p>
+                        </div>
+                        <div class="footer-section">
+                            <h3>Contact</h3>
+                            <a href="mailto:C0Di3@proton.me">C0Di3@proton.me</a>
+                        </div>
+                        <div class="footer-section">
+                            <h3>Follow Us</h3>
+                            <a href="https://www.instagram.com/c0di3_ai?igsh=MTExNWxhMDgxcHg3Zg%3D%3D&utm_source=qr">Instagram</a>
+                            <a href="#">LinkedIn</a>
+                        </div>
                     </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">✓</div>
-                        <div class="benefit-text">Direct input on feature development and priorities</div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">✓</div>
-                        <div class="benefit-text">Exclusive webinars and training sessions with the development team</div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">✓</div>
-                        <div class="benefit-text">Priority support and direct communication channels</div>
-                    </div>
-                    
-                    <div class="benefit-item">
-                        <div class="benefit-icon">✓</div>
-                        <div class="benefit-text">Early access to new features and updates</div>
-                    </div>
+                    <p>© 2025 C0Di3. All rights reserved.</p>
                 </div>
-            </div>
-        </section>
-
-        <footer>
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-section">
-                        <h3>About C0Di3</h3>
-                        <p>Autonomous cybersecurity powered by advanced AI reasoning and expert knowledge.</p>
-                    </div>
-                    <div class="footer-section">
-                        <h3>Contact</h3>
-                        <a href="mailto:C0Di3@proton.me">C0Di3@proton.me</a>
-                    </div>
-                    <div class="footer-section">
-                        <h3>Follow Us</h3>
-                        <a href="https://www.instagram.com/c0di3_ai?igsh=MTExNWxhMDgxcHg3Zg%3D%3D&utm_source=qr">Instagram</a>
-                        <a href="#">LinkedIn</a>
-                    </div>
-                </div>
-                <p>© 2025 C0Di3. All rights reserved.</p>
-            </div>
-        </footer>
-    </main>
+            </footer>
+        </main>
+    </div>
         
     <script>
       const emailInput = document.getElementById('email');
