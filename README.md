@@ -1,3 +1,9 @@
+
+ <p align="center">
+    <img src="C0Di3.PNG" alt="C0Di3" width="300"/>
+  </p>
+
+
 # Core Agent: The Cybersecurity Intelligence Revolution Begins Here 
 
 
