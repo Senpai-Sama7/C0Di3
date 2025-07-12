@@ -13,9 +13,6 @@
 [![Local Processing](https://img.shields.io/badge/Local_Processing-brightgreen)](https://github.com/your-repo)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-<p align="center">
-  <img src="assets/cyber-agent-logo.jpg" alt="Cybersecurity AI Agent" width="300"/>
-</p>
 
 ----
 
