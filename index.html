@@ -85,6 +85,33 @@
             }
         }
 
+        /* — Video Fade Effect — */
+        .video-container {
+            position: relative;
+            display: inline-block;
+            margin: 2rem auto;
+            -webkit-mask-image: linear-gradient(
+                to right, 
+                transparent 0%, 
+                black 15%, 
+                black 85%, 
+                transparent 100%
+            );
+            mask-image: linear-gradient(
+                to right, 
+                transparent 0%, 
+                black 15%, 
+                black 85%, 
+                transparent 100%
+            );
+        }
+
+        .video-container video {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
         /* — Glass-morphic form controls — */
         .waitlist-form {
             max-width: 500px;
@@ -612,16 +639,28 @@
             .waitlist-form {
                 max-width: 100%;
             }
+            .video-container {
+                -webkit-mask-image: linear-gradient(
+                    to right, 
+                    transparent 5%, 
+                    black 20%, 
+                    black 80%, 
+                    transparent 95%
+                );
+                mask-image: linear-gradient(
+                    to right, 
+                    transparent 5%, 
+                    black 20%, 
+                    black 80%, 
+                    transparent 95%
+                );
+            }
         }
     </style>
 </head>
 <body>
     <div class="cyber-grid"></div>
     <div class="floating-particles"></div>
-    
-    <video <div style="padding-top: 300px; text-align: center;" width="300" height="auto" controls autoplay loop muted>
-      <source src="video.mp4" type="video/mp4">
-    </video>
     
     <header>
         <nav class="container">
@@ -646,6 +685,13 @@
                     <p class="hero-subtitle">
                         Meet C0Di3 - Your AI-powered cybersecurity sentinel that thinks, learns, and evolves like a seasoned expert, but never sleeps, never forgets, and never misses a pattern.
                     </p>
+                    
+                    <!-- Video with fade effect -->
+                    <div class="video-container">
+                        <video width="300" height="auto" controls autoplay loop muted>
+                            <source src="video.mp4" type="video/mp4">
+                        </video>
+                    </div>
                     
                     <div class="hero-stats">
                         <div class="stat-card">
