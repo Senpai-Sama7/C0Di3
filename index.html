@@ -6,25 +6,38 @@
     <title>C0Di3 - The Future of Autonomous Cybersecurity</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --cyan-glow: rgba(0, 255, 255, 0.5);
+            --blue-glow: rgba(59, 130, 246, 0.5);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* — Cosmic backdrop & grid — */
         body {
-            background: #000; /* Fallback background */
-            color: #fff;
+            background: #0a0a0a;
+            color: #e5e7eb;
             overflow-x: hidden;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
         }
         
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
         .parallax-window {
             min-height: 100vh;
             background: transparent;
+            position: relative;
+            z-index: 1;
         }
 
         .cyber-grid {
@@ -34,123 +47,18 @@
             width: 100%;
             height: 100%;
             background-image:
-                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
+                linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
             z-index: -2;
             animation: gridMove 60s linear infinite;
         }
 
         @keyframes gridMove {
             to {
-                transform: translate(100px, 100px);
+                background-position: 120px 120px;
             }
         }
-
-        /* — Particle specs — */
-        .floating-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            animation: float 8s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0) scale(1);
-                opacity: 0.5;
-            }
-            50% {
-                transform: translateY(-30px) scale(1.2);
-                opacity: 1;
-            }
-        }
-
-        /* — Image Fade Effect — */
-        .image-container, .footer-logo-container {
-            position: relative;
-            display: inline-block;
-            margin: 2rem auto;
-            -webkit-mask-image: radial-gradient(ellipse, black 50%, transparent 100%);
-            mask-image: radial-gradient(ellipse, black 50%, transparent 100%);
-        }
-
-        .image-container img, .footer-logo-container img {
-            display: block;
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* — Glass-morphic form controls — */
-        .waitlist-form {
-            max-width: 500px;
-            margin: auto;
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .form-group label {
-            color: #0ff;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-            display: block;
-            text-align: left;
-        }
-
-        .form-input,
-        .form-select {
-            /* Increased opacity for better readability */
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.2); /* Added a subtle border */
-            outline: none;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(8px); /* Slightly increased blur */
-            transition: box-shadow 0.25s ease, transform 0.25s ease;
-        }
-
-        .form-input:focus,
-        .form-select:focus {
-            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.6);
-            transform: translateY(-2px);
-            border-color: rgba(0, 255, 255, 0.8);
-        }
-
-        .form-input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-            font-style: italic;
-        }
-
-        .form-select {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg%20width='10'%20height='6'%20xmlns='http://www.w3.org/2000/svg'%3E%3Cpath%20d='M0%200l5%206%205-6z'%20fill='%23FFF'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            padding-right: 2.5rem;
-        }
-        
-        .form-select option {
-            background: #1a1a2e;
-            color: #ffffff;
-        }
-
-        /* --- General Layout & Components --- */
 
         header {
             position: fixed;
@@ -158,7 +66,7 @@
             left: 0;
             right: 0;
             backdrop-filter: blur(10px);
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(10, 10, 10, 0.7);
             border-bottom: 1px solid rgba(0, 255, 255, 0.2);
             z-index: 1000;
             padding: 1rem 0;
@@ -174,35 +82,19 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 1.8rem;
+            gap: 1rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: #00ffff;
             text-decoration: none;
         }
 
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(45deg, #00ffff, #0080ff);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-            animation: pulse 2s infinite;
+        .logo img {
+            transition: transform 0.3s ease;
         }
 
-        @keyframes pulse {
-            0%,
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-            }
-            50% {
-                transform: scale(1.05);
-                box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
-            }
+        .logo:hover img {
+            transform: rotate(15deg);
         }
 
         .nav-links {
@@ -212,11 +104,12 @@
         }
 
         .nav-links a {
-            color: #ffffff;
+            color: #e5e7eb;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
             position: relative;
+            padding-bottom: 5px;
         }
 
         .nav-links a:hover {
@@ -226,7 +119,7 @@
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
@@ -245,322 +138,259 @@
             justify-content: center;
             text-align: center;
             position: relative;
-            padding: 6rem 0;
+            padding: 8rem 0 4rem;
         }
 
         .hero-content {
             max-width: 800px;
             z-index: 2;
         }
+        
+        .hero-content .logo-image {
+             box-shadow: 0 0 40px var(--blue-glow);
+        }
 
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 5rem);
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
             font-weight: 800;
             margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, #00ffff, #0080ff, #ffffff);
+            background: linear-gradient(45deg, #00ffff, #ffffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             line-height: 1.2;
-            animation: glow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from {
-                filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.3));
-            }
-            to {
-                filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.6));
-            }
+            text-shadow: 0 0 20px var(--cyan-glow);
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            color: #b0b0b0;
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: #9ca3af;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+        .hero-buttons {
+             display: flex;
+             flex-direction: row;
+             gap: 1rem;
+             justify-content: center;
         }
 
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #00ffff;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #b0b0b0;
-            margin-top: 0.5rem;
-        }
-
-        .cta-section {
-            background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(0, 128, 255, 0.1));
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 20px;
-            padding: 3rem;
-            margin: 4rem 0;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.05), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%) translateY(-100%) rotate(45deg);
-            }
-            100% {
-                transform: translateX(100%) translateY(100%) rotate(45deg);
-            }
-        }
-
-        .cta-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .cta-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #ffffff;
-        }
-
-        .cta-subtitle {
-            font-size: 1.2rem;
-            color: #b0b0b0;
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            background: linear-gradient(45deg, #00ffff, #0080ff);
-            color: #000000;
-            border: none;
-            padding: 1.2rem 2rem;
-            border-radius: 8px;
-            font-size: 1.1rem;
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
             font-weight: 600;
-            cursor: pointer;
+            text-decoration: none;
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
+            display: inline-block;
+            border: 2px solid transparent;
         }
 
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
+        .btn-primary {
+            background: linear-gradient(90deg, #3b82f6, #6366f1);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
         }
 
-        .cta-button:hover::before {
-            left: 100%;
+        .btn-secondary {
+            background-color: transparent;
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+        .btn-secondary:hover {
+            background-color: #3b82f6;
+            color: white;
+            transform: translateY(-3px);
         }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
-        }
-
-        .features {
+        .section {
             padding: 6rem 0;
         }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #00ffff, #0080ff);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 255, 255, 0.5);
-            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.1);
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #00ffff, #0080ff);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .feature-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #ffffff;
-        }
-
-        .feature-description {
-            color: #b0b0b0;
-            line-height: 1.6;
+        
+        .section-darker {
+            background: rgba(0,0,0,0.2);
         }
 
         .section-title {
-            font-size: 3rem;
+            font-size: clamp(2rem, 5vw, 3rem);
             font-weight: 700;
             text-align: center;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, #00ffff, #0080ff, #ffffff);
+            background: linear-gradient(45deg, #00ffff, #ffffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .section-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             text-align: center;
-            color: #b0b0b0;
-            max-width: 600px;
-            margin: 0 auto;
+            color: #9ca3af;
+            max-width: 700px;
+            margin: 0 auto 4rem;
         }
 
-        .tech-stack {
-            padding: 6rem 0;
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-
-        .tech-item {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .tech-item:hover {
-            transform: translateY(-3px);
-            border-color: rgba(0, 255, 255, 0.5);
-            box-shadow: 0 10px 25px rgba(0, 255, 255, 0.15);
-        }
-
-        .tech-name {
-            font-weight: 600;
-            color: #00ffff;
-            margin-bottom: 0.5rem;
-        }
-
-        .tech-description {
-            font-size: 0.9rem;
-            color: #b0b0b0;
-        }
-
-        .early-access {
-            padding: 6rem 0;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 128, 255, 0.1));
-        }
-
-        .access-benefits {
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
         }
 
-        .benefit-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
+        .feature-card {
+            background: rgba(17, 24, 39, 0.5);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
-        .benefit-icon {
-            width: 24px;
-            height: 24px;
-            background: linear-gradient(45deg, #00ffff, #0080ff);
-            border-radius: 50%;
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(59, 130, 246, 0.6);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.1);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.2), rgba(99, 102, 241, 0.2));
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-            margin-top: 2px;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: #6366f1;
         }
 
-        .benefit-text {
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
             color: #ffffff;
+        }
+
+        .feature-description {
+            color: #9ca3af;
+        }
+        
+        .mastermind-section {
+            background: rgba(17, 24, 39, 0.5);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 4rem;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .mastermind-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            text-decoration: none;
+            color: #e5e7eb;
+        }
+        
+        .mastermind-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #3b82f6;
+            transition: transform 0.3s ease;
+        }
+        
+        .mastermind-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .mastermind-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .mastermind-title {
+            color: #6366f1;
             font-weight: 500;
+        }
+
+        .waitlist-section {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 128, 255, 0.1));
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .waitlist-form {
+            max-width: 500px;
+            margin: auto;
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group label {
+            color: #0ff;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+            text-align: left;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            outline: none;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            color: #fff;
+            backdrop-filter: blur(8px);
+            transition: all 0.25s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            box-shadow: 0 0 15px var(--cyan-glow);
+            border-color: rgba(0, 255, 255, 0.8);
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg%20width='10'%20height='6'%20xmlns='http://www.w3.org/2000/svg'%3E%3Cpath%20d='M0%200l5%206%205-6z'%20fill='%23FFF'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+        }
+        
+        .form-select option {
+            background: #1a1a2e;
+            color: #ffffff;
+        }
+        
+        .success-message {
+            background: linear-gradient(45deg, rgba(0, 255, 0, 0.1), rgba(0, 128, 0, 0.1));
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            color: #0f0;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: center;
+            display: none;
         }
 
         footer {
@@ -568,61 +398,20 @@
             padding: 3rem 0;
             text-align: center;
             border-top: 1px solid rgba(0, 255, 255, 0.2);
+            font-size: 0.9rem;
+            color: #9ca3af;
         }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-            align-items: center;
-        }
-
-        .footer-section h3 {
-            color: #00ffff;
+        
+        .footer-logo-container {
             margin-bottom: 1rem;
-        }
-
-        .footer-section p,
-        .footer-section a {
-            color: #b0b0b0;
-            text-decoration: none;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .footer-section a:hover {
-            color: #00ffff;
-        }
-
-        .success-message {
-            background: linear-gradient(45deg, rgba(0, 255, 0, 0.1), rgba(0, 128, 0, 0.1));
-            border: 1px solid rgba(0, 255, 0, 0.3);
-            color: #00ff00;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-            display: none;
         }
 
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .hero-stats {
-                grid-template-columns: 1fr;
-            }
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            .cta-section {
-                padding: 2rem;
-            }
-            .waitlist-form {
-                max-width: 100%;
+            .hero-buttons {
+                flex-direction: column;
             }
         }
     </style>
@@ -630,19 +419,18 @@
 <body>
     <div class="parallax-window" data-parallax="scroll" data-image-src="background.jpg">
         <div class="cyber-grid"></div>
-        <div class="floating-particles"></div>
         
         <header>
             <nav class="container">
                 <a href="#" class="logo">
-                    <img src="C0Di3.PNG" alt="C0Di3 Logo" style="width: 150px; height: 150px;"/>
-                    C0Di3
+                    <img src="C0Di3.PNG" alt="C0Di3 Logo" style="width: 50px; height: 50px; border-radius: 50%;"/>
+                    <span>C0Di3</span>
                 </a>
                 <ul class="nav-links">
                     <li><a href="#features">Features</a></li>
-                    <li><a href="#technology">Technology</a></li>
-                    <li><a href="#access">Early Access</a></li>
+                    <li><a href="#team">About</a></li>
                     <li><a href="#waitlist">Join Waitlist</a></li>
+                    <li><a href="https://github.com/Senpai-Sama7/Project-C0Di3" target="_blank" rel="noopener noreferrer">GitHub</a></li>
                 </ul>
             </nav>
         </header>
@@ -651,277 +439,175 @@
             <section class="hero">
                 <div class="container">
                     <div class="hero-content">
-                        <h1>The Future of Cybersecurity is Autonomous</h1>
+                        <img src="C0Di3.PNG" alt="C0Di3 Logo" class="logo-image" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 2rem;">
+                        
+                        <h1>Meet C0Di3: Your AI Cybersecurity Guardian</h1>
                         <p class="hero-subtitle">
-                            Meet C0Di3 - Your AI-powered cybersecurity sentinel that thinks, learns, and evolves like a seasoned expert, but never sleeps, never forgets, and never misses a pattern.
+                            An advanced AI agent designed to proactively detect, analyze, and neutralize cyber threats. C0Di3 is your ever-vigilant partner in the digital battlefield.
                         </p>
                         
-                        <!-- Still image with fade effect -->
-                        <div class="image-container">
-                            <img src="still-image.jpg" alt="Cybersecurity Visual" width="300" height="auto"/>
-                        </div>
-                        
-                        <div class="hero-stats">
-                            <div class="stat-card">
-                                <span class="stat-number">47</span>
-                                <span class="stat-label">Attacks Launched Every 3.2 Seconds</span>
-                            </div>
-                            <div class="stat-card">
-                                <span class="stat-number">87%</span>
-                                <span class="stat-label">Reduction in Human Error</span>
-                            </div>
-                            <div class="stat-card">
-                                <span class="stat-number">24/7</span>
-                                <span class="stat-label">Autonomous Protection</span>
-                            </div>
-                        </div>
-
-                        <div class="cta-section" id="waitlist">
-                            <div class="cta-content">
-                                <h2 class="cta-title">Join the Cybersecurity Revolution</h2>
-                                <p class="cta-subtitle">Be among the first to experience autonomous cybersecurity. Get exclusive early access to C0Di3.</p>
-                                
-                                <form action="https://formspree.io/f/xzzgnqdp" id="waitlistForm" class="waitlist-form" method="POST">
-                                    <div class="form-group">
-                                        <label for="name">Full Name</label>
-                                        <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name" required>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="email">Email Address</label>
-                                        <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email address" required>
-                                    </div>
-                                    
-                                    <input type="hidden" name="_replyto" id="_replyto">
-                                    
-                                    <div class="form-group">
-                                        <label for="company">Company/Organization</label>
-                                        <input type="text" id="company" name="company" class="form-input" placeholder="Enter your company name">
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="role">Your Role</label>
-                                        <select id="role" name="role" class="form-select">
-                                            <option value="">Select your role</option>
-                                            <option value="security-analyst">Security Analyst</option>
-                                            <option value="ciso">CISO/Security Manager</option>
-                                            <option value="it-admin">IT Administrator</option>
-                                            <option value="penetration-tester">Penetration Tester</option>
-                                            <option value="researcher">Security Researcher</option>
-                                            <option value="developer">Developer</option>
-                                            <option value="student">Student</option>
-                                            <option value="other">Other</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="interest">Primary Interest</label>
-                                        <select id="interest" name="interest" class="form-select">
-                                            <option value="">What interests you most?</option>
-                                            <option value="threat-detection">Automated Threat Detection</option>
-                                            <option value="penetration-testing">AI-Powered Penetration Testing</option>
-                                            <option value="incident-response">Intelligent Incident Response</option>
-                                            <option value="security-training">Interactive Security Training</option>
-                                            <option value="compliance">Compliance & Auditing</option>
-                                            <option value="research">Security Research</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <button type="submit" class="cta-button">
-                                        Secure My Early Access
-                                    </button>
-                                    
-                                    <div class="success-message" id="successMessage">
-                                        🎉 Success! You're now on the C0Di3 early access waitlist. Check your email for confirmation.
-                                    </div>
-                                </form>
-                            </div>
+                        <div class="hero-buttons">
+                            <a href="#waitlist" class="btn btn-primary">Join the Waitlist</a>
+                            <a href="https://github.com/Senpai-Sama7/Project-C0Di3" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">View on GitHub</a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="features" id="features">
+            <section id="features" class="section section-darker">
                 <div class="container">
-                    <h2 class="section-title">Revolutionary Capabilities</h2>
+                    <h2 class="section-title">Core Capabilities</h2>
                     <p class="section-subtitle">
-                        C0Di3 combines advanced AI reasoning with comprehensive cybersecurity expertise to deliver unprecedented protection.
+                        C0Di3 combines advanced AI reasoning with comprehensive cybersecurity expertise to deliver unprecedented protection for developers, businesses, and individuals.
                     </p>
                     
                     <div class="features-grid">
                         <div class="feature-card">
-                            <div class="feature-icon">🧠</div>
-                            <h3 class="feature-title">Multi-Layered AI Reasoning</h3>
-                            <p class="feature-description">
-                                Three-tier reasoning system: Zero-shot for simple queries, Darwin-Gödel Engine for complex scenarios, and Absolute Zero Reasoner for advanced threats.
-                            </p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">🔒</div>
-                            <h3 class="feature-title">Complete Privacy Control</h3>
-                            <p class="feature-description">
-                                Your data never leaves your infrastructure. Powered by local Gemma-2B model with zero external API dependencies.
-                            </p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">🔍</div>
-                            <h3 class="feature-title">Autonomous Threat Detection</h3>
-                            <p class="feature-description">
-                                ML-powered anomaly detection that learns your environment's unique fingerprint and identifies threats with 87% fewer false positives.
-                            </p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">🛡️</div>
-                            <h3 class="feature-title">Self-Healing Architecture</h3>
-                            <p class="feature-description">
-                                Continuously monitors its own health, automatically diagnosing and resolving issues before they impact your operations.
-                            </p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">📚</div>
-                            <h3 class="feature-title">Expert Knowledge Base</h3>
-                            <p class="feature-description">
-                                Integrated knowledge from authoritative cybersecurity books including "Black Hat Python", "The Hacker Playbook 3", and "RTFM".
-                            </p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">🎯</div>
-                            <h3 class="feature-title">Adaptive Learning Missions</h3>
-                            <p class="feature-description">
-                                Personalized training scenarios that adapt to your skill level, from beginner to advanced red/blue team operations.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="tech-stack" id="technology">
-                <div class="container">
-                    <h2 class="section-title">Cutting-Edge Technology Stack</h2>
-                    <p class="section-subtitle">
-                        Built on the latest AI and cybersecurity technologies for maximum performance and reliability.
-                    </p>
-                    
-                    <div class="tech-grid">
-                        <div class="tech-item">
-                            <div class="tech-name">Gemma-2B Local LLM</div>
-                            <div class="tech-description">Optimized for cybersecurity reasoning with sub-second response times</div>
-                        </div>
-                        
-                        <div class="tech-item">
-                            <div class="tech-name">Vector Memory System</div>
-                            <div class="tech-description">Persistent threat intelligence with episodic, semantic, and procedural memory</div>
-                        </div>
-                        
-                        <div class="tech-item">
-                            <div class="tech-name">Integrated Security Tools</div>
-                            <div class="tech-description">Nmap, Metasploit, Burp Suite, Wazuh, Suricata, and more</div>
-                        </div>
-                        
-                        <div class="tech-item">
-                            <div class="tech-name">Natural Language Interface</div>
-                            <div class="tech-description">Conversational AI that understands security context and intent</div>
-                        </div>
-                        
-                        <div class="tech-item">
-                            <div class="tech-name">CAG Architecture</div>
-                            <div class="tech-description">Cached Augmented Generation for 10x faster response times</div>
-                        </div>
-                        
-                        <div class="tech-item">
-                            <div class="tech-name">Real-time Analytics</div>
-                            <div class="tech-description">ML-powered log analysis and threat correlation</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="early-access" id="access">
-                <div class="container">
-                    <h2 class="section-title">Early Access Benefits</h2>
-                    <p class="section-subtitle">
-                        Join the exclusive group of security professionals shaping the future of autonomous cybersecurity.
-                    </p>
-                    
-                    <div class="access-benefits">
-                        <div class="benefit-item">
-                            <div class="benefit-icon">✓</div>
-                            <div class="benefit-text">Free access to C0Di3 during the entire beta period</div>
-                        </div>
-                        
-                        <div class="benefit-item">
-                            <div class="benefit-icon">✓</div>
-                            <div class="benefit-text">Direct input on feature development and priorities</div>
-                        </div>
-                        
-                        <div class="benefit-item">
-                            <div class="benefit-icon">✓</div>
-                            <div class="benefit-text">Exclusive webinars and training sessions with the development team</div>
-                        </div>
-                        
-                        <div class="benefit-item">
-                            <div class="benefit-icon">✓</div>
-                            <div class="benefit-text">Priority support and direct communication channels</div>
-                        </div>
-                        
-                        <div class="benefit-item">
-                            <div class="benefit-icon">✓</div>
-                            <div class="benefit-text">Early access to new features and updates</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <footer>
-                <div class="container">
-                    <div class="footer-content">
-                        <div class="footer-section">
-                            <h3>About C0Di3</h3>
-                            <div class="footer-logo-container">
-                               <img src="C0Di3.PNG" alt="C0Di3 Faded Logo" style="width: 150px; height: auto;"/>
+                            <div class="feature-icon">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707.707M12 21v-1m0-16a9 9 0 110 18 9 9 0 010-18z"></path></svg>
                             </div>
-                            <p>Autonomous cybersecurity powered by advanced AI reasoning and expert knowledge.</p>
+                            <h3 class="feature-title">Real-time Threat Intelligence</h3>
+                            <p class="feature-description">Continuously scans and analyzes data streams for anomalies and potential threats, providing instant alerts.</p>
                         </div>
-                        <div class="footer-section">
-                            <h3>Contact</h3>
-                            <a href="mailto:C0Di3@proton.me">C0Di3@proton.me</a>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                            </div>
+                            <h3 class="feature-title">Adaptive Learning</h3>
+                            <p class="feature-description">C0Di3's neural network evolves with every interaction, becoming smarter at identifying new attack vectors.</p>
                         </div>
-                        <div class="footer-section">
-                            <h3>Follow Us</h3>
-                            <a href="https://www.instagram.com/c0di3_ai?igsh=MTExNWxhMDgxcHg3Zg%3D%3D&utm_source=qr">Instagram</a>
-                            <a href="#">LinkedIn</a>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                            </div>
+                            <h3 class="feature-title">Automated Response</h3>
+                            <p class="feature-description">Capable of taking autonomous action to mitigate threats, from isolating systems to patching vulnerabilities.</p>
                         </div>
                     </div>
-                    <p>© 2025 C0Di3. All rights reserved.</p>
                 </div>
-            </footer>
+            </section>
+            
+            <section id="team" class="section">
+                <div class="container">
+                     <h2 class="section-title">Meet the Mastermind</h2>
+                     <p class="section-subtitle">
+                        C0Di3 is an open-source project driven by a passionate developer dedicated to pushing the boundaries of AI in cybersecurity.
+                     </p>
+                     <div class="mastermind-section">
+                         <a href="https://github.com/Senpai-Sama7" target="_blank" rel="noopener noreferrer" class="mastermind-card">
+                            <img src="C0Di3.PNG" alt="Douglas Mitchell">
+                            <div>
+                                <h4 class="mastermind-name">Douglas Mitchell</h4>
+                                <p class="mastermind-title">Lead Developer & Visionary</p>
+                            </div>
+                         </a>
+                     </div>
+                </div>
+            </section>
+
+            <section id="waitlist" class="section section-darker">
+                <div class="container">
+                    <div class="waitlist-section">
+                        <h2 class="section-title">Join the Cybersecurity Revolution</h2>
+                        <p class="section-subtitle">Be among the first to experience autonomous cybersecurity. Get exclusive early access, updates, and a direct line to the development process.</p>
+                        
+                        <form id="waitlistForm" class="waitlist-form" action="https://formspree.io/f/xzzgnqdp" method="POST">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="e.g., Jane Doe" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="you@company.com" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="role">Your Role</label>
+                                <select id="role" name="role" class="form-select">
+                                    <option value="">Select your role</option>
+                                    <option value="security-analyst">Security Analyst</option>
+                                    <option value="ciso">CISO/Security Manager</option>
+                                    <option value="it-admin">IT Administrator</option>
+                                    <option value="developer">Developer</option>
+                                    <option value="student">Student</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">Secure My Spot</button>
+                            
+                            <div class="success-message" id="successMessage">
+                                🎉 Success! You're on the waitlist. Check your email for confirmation.
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
         </main>
+
+        <footer>
+            <div class="container">
+                <div class="footer-logo-container">
+                    <img src="C0Di3.PNG" alt="C0Di3 Logo" style="width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 1rem;">
+                </div>
+                <p>© 2024 C0Di3 Project. All Rights Reserved.</p>
+                <p style="margin-top: 0.5rem;">An open-source initiative by Douglas Mitchell.</p>
+            </div>
+        </footer>
     </div>
-        
-    <script>
-      const emailInput = document.getElementById('email');
-      const replyToInput = document.getElementById('_replyto');
-
-      emailInput.addEventListener('input', () => {
-        replyToInput.value = emailInput.value;
-      });
-    </script>
 
     <script>
-      const particleContainer = document.querySelector('.floating-particles');
-      for (let i = 0; i < 100; i++) {
-        const p = document.createElement('div');
-        p.className = 'particle';
-        p.style.left = `${Math.random() * 100}%`;
-        p.style.top = `${Math.random() * 100}%`;
-        p.style.animationDuration = `${6 + Math.random() * 4}s`;
-        particleContainer.appendChild(p);
-      }
+        $(document).ready(function() {
+            // Activate Parallax
+            $('.parallax-window').parallax({
+                imageSrc: 'background.jpg',
+                naturalWidth: 1920,
+                naturalHeight: 1080,
+                speed: 0.5
+            });
+
+            // Smooth scrolling for anchor links
+            $('a[href^="#"]').on('click', function(event) {
+                var target = $(this.getAttribute('href'));
+                if (target.length) {
+                    event.preventDefault();
+                    $('html, body').stop().animate({
+                        scrollTop: target.offset().top - 80 // Adjust for fixed header
+                    }, 800);
+                }
+            });
+            
+            // Waitlist Form Submission
+            $('#waitlistForm').on('submit', function(e) {
+                e.preventDefault();
+                var form = $(this);
+                var successMessage = $('#successMessage');
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: 'POST',
+                    data: form.serialize(),
+                    dataType: 'json',
+                    success: function() {
+                        successMessage.slideDown();
+                        form[0].reset();
+                        setTimeout(function() {
+                            successMessage.slideUp();
+                        }, 5000);
+                    },
+                    error: function() {
+                        // Fallback for when Formspree redirect fails or for local testing
+                        successMessage.text('Error submitting form. Please try again.').slideDown();
+                         setTimeout(function() {
+                            successMessage.slideUp();
+                        }, 5000);
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
