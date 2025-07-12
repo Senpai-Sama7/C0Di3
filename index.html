@@ -87,8 +87,8 @@
     }
 
     @keyframes pulse {
-        0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); }
-        50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(0, 255, 255, 0.5); }
+        0%, 100% { trans: scale(1); box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); }
+        50% { trans: scale(1.05); box-shadow: 0 0 30px rgba(0, 255, 255, 0.5); }
     }
 
     .nav-links {
@@ -179,11 +179,11 @@
         padding: 1.5rem;
         text-align: center;
         backdrop-filter: blur(10px);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: trans 0.3s ease, box-shadow 0.3s ease;
     }
 
     .stat-card:hover {
-        transform: translateY(-5px);
+        trans: translateY(-5px);
         box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
     }
 
@@ -224,8 +224,8 @@
     }
 
     @keyframes shimmer {
-        0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-        100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        0% { trans: translateX(-100%) translateY(-100%) rotate(45deg); }
+        100% { trans: translateX(100%) translateY(100%) rotate(45deg); }
     }
 
     .cta-content {
@@ -246,7 +246,7 @@
         margin-bottom: 2rem;
     }
 
-    .waitlist-form {
+    .waitlist- {
         display: flex;
         flex-direction: column;
         gap: 1rem;
@@ -254,19 +254,19 @@
         margin: 0 auto;
     }
 
-    .form-group {
+    .-group {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
     }
 
-    .form-group label {
+    .-group label {
         font-weight: 500;
         color: #00ffff;
         text-align: left;
     }
 
-    .form-input {
+    .-input {
         padding: 1rem;
         border: 2px solid rgba(0, 255, 255, 0.3);
         border-radius: 8px;
@@ -276,17 +276,17 @@
         transition: all 0.3s ease;
     }
 
-    .form-input:focus {
+    .-input:focus {
         outline: none;
         border-color: #00ffff;
         box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
     }
 
-    .form-input::placeholder {
+    .-input::placeholder {
         color: #666;
     }
 
-    .form-select {
+    .-select {
         padding: 1rem;
         border: 2px solid rgba(0, 255, 255, 0.3);
         border-radius: 8px;
@@ -296,13 +296,13 @@
         transition: all 0.3s ease;
     }
 
-    .form-select:focus {
+    .-select:focus {
         outline: none;
         border-color: #00ffff;
         box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
     }
 
-    .form-select option {
+    .-select option {
         background: #1a1a2e;
         color: #ffffff;
     }
@@ -317,7 +317,7 @@
         font-weight: 600;
         cursor: pointer;
         transition: all 0.3s ease;
-        text-transform: uppercase;
+        text-trans: uppercase;
         letter-spacing: 1px;
         position: relative;
         overflow: hidden;
@@ -339,7 +339,7 @@
     }
 
     .cta-button:hover {
-        transform: translateY(-2px);
+        trans: translateY(-2px);
         box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
     }
 
@@ -642,7 +642,7 @@
                         <h2 class="cta-title">Join the Cybersecurity Revolution</h2>
                         <p class="cta-subtitle">Be among the first to experience autonomous cybersecurity. Get exclusive early access to C0Di3.</p>
                         
-                        <form class="waitlist-form" id="waitlistForm">
+                        <form action="https://formspree.io/f/xzzgnqdp" id="waitlistForm">
                             <div class="form-group">
                                 <label for="name">Full Name</label>
                                 <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name" required>
@@ -652,6 +652,8 @@
                                 <label for="email">Email Address</label>
                                 <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email address" required>
                             </div>
+                            
+                            <input type="hidden" name="_replyto" id="_replyto">
                             
                             <div class="form-group">
                                 <label for="company">Company/Organization</label>
@@ -857,6 +859,15 @@
         </div>
     </footer>
 </main>
+    
+<script>
+  const emailInput = document.getElementById('email');
+  const replyToInput = document.getElementById('_replyto');
+
+  emailInput.addEventListener('input', () => {
+    replyToInput.value = emailInput.value;
+  });
+</script>
 
 </body>
 </html>
