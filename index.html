@@ -4,8 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C0Di3 - The Future of Autonomous Cybersecurity</title>
+    
+    <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Google Analytics Tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8KSJQ3RHD8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-8KSJQ3RHD8');
+    </script>
+
+    <!-- Microsoft Clarity Tag -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "sdujpd8pm3");
+    </script>
+
     <style>
         :root {
             --cyan-glow: rgba(0, 255, 255, 0.5);
@@ -39,7 +62,6 @@
             height: 100%;
             z-index: -3;
             overflow: hidden;
-            /* Static image fallback is the default */
             background: url('background.jpg') no-repeat center center/cover;
         }
         .video-background video {
@@ -54,7 +76,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); /* Dark overlay for readability */
+            background-color: rgba(0, 0, 0, 0.6);
             z-index: -2;
         }
 
@@ -173,7 +195,7 @@
                 linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
             background-size: 60px 60px;
-            z-index: -1; /* On top of video overlay */
+            z-index: -1;
             animation: gridMove 60s linear infinite;
         }
 
@@ -472,8 +494,8 @@
         .form-input,
         .form-select {
             width: 100%;
-            background: rgba(10, 10, 10, 0.8); /* Darker background for readability */
-            border: 1px solid rgba(59, 130, 246, 0.4); /* Matching border */
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.4);
             outline: none;
             padding: 0.75rem 1rem;
             border-radius: 0.5rem;
@@ -660,28 +682,30 @@
                         <h2 class="section-title">Join the Cybersecurity Revolution</h2>
                         <p class="section-subtitle">Be among the first to experience autonomous cybersecurity. Get exclusive early access, updates, and a direct line to the development process.</p>
                         
-                        <form id="waitlistForm" class="waitlist-form" action="https://formspree.io/f/xzzgnqdp" method="POST">
+                        <form id="waitlistForm" class="waitlist-form" action="https://github.us4.list-manage.com/subscribe/post?u=ef31bc3a706b3427d2962bcfe&id=9200e8bfa5" method="POST">
                             <div class="form-group">
-                                <label for="name">Full Name</label>
-                                <input type="text" id="name" name="name" class="form-input" placeholder="e.g., Jane Doe" required>
+                                <label for="mce-FNAME">Full Name</label>
+                                <input type="text" id="mce-FNAME" name="FNAME" class="form-input" placeholder="e.g., Jane Doe" required>
                             </div>
                             
                             <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input type="email" id="email" name="email" class="form-input" placeholder="you@company.com" required>
+                                <label for="mce-EMAIL">Email Address</label>
+                                <input type="email" id="mce-EMAIL" name="EMAIL" class="form-input" placeholder="you@company.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mce-COMPANY">Company</label>
+                                <input type="text" id="mce-COMPANY" name="COMPANY" class="form-input" placeholder="e.g., ACME Corp">
                             </div>
                             
                             <div class="form-group">
-                                <label for="role">Your Role</label>
-                                <select id="role" name="role" class="form-select">
-                                    <option value="">Select your role</option>
-                                    <option value="security-analyst">Security Analyst</option>
-                                    <option value="ciso">CISO/Security Manager</option>
-                                    <option value="it-admin">IT Administrator</option>
-                                    <option value="developer">Developer</option>
-                                    <option value="student">Student</option>
-                                    <option value="other">Other</option>
-                                </select>
+                                <label for="mce-MMERGE3">Your Role</label>
+                                <input type="text" id="mce-MMERGE3" name="MMERGE3" class="form-input" placeholder="e.g., Security Analyst" required>
+                            </div>
+                            
+                            <!-- Mailchimp anti-bot field -->
+                            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                                <input type="text" name="b_ef31bc3a706b3427d2962bcfe_9200e8bfa5" tabindex="-1" value="">
                             </div>
                             
                             <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">Secure My Spot</button>
@@ -725,7 +749,6 @@
                 const videoHTML = `
                     <video autoplay muted loop playsinline>
                         <source src="video2.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
                     </video>`;
                 $('.video-background').html(videoHTML);
             }
@@ -756,26 +779,32 @@
                 }
             });
             
-            // --- Waitlist Form Submission ---
+            // --- Mailchimp AJAX Form Submission ---
             $('#waitlistForm').on('submit', function(e) {
                 e.preventDefault();
                 var form = $(this);
                 var successMessage = $('#successMessage');
+                var url = form.attr('action').replace('/post?', '/post-json?').concat('&c=?');
                 
                 $.ajax({
-                    url: form.attr('action'),
-                    method: 'POST',
+                    url: url,
+                    method: 'GET',
                     data: form.serialize(),
                     dataType: 'json',
-                    success: function() {
-                        successMessage.slideDown();
+                    contentType: "application/json; charset=utf-8",
+                    success: function(data) {
+                        if (data.result === "success") {
+                            successMessage.text('🎉 Success! You\'re on the waitlist.').slideDown();
+                        } else {
+                            successMessage.text('Error: ' + data.msg).slideDown();
+                        }
                         form[0].reset();
                         setTimeout(function() {
                             successMessage.slideUp();
                         }, 5000);
                     },
                     error: function() {
-                        successMessage.text('Error submitting form. Please try again.').slideDown();
+                        successMessage.text('An unknown error occurred. Please try again.').slideDown();
                          setTimeout(function() {
                             successMessage.slideUp();
                         }, 5000);
