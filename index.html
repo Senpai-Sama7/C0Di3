@@ -27,6 +27,84 @@
             line-height: 1.6;
         }
         
+        body.loaded {
+            overflow-y: auto;
+        }
+
+        /* --- Entrance Animation --- */
+        #entrance-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease-out 2.5s;
+        }
+
+        #entrance-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .starfield {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: zoom 2.5s ease-in-out forwards;
+        }
+
+        @keyframes zoom {
+            0% {
+                transform: scale(0.1);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        
+        .parallax-window {
+            transform: scale(0.95);
+            opacity: 0;
+            transition: transform 1s ease-out 2s, opacity 1s ease-out 2s;
+        }
+
+        body.loaded .parallax-window {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+
+        /* --- Scroll Animations --- */
+        .fly-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fly-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -417,6 +495,10 @@
     </style>
 </head>
 <body>
+    <div id="entrance-overlay">
+        <div class="starfield"></div>
+    </div>
+
     <div class="parallax-window" data-parallax="scroll" data-image-src="background.jpg">
         <div class="cyber-grid"></div>
         
@@ -439,14 +521,14 @@
             <section class="hero">
                 <div class="container">
                     <div class="hero-content">
-                        <img src="C0Di3.PNG" alt="C0Di3 Logo" class="logo-image" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 2rem;">
+                        <img src="C0Di3.PNG" alt="C0Di3 Logo" class="logo-image fly-in" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 2rem;">
                         
-                        <h1>Meet C0Di3: Your AI Cybersecurity Guardian</h1>
-                        <p class="hero-subtitle">
+                        <h1 class="fly-in" style="transition-delay: 0.2s;">Meet C0Di3: Your AI Cybersecurity Guardian</h1>
+                        <p class="hero-subtitle fly-in" style="transition-delay: 0.4s;">
                             An advanced AI agent designed to proactively detect, analyze, and neutralize cyber threats. C0Di3 is your ever-vigilant partner in the digital battlefield.
                         </p>
                         
-                        <div class="hero-buttons">
+                        <div class="hero-buttons fly-in" style="transition-delay: 0.6s;">
                             <a href="#waitlist" class="btn btn-primary">Join the Waitlist</a>
                             <a href="https://github.com/Senpai-Sama7/Project-C0Di3" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">View on GitHub</a>
                         </div>
@@ -456,13 +538,13 @@
 
             <section id="features" class="section section-darker">
                 <div class="container">
-                    <h2 class="section-title">Core Capabilities</h2>
-                    <p class="section-subtitle">
+                    <h2 class="section-title fly-in">Core Capabilities</h2>
+                    <p class="section-subtitle fly-in">
                         C0Di3 combines advanced AI reasoning with comprehensive cybersecurity expertise to deliver unprecedented protection for developers, businesses, and individuals.
                     </p>
                     
                     <div class="features-grid">
-                        <div class="feature-card">
+                        <div class="feature-card fly-in">
                             <div class="feature-icon">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707.707M12 21v-1m0-16a9 9 0 110 18 9 9 0 010-18z"></path></svg>
                             </div>
@@ -470,7 +552,7 @@
                             <p class="feature-description">Continuously scans and analyzes data streams for anomalies and potential threats, providing instant alerts.</p>
                         </div>
                         
-                        <div class="feature-card">
+                        <div class="feature-card fly-in" style="transition-delay: 0.2s;">
                             <div class="feature-icon">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
                             </div>
@@ -478,7 +560,7 @@
                             <p class="feature-description">C0Di3's neural network evolves with every interaction, becoming smarter at identifying new attack vectors.</p>
                         </div>
                         
-                        <div class="feature-card">
+                        <div class="feature-card fly-in" style="transition-delay: 0.4s;">
                             <div class="feature-icon">
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                             </div>
@@ -491,11 +573,11 @@
             
             <section id="team" class="section">
                 <div class="container">
-                     <h2 class="section-title">Meet the Mastermind</h2>
-                     <p class="section-subtitle">
+                     <h2 class="section-title fly-in">Meet the Mastermind</h2>
+                     <p class="section-subtitle fly-in">
                         C0Di3 is an open-source project driven by a passionate developer dedicated to pushing the boundaries of AI in cybersecurity.
                      </p>
-                     <div class="mastermind-section">
+                     <div class="mastermind-section fly-in">
                          <a href="https://github.com/Senpai-Sama7" target="_blank" rel="noopener noreferrer" class="mastermind-card">
                             <img src="C0Di3.PNG" alt="Douglas Mitchell">
                             <div>
@@ -509,7 +591,7 @@
 
             <section id="waitlist" class="section section-darker">
                 <div class="container">
-                    <div class="waitlist-section">
+                    <div class="waitlist-section fly-in">
                         <h2 class="section-title">Join the Cybersecurity Revolution</h2>
                         <p class="section-subtitle">Be among the first to experience autonomous cybersecurity. Get exclusive early access, updates, and a direct line to the development process.</p>
                         
@@ -561,7 +643,15 @@
 
     <script>
         $(document).ready(function() {
-            // Activate Parallax
+            // --- Entrance Animation ---
+            const overlay = $('#entrance-overlay');
+            setTimeout(function() {
+                overlay.addClass('hidden');
+                $('body').addClass('loaded');
+            }, 2500);
+
+
+            // --- Parallax ---
             $('.parallax-window').parallax({
                 imageSrc: 'background.jpg',
                 naturalWidth: 1920,
@@ -569,7 +659,22 @@
                 speed: 0.5
             });
 
-            // Smooth scrolling for anchor links
+            // --- Scroll Animations ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            const elementsToAnimate = document.querySelectorAll('.fly-in');
+            elementsToAnimate.forEach(el => observer.observe(el));
+
+
+            // --- Smooth Scrolling ---
             $('a[href^="#"]').on('click', function(event) {
                 var target = $(this.getAttribute('href'));
                 if (target.length) {
@@ -580,7 +685,7 @@
                 }
             });
             
-            // Waitlist Form Submission
+            // --- Waitlist Form Submission ---
             $('#waitlistForm').on('submit', function(e) {
                 e.preventDefault();
                 var form = $(this);
@@ -599,7 +704,6 @@
                         }, 5000);
                     },
                     error: function() {
-                        // Fallback for when Formspree redirect fails or for local testing
                         successMessage.text('Error submitting form. Please try again.').slideDown();
                          setTimeout(function() {
                             successMessage.slideUp();
