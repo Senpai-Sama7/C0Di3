@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<!-- .
+<!-- 
+  This site was created by merging two templates as requested.
+  The base structure, animations, and scripts from the first "Bitcoin" template have been fully preserved.
+  The content, branding, and specific features (like the form) from the "C0Di3" template have been integrated into this structure.
+  The C0Di3 entrance animation and animated background have now been added.
 -->
 <html lang="en">
 <head>
@@ -52,130 +56,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
 
     <style>
-      html.lenis {
-        height: auto;
+      /* --- Base Styles from Bitcoin Template --- */
+      html.lenis { height: auto; }
+      .lenis.lenis-smooth { scroll-behavior: auto; }
+      .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+      .lenis.lenis-stopped { overflow: hidden; }
+      html { scrollbar-gutter: auto; }
+      ::-webkit-scrollbar { background-color: #0a0a0a; width: 6px; }
+      ::-webkit-scrollbar-thumb { background-color: #3b82f6; border-radius: 6px; }
+      .hero_content-top, .hero_content-bottom { opacity: 0; }
+      
+      /* --- C0Di3 Entrance and Background Effects --- */
+      body {
+        background: #0a0a0a;
+        overflow-y: hidden; /* Hide scrollbar during entrance */
       }
-      .lenis.lenis-smooth {
-        scroll-behavior: auto;
+      body.loaded {
+        overflow-y: auto;
       }
-      .lenis.lenis-smooth [data-lenis-prevent] {
-        overscroll-behavior: contain;
+      #entrance-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: #000; z-index: 9999; display: flex;
+        align-items: center; justify-content: center;
+        transition: opacity 0.5s ease-out; overflow: hidden;
       }
-      .lenis.lenis-stopped {
-        overflow: hidden;
-      }
-      html {
-        scrollbar-gutter: auto;
-      }
-      ::-webkit-scrollbar {
-        background-color: #212121;
-        width: 6px;
-      }
-      ::-webkit-scrollbar-thumb {
-        background-color: #606060;
-        border-radius: 6px;
-      }
-      .hero_content-top, .hero_content-bottom {
-        opacity: 0;
-      }
-    </style>
-    <style>
-      .navbar_links-wrapper:has(.navbar_link:hover) .navbar_link:not(:hover),
-      .navbar_links-wrapper:has(.navbar_link.w--current) .navbar_link:not(.w--current):not(:hover) {
-        opacity: 0.5;
-      }
-      [radial-border]::after {
-        content: "";
-        pointer-events: none;
-        user-select: none;
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        mask-composite: xor;
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        position: absolute;
-        inset: 0;
-        padding: 2px;
-        border-radius: inherit;
-        background: radial-gradient(
-          ellipse 80% 80% at 50% 20%,
-          rgba(0, 255, 255, 0.9),
-          rgba(59, 130, 246, 0.5),
-          rgba(59, 130, 246, 0)
-        );
-      }
-      [radial-border="right"]::after {
-        background: radial-gradient(
-          ellipse 80% 80% at 95% 20%,
-          rgba(0, 255, 255, 0.9),
-          rgba(59, 130, 246, 0.5),
-          rgba(59, 130, 246, 0)
-        );
-      }
-      [radial-border="left"]::after {
-        background: radial-gradient(
-          ellipse 80% 80% at 5% 20%,
-          rgba(0, 255, 255, 0.9),
-          rgba(59, 130, 246, 0.5),
-          rgba(59, 130, 246, 0)
-        );
-      }
-      [glow-border="card"]::before {
-        content: "";
-        pointer-events: none;
-        user-select: none;
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        mask-composite: xor;
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        position: absolute;
-        inset: 0;
-        padding: 2px;
-        border-radius: inherit;
-        opacity: 0;
-        will-change: background, opacity;
-        transition-duration: 400ms;
-        transition-timing-function: ease;
-        transition-delay: 0s;
-        transition-property: opacity;
-        background: radial-gradient(
-          circle 10rem at var(--cursor-x) var(--cursor-y),
-          rgba(0, 255, 255, 1),
-          rgba(59, 130, 246, 0.5),
-          rgba(59, 130, 246, 0)
-        );
-        background-size: auto;
-        background-origin: padding-box;
-        z-index: 0;
-      }
-      [glow-border="wrapper"]:hover [glow-border="card"]::before {
-        opacity: 1;
-      }
-      .petal-texts_wrapper .petal-text:first-child {
-        opacity: 1;
-      }
-      .petals-circle_inner .petals-circle_text:first-child {
-        opacity: 1;
-      }
-      @keyframes pulse {
-        0% { opacity: 0.2; } 50% { opacity: 0.3; } 100% { opacity: 0.2; }
-      }
-      .hero_light { animation: pulse 6s infinite ease-in-out; }
-      @media screen and (max-width: 768px) {
-        @keyframes pulse { 0% { opacity: 0.1; } 50% { opacity: 0.2; } 100% { opacity: 0.1; } }
-        .hero_light { animation: pulse 6s infinite ease-in-out; }
-      }
-      @keyframes heroAurora {
-        0% { transform: translate(-50%, -1%) rotateZ(0deg); } 25% { transform: translate(-50%, -1%) rotateZ(-7deg); } 50% { transform: translate(-50%, -1%) rotateZ(0deg); } 75% { transform: translate(-50%, -1%) rotateZ(7deg); } 100% { transform: translate(-50%, -1%) rotateZ(0deg); }
-      }
-      .hero_aurora.is-blured { animation: heroAurora 14s infinite ease-in-out; }
-      @keyframes footerAurora {
-        0% { transform: rotateZ(-10deg); } 50% { transform: rotateZ(10deg); } 100% { transform: rotateZ(-10deg); }
-      }
-      .footer_aurora.is-blured { animation: footerAurora 6s infinite ease-in-out; }
+      #entrance-overlay.hidden { opacity: 0; pointer-events: none; }
+      .starfield { position: absolute; width: 100%; height: 100%; background-repeat: repeat; animation: zoom 2s ease-in-out forwards; }
+      .starfield-1 { background-size: 200px 200px; background-image: radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)), radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)), radial-gradient(1px 1px at 50px 160px, #ddd, rgba(0,0,0,0)), radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)), radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0)), radial-gradient(1px 1px at 160px 120px, #ddd, rgba(0,0,0,0)); animation-duration: 2s; }
+      .starfield-2 { background-size: 300px 300px; background-image: radial-gradient(1px 1px at 50px 50px, #eee, rgba(0,0,0,0)), radial-gradient(2px 2px at 100px 100px, #fff, rgba(0,0,0,0)), radial-gradient(1px 1px at 200px 150px, #ddd, rgba(0,0,0,0)), radial-gradient(1px 1px at 250px 90px, #fff, rgba(0,0,0,0)); animation-duration: 1.8s; }
+      .starfield-3 { background-size: 400px 400px; background-image: radial-gradient(2px 2px at 10px 200px, #eee, rgba(0,0,0,0)), radial-gradient(2px 2px at 300px 300px, #fff, rgba(0,0,0,0)), radial-gradient(3px 3px at 150px 250px, #ddd, rgba(0,0,0,0)); animation-duration: 1.5s; }
+      @keyframes zoom { 0% { transform: scale(0.1); opacity: 0; } 50% { opacity: 1; } 100% { transform: scale(2.5); opacity: 0; } }
+      .page-wrapper { transform: scale(0.95); opacity: 0; transition: transform 0.8s ease-out, opacity 0.8s ease-out; }
+      body.loaded .page-wrapper { transform: scale(1); opacity: 1; }
+      .video-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; overflow: hidden; background: url('background.jpg') no-repeat center center/cover; }
+      .video-background video { width: 100%; height: 100%; object-fit: cover; }
+      .video-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); z-index: -2; }
+      .cyber-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px); background-size: 60px 60px; z-index: -1; animation: gridMove 60s linear infinite; }
+      @keyframes gridMove { to { background-position: 120px 120px; } }
 
-      /* C0Di3 Specific Styles */
+      /* --- Combined & Adapted Styles --- */
+      .navbar_links-wrapper:has(.navbar_link:hover) .navbar_link:not(:hover),
+      .navbar_links-wrapper:has(.navbar_link.w--current) .navbar_link:not(.w--current):not(:hover) { opacity: 0.5; }
+      [radial-border]::after { content: ""; pointer-events: none; user-select: none; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask-composite: xor; -webkit-mask-composite: xor; mask-composite: exclude; position: absolute; inset: 0; padding: 2px; border-radius: inherit; background: radial-gradient( ellipse 80% 80% at 50% 20%, rgba(0, 255, 255, 0.9), rgba(59, 130, 246, 0.5), rgba(59, 130, 246, 0) ); }
+      [radial-border="right"]::after { background: radial-gradient( ellipse 80% 80% at 95% 20%, rgba(0, 255, 255, 0.9), rgba(59, 130, 246, 0.5), rgba(59, 130, 246, 0) ); }
+      [radial-border="left"]::after { background: radial-gradient( ellipse 80% 80% at 5% 20%, rgba(0, 255, 255, 0.9), rgba(59, 130, 246, 0.5), rgba(59, 130, 246, 0) ); }
+      [glow-border="card"]::before { content: ""; pointer-events: none; user-select: none; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask-composite: xor; -webkit-mask-composite: xor; mask-composite: exclude; position: absolute; inset: 0; padding: 2px; border-radius: inherit; opacity: 0; will-change: background, opacity; transition-duration: 400ms; transition-timing-function: ease; transition-delay: 0s; transition-property: opacity; background: radial-gradient( circle 10rem at var(--cursor-x) var(--cursor-y), rgba(0, 255, 255, 1), rgba(59, 130, 246, 0.5), rgba(59, 130, 246, 0) ); background-size: auto; background-origin: padding-box; z-index: 0; }
+      [glow-border="wrapper"]:hover [glow-border="card"]::before { opacity: 1; }
+      .petal-texts_wrapper .petal-text:first-child { opacity: 1; }
+      .petals-circle_inner .petals-circle_text:first-child { opacity: 1; }
+      @keyframes pulse { 0% { opacity: 0.2; } 50% { opacity: 0.3; } 100% { opacity: 0.2; } }
+      .hero_light { animation: pulse 6s infinite ease-in-out; }
+      @media screen and (max-width: 768px) { @keyframes pulse { 0% { opacity: 0.1; } 50% { opacity: 0.2; } 100% { opacity: 0.1; } } .hero_light { animation: pulse 6s infinite ease-in-out; } }
+      @keyframes heroAurora { 0% { transform: translate(-50%, -1%) rotateZ(0deg); } 25% { transform: translate(-50%, -1%) rotateZ(-7deg); } 50% { transform: translate(-50%, -1%) rotateZ(0deg); } 75% { transform: translate(-50%, -1%) rotateZ(7deg); } 100% { transform: translate(-50%, -1%) rotateZ(0deg); } }
+      .hero_aurora.is-blured { animation: heroAurora 14s infinite ease-in-out; }
+      @keyframes footerAurora { 0% { transform: rotateZ(-10deg); } 50% { transform: rotateZ(10deg); } 100% { transform: rotateZ(-10deg); } }
+      .footer_aurora.is-blured { animation: footerAurora 6s infinite ease-in-out; }
       .hero-buttons { display: flex; flex-direction: row; gap: 1rem; justify-content: center; margin-top: 2rem; }
       .btn { padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; display: inline-block; border: 2px solid transparent; }
       .btn-primary { background: linear-gradient(90deg, #3b82f6, #6366f1); color: white; }
@@ -194,6 +129,15 @@
     </style>
 </head>
 <body>
+    <div id="entrance-overlay">
+        <div class="starfield starfield-1"></div>
+        <div class="starfield starfield-2"></div>
+        <div class="starfield starfield-3"></div>
+    </div>
+    <div class="video-background"></div>
+    <div class="video-overlay"></div>
+    <div class="cyber-grid"></div>
+
     <div class="page-wrapper">
         <div class="styles w-embed"></div>
         <nav data-lenis-prevent="" class="menu" style="translate: none; rotate: none; scale: none; pointer-events: none; opacity: 0; transform: translate(0px, -100%);">
@@ -522,77 +466,52 @@
 
     <script>
       "use strict";
-      const lenis = new Lenis({
-        lerp: 0.15,
-        wheelMultiplier: 0.9,
-        infinite: false,
-        gestureOrientation: "vertical",
-        normalizeWheel: false,
-        smoothTouch: false
-      });
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-      $("[data-lenis-start]").on("click", function () {
-        lenis.start();
-      });
-      $("[data-lenis-stop]").on("click", function () {
-        lenis.stop();
-      });
-      $("[data-lenis-toggle]").on("click", function () {
-        $(this).toggleClass("stop-scroll");
-        if ($(this).hasClass("stop-scroll")) {
-          lenis.stop();
-        } else {
-          lenis.start();
+      // --- C0Di3 Entrance and Video Logic ---
+      $(document).ready(function() {
+        const overlay = $('#entrance-overlay');
+        setTimeout(function() {
+            overlay.addClass('hidden');
+            $('body').addClass('loaded');
+        }, 2000);
+
+        const isMobile = window.innerWidth <= 768;
+        if (!isMobile) {
+            const videoHTML = `
+                <video autoplay muted loop playsinline>
+                    <source src="video2.mp4" type="video/mp4">
+                </video>`;
+            $('.video-background').html(videoHTML);
         }
       });
+      
+      // --- Bitcoin Template Core Scripts ---
+      const lenis = new Lenis({ lerp: 0.15, wheelMultiplier: 0.9, infinite: false, gestureOrientation: "vertical", normalizeWheel: false, smoothTouch: false });
+      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+      requestAnimationFrame(raf);
+      $("[data-lenis-start]").on("click", function () { lenis.start(); });
+      $("[data-lenis-stop]").on("click", function () { lenis.stop(); });
+      $("[data-lenis-toggle]").on("click", function () { $(this).toggleClass("stop-scroll"); if ($(this).hasClass("stop-scroll")) { lenis.stop(); } else { lenis.start(); } });
       const menu = document.querySelector(".menu");
       const toggleBtn = document.querySelector(".menu-toggle");
       const menuLines = document.querySelectorAll(".menu-toggle_line");
-      const menuLinks = document.querySelectorAll(".menu_link, .navbar_link");
+      const menuLinks = document.querySelectorAll(".menu_link, .navbar_link, .btn");
       const menuButton = document.querySelector(".menu_bottom .button");
       gsap.set(menu, { y: "-100%", opacity: 0, pointerEvents: "none" });
       gsap.set(gsap.utils.toArray('.menu_link'), { y: "100%" });
       gsap.set(menuButton, { width: "0%" });
       const lineHeight = menuLines[0].offsetHeight;
       const moveY = lineHeight + 4;
-      const menuTl = gsap.timeline({
-        paused: true,
-        reversed: true,
-        defaults: { ease: "power3.inOut" }
-      });
-      menuTl
-        .set(menu, { opacity: 1, pointerEvents: "auto" })
-        .to(menu, { y: "0%", duration: 1 })
-        .to(menuLines[0], { y: moveY, rotate: 45, duration: 0.5 }, "<")
-        .to(menuLines[1], { opacity: 0, duration: 0.3 }, "<")
-        .to(menuLines[2], { y: -moveY, rotate: -45, duration: 0.5 }, "<")
-        .to(gsap.utils.toArray('.menu_link'), { y: "0%", duration: 0.5, ease: "power3.out", stagger: 0.08 }, "-=0.2")
-        .to(menuButton, { width: "100%", duration: 0.7, ease: "power4.inOut" }, "<+0.2");
-      toggleBtn.addEventListener("click", () => {
-        if (menuTl.reversed()) {
-          menuTl.play();
-        } else {
-          menuTl.reverse();
-        }
-      });
-      function closeMenu() {
-        if (!menuTl.reversed()) {
-          toggleBtn.click();
-        }
-      }
+      const menuTl = gsap.timeline({ paused: true, reversed: true, defaults: { ease: "power3.inOut" } });
+      menuTl.set(menu, { opacity: 1, pointerEvents: "auto" }).to(menu, { y: "0%", duration: 1 }).to(menuLines[0], { y: moveY, rotate: 45, duration: 0.5 }, "<").to(menuLines[1], { opacity: 0, duration: 0.3 }, "<").to(menuLines[2], { y: -moveY, rotate: -45, duration: 0.5 }, "<").to(gsap.utils.toArray('.menu_link'), { y: "0%", duration: 0.5, ease: "power3.out", stagger: 0.08 }, "-=0.2").to(menuButton, { width: "100%", duration: 0.7, ease: "power4.inOut" }, "<+0.2");
+      toggleBtn.addEventListener("click", () => { if (menuTl.reversed()) { menuTl.play(); } else { menuTl.reverse(); } });
+      function closeMenu() { if (!menuTl.reversed()) { toggleBtn.click(); } }
       menuLinks.forEach(link => {
         link.addEventListener("click", (e) => {
             const href = link.getAttribute('href');
             if (href && href.startsWith('#')) {
                 e.preventDefault();
                 const targetEl = document.querySelector(href);
-                if (targetEl) {
-                    lenis.scrollTo(targetEl, { offset: -80 });
-                }
+                if (targetEl) { lenis.scrollTo(targetEl, { offset: -80 }); }
                 closeMenu();
             }
         });
@@ -600,611 +519,67 @@
       document.addEventListener("DOMContentLoaded", function () {
         if (window.innerWidth <= 991) return;
         const canvasOne = document.getElementById("canvasOne");
-        const W = window.innerWidth;
-        const H = window.innerHeight;
-        let ctx = canvasOne.getContext("2d");
-        canvasOne.width = W;
-        canvasOne.height = H;
-        ctx.globalCompositeOperation = "lighter";
-        const particles = [];
-        const particleCount = 200;
-        const particleSize = 2;
-        function randomNorm(mean, stdev) {
-          return Math.abs(Math.round((Math.random() * 2 - 1 + Math.random() * 2 - 1 + Math.random() * 2 - 1) * stdev) + mean);
-        }
-        function Particle() {
-          this.h = 0;
-          this.s = 0;
-          this.l = parseInt(40 * Math.random() + 40, 10);
-          this.a = 0.3 * Math.random() + 0.2;
-          this.color = `hsla(${this.h},${this.s}%,${this.l}%,${this.a})`;
-          this.shadowcolor = `hsla(${this.h},${this.s}%,${this.l}%,${Math.max(this.a - 0.2, 0.05)})`;
-          this.x = Math.random() * W;
-          this.y = Math.random() * H;
-          this.direction = {
-            x: -1 + Math.random() * 2,
-            y: -1 + Math.random() * 2
-          };
-          this.radius = randomNorm(0, particleSize);
-          this.scale = 0.7 * Math.random() + 0.5;
-          this.rotation = Math.PI / 4 * Math.random();
-          this.vx = (2 * Math.random() + 4) * 0.01 * this.radius;
-          this.vy = (2 * Math.random() + 4) * 0.01 * this.radius;
-          this.valpha = 0.01 * Math.random() - 0.02;
-          this.move = function () {
-            this.x += this.vx * this.direction.x;
-            this.y += this.vy * this.direction.y;
-            this.rotation += this.valpha;
-          };
-          this.changeDirection = function (axis) {
-            this.direction[axis] *= -1;
-            this.valpha *= -1;
-          };
-          this.boundaryCheck = function () {
-            if (this.x >= W * 1.2 || this.x <= -W * 0.2) {
-              this.changeDirection("x");
-            }
-            if (this.y >= H * 1.2 || this.y <= -H * 0.2) {
-              this.changeDirection("y");
-            }
-          };
-          this.draw = function () {
-            ctx.save();
-            ctx.translate(this.x, this.y);
-            ctx.rotate(this.rotation);
-            ctx.scale(1, this.scale);
-            const grad = ctx.createRadialGradient(0, 0, this.radius, 0, 0, 0);
-            grad.addColorStop(1, this.color);
-            grad.addColorStop(0, this.shadowcolor);
-            ctx.beginPath();
-            ctx.fillStyle = grad;
-            ctx.arc(0, 0, this.radius, 0, Math.PI * 2, false);
-            ctx.fill();
-            ctx.restore();
-          };
-        }
-        function clearCanvas() {
-          ctx.clearRect(0, 0, W, H);
-        }
-        function createParticles() {
-          for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-          }
-        }
-        function drawParticles() {
-          particles.forEach(p => p.draw());
-        }
-        function updateParticles() {
-          particles.forEach(p => {
-            p.move();
-            p.boundaryCheck();
-          });
-        }
-        function animateParticles() {
-          clearCanvas();
-          drawParticles();
-          updateParticles();
-          requestAnimationFrame(animateParticles);
-        }
-        createParticles();
+        const W = window.innerWidth; const H = window.innerHeight; let ctx = canvasOne.getContext("2d");
+        canvasOne.width = W; canvasOne.height = H; ctx.globalCompositeOperation = "lighter";
+        const particles = []; const particleCount = 200; const particleSize = 2;
+        function randomNorm(mean, stdev) { return Math.abs(Math.round((Math.random() * 2 - 1 + Math.random() * 2 - 1 + Math.random() * 2 - 1) * stdev) + mean); }
+        function Particle() { this.h = 0; this.s = 0; this.l = parseInt(40 * Math.random() + 40, 10); this.a = 0.3 * Math.random() + 0.2; this.color = `hsla(${this.h},${this.s}%,${this.l}%,${this.a})`; this.shadowcolor = `hsla(${this.h},${this.s}%,${this.l}%,${Math.max(this.a - 0.2, 0.05)})`; this.x = Math.random() * W; this.y = Math.random() * H; this.direction = { x: -1 + Math.random() * 2, y: -1 + Math.random() * 2 }; this.radius = randomNorm(0, particleSize); this.scale = 0.7 * Math.random() + 0.5; this.rotation = Math.PI / 4 * Math.random(); this.vx = (2 * Math.random() + 4) * 0.01 * this.radius; this.vy = (2 * Math.random() + 4) * 0.01 * this.radius; this.valpha = 0.01 * Math.random() - 0.02; this.move = function () { this.x += this.vx * this.direction.x; this.y += this.vy * this.direction.y; this.rotation += this.valpha; }; this.changeDirection = function (axis) { this.direction[axis] *= -1; this.valpha *= -1; }; this.boundaryCheck = function () { if (this.x >= W * 1.2 || this.x <= -W * 0.2) { this.changeDirection("x"); } if (this.y >= H * 1.2 || this.y <= -H * 0.2) { this.changeDirection("y"); } }; this.draw = function () { ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.rotation); ctx.scale(1, this.scale); const grad = ctx.createRadialGradient(0, 0, this.radius, 0, 0, 0); grad.addColorStop(1, this.color); grad.addColorStop(0, this.shadowcolor); ctx.beginPath(); ctx.fillStyle = grad; ctx.arc(0, 0, this.radius, 0, Math.PI * 2, false); ctx.fill(); ctx.restore(); }; }
+        function animateParticles() { ctx.clearRect(0, 0, W, H); particles.forEach(p => p.draw()); particles.forEach(p => { p.move(); p.boundaryCheck(); }); requestAnimationFrame(animateParticles); }
+        for (let i = 0; i < particleCount; i++) { particles.push(new Particle()); }
         animateParticles();
-        const canvas2 = document.getElementById("fireFlies");
-        const ctx2 = canvas2.getContext("2d");
-        const canvasWidth = 1700, canvasHeight = 1000;
-        canvas2.width = canvasWidth;
-        canvas2.height = canvasHeight;
-        const resolution = 50;
-        const cols = canvasWidth / resolution;
-        const rows = canvasHeight / resolution;
-        const specks = 700;
+        const canvas2 = document.getElementById("fireFlies"); const ctx2 = canvas2.getContext("2d");
+        const canvasWidth = 1700, canvasHeight = 1000; canvas2.width = canvasWidth; canvas2.height = canvasHeight;
+        const resolution = 50; const cols = canvasWidth / resolution; const rows = canvasHeight / resolution; const specks = 700;
         const cells = [], fireParticles = [];
-        function FireParticle(x, y) {
-          this.x = this.px = x;
-          this.y = this.py = y;
-          this.xv = this.yv = 0;
-        }
-        function Cell(x, y) {
-          this.x = x; this.y = y; this.r = resolution;
-          this.xv = this.yv = 0; this.pressure = 0;
-        }
-        for (let i = 0; i < specks; i++) {
-          fireParticles.push(new FireParticle(Math.random() * canvasWidth, Math.random() * canvasHeight));
-        }
-        for (let col = 0; col < cols; col++) {
-          cells[col] = [];
-          for (let row = 0; row < rows; row++) {
-            cells[col][row] = new Cell(col * resolution, row * resolution);
-          }
-        }
-        for (let col = 0; col < cols; col++) {
-          for (let row = 0; row < rows; row++) {
-            const cell = cells[col][row];
-            const up = cells[col][(row - 1 + rows) % rows];
-            const left = cells[(col - 1 + cols) % cols][row];
-            const upLeft = cells[(col - 1 + cols) % cols][(row - 1 + rows) % rows];
-            const upRight = cells[(col + 1) % cols][(row - 1 + rows) % rows];
-            cell.up = up; cell.left = left;
-            cell.up_left = upLeft; cell.up_right = upRight;
-            up.down = cell; left.right = cell;
-            upLeft.down_right = cell; upRight.down_left = cell;
-          }
-        }
-        function drawFire() {
-          ctx2.clearRect(0, 0, canvasWidth, canvasHeight);
-          ctx2.strokeStyle = "rgba(180,180,180,0.3)";
-          fireParticles.forEach(p => {
-            const col = Math.floor(p.x / resolution);
-            const row = Math.floor(p.y / resolution);
-            if (col >= 0 && row >= 0 && col < cols && row < rows) {
-              const cell = cells[col][row];
-              const ax = (p.x % resolution) / resolution;
-              const ay = (p.y % resolution) / resolution;
-              p.xv += (1 - ax) * cell.xv * 0.05 + ax * (cell.right?.xv || 0) * 0.05;
-              p.yv += (1 - ay) * cell.yv * 0.05 + ay * (cell.down?.yv || 0) * 0.05;
-              p.x += p.xv;
-              p.y += p.yv;
-              const dx = p.px - p.x;
-              const dy = p.py - p.y;
-              const dist = Math.sqrt(dx * dx + dy * dy);
-              const limit = Math.random() * 0.5;
-              ctx2.beginPath();
-              ctx2.moveTo(p.x, p.y);
-              ctx2.lineTo(dist > limit ? p.px : p.x + limit, dist > limit ? p.py : p.y + limit);
-              ctx2.stroke();
-              p.px = p.x;
-              p.py = p.y;
-              p.xv *= 0.1;
-              p.yv *= 0.1;
-            } else {
-              p.x = p.px = Math.random() * canvasWidth;
-              p.y = p.py = Math.random() * canvasHeight;
-            }
-          });
-          cells.flat().forEach(cell => {
-            const dx = (
-              (cell.up_left?.pressure || 0) * 0.5 +
-              (cell.left?.pressure || 0) +
-              (cell.down_left?.pressure || 0) * 0.5 -
-              (cell.up_right?.pressure || 0) * 0.5 -
-              (cell.right?.pressure || 0) -
-              (cell.down_right?.pressure || 0) * 0.5
-            );
-            const dy = (
-              (cell.up_left?.pressure || 0) * 0.5 +
-              (cell.up?.pressure || 0) +
-              (cell.up_right?.pressure || 0) * 0.5 -
-              (cell.down_left?.pressure || 0) * 0.5 -
-              (cell.down?.pressure || 0) -
-              (cell.down_right?.pressure || 0) * 0.5
-            );
-            cell.xv = (cell.xv + dx * 0.25) * 0.99;
-            cell.yv = (cell.yv + dy * 0.25) * 0.99;
-          });
-          requestAnimationFrame(drawFire);
-        }
+        function FireParticle(x, y) { this.x = this.px = x; this.y = this.py = y; this.xv = this.yv = 0; }
+        function Cell(x, y) { this.x = x; this.y = y; this.r = resolution; this.xv = this.yv = 0; this.pressure = 0; }
+        for (let i = 0; i < specks; i++) { fireParticles.push(new FireParticle(Math.random() * canvasWidth, Math.random() * canvasHeight)); }
+        for (let col = 0; col < cols; col++) { cells[col] = []; for (let row = 0; row < rows; row++) { cells[col][row] = new Cell(col * resolution, row * resolution); } }
+        for (let col = 0; col < cols; col++) { for (let row = 0; row < rows; row++) { const cell = cells[col][row]; const up = cells[col][(row - 1 + rows) % rows]; const left = cells[(col - 1 + cols) % cols][row]; const upLeft = cells[(col - 1 + cols) % cols][(row - 1 + rows) % rows]; const upRight = cells[(col + 1) % cols][(row - 1 + rows) % rows]; cell.up = up; cell.left = left; cell.up_left = upLeft; cell.up_right = upRight; up.down = cell; left.right = cell; upLeft.down_right = cell; upRight.down_left = cell; } }
+        function drawFire() { ctx2.clearRect(0, 0, canvasWidth, canvasHeight); ctx2.strokeStyle = "rgba(180,180,180,0.3)"; fireParticles.forEach(p => { const col = Math.floor(p.x / resolution); const row = Math.floor(p.y / resolution); if (col >= 0 && row >= 0 && col < cols && row < rows) { const cell = cells[col][row]; const ax = (p.x % resolution) / resolution; const ay = (p.y % resolution) / resolution; p.xv += (1 - ax) * cell.xv * 0.05 + ax * (cell.right?.xv || 0) * 0.05; p.yv += (1 - ay) * cell.yv * 0.05 + ay * (cell.down?.yv || 0) * 0.05; p.x += p.xv; p.y += p.yv; const dx = p.px - p.x; const dy = p.py - p.y; const dist = Math.sqrt(dx * dx + dy * dy); const limit = Math.random() * 0.5; ctx2.beginPath(); ctx2.moveTo(p.x, p.y); ctx2.lineTo(dist > limit ? p.px : p.x + limit, dist > limit ? p.py : p.y + limit); ctx2.stroke(); p.px = p.x; p.py = p.y; p.xv *= 0.1; p.yv *= 0.1; } else { p.x = p.px = Math.random() * canvasWidth; p.y = p.py = Math.random() * canvasHeight; } }); cells.flat().forEach(cell => { const dx = ( (cell.up_left?.pressure || 0) * 0.5 + (cell.left?.pressure || 0) + (cell.down_left?.pressure || 0) * 0.5 - (cell.up_right?.pressure || 0) * 0.5 - (cell.right?.pressure || 0) - (cell.down_right?.pressure || 0) * 0.5 ); const dy = ( (cell.up_left?.pressure || 0) * 0.5 + (cell.up?.pressure || 0) + (cell.up_right?.pressure || 0) * 0.5 - (cell.down_left?.pressure || 0) * 0.5 - (cell.down?.pressure || 0) - (cell.down_right?.pressure || 0) * 0.5 ); cell.xv = (cell.xv + dx * 0.25) * 0.99; cell.yv = (cell.yv + dy * 0.25) * 0.99; }); requestAnimationFrame(drawFire); }
         drawFire();
       });
     </script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         gsap.registerPlugin(ScrollTrigger);
-        function cardGlowBorder() {
-          document.querySelectorAll('[glow-border="wrapper"]').forEach(wrapper => {
-            wrapper.addEventListener("mousemove", function (event) {
-              this.querySelectorAll('[glow-border="card"]').forEach(card => {
-                const rect = card.getBoundingClientRect(),
-                      x = event.clientX - rect.left,
-                      y = event.clientY - rect.top;
-                card.style.setProperty("--cursor-x", `${x}px`);
-                card.style.setProperty("--cursor-y", `${y}px`);
-              });
-            });
-          });
-        }
-        if (document.querySelectorAll('[glow-border="wrapper"]').length) {
-          cardGlowBorder();
-        }
+        function cardGlowBorder() { document.querySelectorAll('[glow-border="wrapper"]').forEach(wrapper => { wrapper.addEventListener("mousemove", function (event) { this.querySelectorAll('[glow-border="card"]').forEach(card => { const rect = card.getBoundingClientRect(), x = event.clientX - rect.left, y = event.clientY - rect.top; card.style.setProperty("--cursor-x", `${x}px`); card.style.setProperty("--cursor-y", `${y}px`); }); }); }); }
+        if (document.querySelectorAll('[glow-border="wrapper"]').length) { cardGlowBorder(); }
         const tl = gsap.timeline();
-        if (document.querySelector(".hero_content-top")) {
-          tl.fromTo(".hero_content-top", 
-                    { opacity: 0, z: "-2rem" }, 
-                    { opacity: 1, z: "0rem", duration: 3, ease: "power2.out" }
-                   );
-        }
-        if (document.querySelector(".hero_content-bottom")) {
-          tl.fromTo(".hero_content-bottom", 
-                    { opacity: 0 }, 
-                    { opacity: 1, duration: 1, ease: "power2.out" }, 
-                    "-=1.2"
-                   );
-        }
-        document.querySelectorAll('[data-animation="text-reveal"]').forEach(el => {
-          gsap.fromTo(el,
-                      { opacity: 0 },
-                      {
-            opacity: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 80%",
-              end: "top 40%",
-              scrub: true,
-            }
-          }
-                     );
-        });
-        const overlay = document.querySelector(".headline_circle-overlay");
-        const circle = document.querySelector(".headline_circle");
-        if (overlay && circle) {
-          gsap.fromTo(overlay,
-                      { y: "0%" },
-                      {
-            y: "100%",
-            ease: "none",
-            scrollTrigger: {
-              trigger: circle,
-              start: "top 90%",
-              end: "bottom 40%",
-              scrub: true,
-            }
-          }
-                     );
-        }
-        if (window.innerWidth >= 991) {
-          document.querySelectorAll('.benefit-card').forEach(card => {
-            const isLeft = card.classList.contains('is-left');
-            const isRight = card.classList.contains('is-right');
-            const from = {
-              x: isLeft ? '-2rem' : isRight ? '2rem' : '0rem',
-              y: '2rem',
-              opacity: 0
-            };
-            gsap.fromTo(card, from, {
-              x: '0rem',
-              y: '0rem',
-              opacity: 1,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: card,
-                start: 'top 80%',
-                end: 'top 20%',
-                scrub: true
-              }
-            });
-          });
-        }
+        if (document.querySelector(".hero_content-top")) { tl.fromTo(".hero_content-top", { opacity: 0, z: "-2rem" }, { opacity: 1, z: "0rem", duration: 3, ease: "power2.out" } ); }
+        if (document.querySelector(".hero_content-bottom")) { tl.fromTo(".hero_content-bottom", { opacity: 0 }, { opacity: 1, duration: 1, ease: "power2.out" }, "-=1.2" ); }
+        document.querySelectorAll('[data-animation="text-reveal"]').forEach(el => { gsap.fromTo(el, { opacity: 0 }, { opacity: 1, ease: "none", scrollTrigger: { trigger: el, start: "top 80%", end: "top 40%", scrub: true, } } ); });
+        const overlay = document.querySelector(".headline_circle-overlay"); const circle = document.querySelector(".headline_circle");
+        if (overlay && circle) { gsap.fromTo(overlay, { y: "0%" }, { y: "100%", ease: "none", scrollTrigger: { trigger: circle, start: "top 90%", end: "bottom 40%", scrub: true, } } ); }
+        if (window.innerWidth >= 991) { document.querySelectorAll('.benefit-card').forEach(card => { const isLeft = card.classList.contains('is-left'); const isRight = card.classList.contains('is-right'); const from = { x: isLeft ? '-2rem' : isRight ? '2rem' : '0rem', y: '2rem', opacity: 0 }; gsap.fromTo(card, from, { x: '0rem', y: '0rem', opacity: 1, ease: 'power2.out', scrollTrigger: { trigger: card, start: 'top 80%', end: 'top 20%', scrub: true } }); }); }
         const navbar = document.querySelector(".navbar");
-        if (navbar) {
-          let lastScroll = window.scrollY;
-          let ticking = false;
-          const scrollThreshold = 5;
-          function updateNavbarPosition() {
-            const currentScroll = window.scrollY;
-            if (Math.abs(currentScroll - lastScroll) < scrollThreshold) {
-              ticking = false;
-              return;
-            }
-            if (currentScroll > lastScroll && currentScroll > 50) {
-              gsap.to(navbar, { y: "-100%", duration: 1, ease: "power2.out" });
-            } else if (currentScroll < lastScroll) {
-              gsap.to(navbar, { y: "0%", duration: 1, ease: "power2.out" });
-            }
-            lastScroll = currentScroll;
-            ticking = false;
-          }
-          window.addEventListener("scroll", () => {
-            if (!ticking) {
-              window.requestAnimationFrame(updateNavbarPosition);
-              ticking = true;
-            }
-          });
-          if (document.querySelector(".section.is-hero")) {
-            ScrollTrigger.create({
-              trigger: ".section.is-hero",
-              start: "bottom top",
-              end: "bottom top",
-              onEnter: () => {
-                navbar.style.backgroundColor = "var(--background-primary)";
-              },
-              onLeaveBack: () => {
-                navbar.style.backgroundColor = "transparent";
-              }
-            });
-          }
-        }
+        if (navbar) { let lastScroll = window.scrollY; let ticking = false; const scrollThreshold = 5; function updateNavbarPosition() { const currentScroll = window.scrollY; if (Math.abs(currentScroll - lastScroll) < scrollThreshold) { ticking = false; return; } if (currentScroll > lastScroll && currentScroll > 50) { gsap.to(navbar, { y: "-100%", duration: 1, ease: "power2.out" }); } else if (currentScroll < lastScroll) { gsap.to(navbar, { y: "0%", duration: 1, ease: "power2.out" }); } lastScroll = currentScroll; ticking = false; } window.addEventListener("scroll", () => { if (!ticking) { window.requestAnimationFrame(updateNavbarPosition); ticking = true; } }); if (document.querySelector(".section.is-hero")) { ScrollTrigger.create({ trigger: ".section.is-hero", start: "bottom top", end: "bottom top", onEnter: () => { navbar.style.backgroundColor = "rgba(10, 10, 10, 0.7)"; navbar.style.backdropFilter = "blur(10px)"; }, onLeaveBack: () => { navbar.style.backgroundColor = "transparent"; navbar.style.backdropFilter = "none"; } }); } }
         const numbersWrapper = document.querySelector('.numbers_wrapper');
-        if (numbersWrapper) {
-          ScrollTrigger.create({
-            trigger: numbersWrapper,
-            start: "top 90%",
-            once: true,
-            onEnter: () => {
-              document.querySelectorAll('[data-counter]').forEach(numberSpan => {
-                const finalNumber = parseInt(numberSpan.getAttribute('data-count'));
-                if (isNaN(finalNumber)) return;
-                numberSpan.textContent = '0';
-                const obj = { val: 0 };
-                gsap.to(obj, {
-                  val: finalNumber,
-                  duration: 10,
-                  ease: "power3.out",
-                  onUpdate: () => {
-                    numberSpan.textContent = Math.floor(obj.val).toLocaleString('en-US');
-                  }
-                });
-              });
-            }
-          });
-          gsap.utils.toArray('.numbers_wrapper .numbers_line-overlay').forEach(overlay => {
-            gsap.fromTo(overlay,
-                        { height: '100%' },
-                        {
-              height: '0%',
-              scrollTrigger: {
-                trigger: numbersWrapper,
-                start: "top bottom",
-                end: "top top",
-                scrub: true
-              }
-            }
-                       );
-          });
-        }
-        document.querySelectorAll('.button').forEach(glowButton => {
-          const glow = glowButton.querySelector('.glow');
-          if (!glow || glowButton.dataset.glowAttached) return;
-          glowButton.dataset.glowAttached = true;
-          glowButton.addEventListener('mousemove', (e) => {
-            const rect = glowButton.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            gsap.to(glow, {
-              x: x,
-              y: y,
-              duration: 0.3,
-              ease: 'power3.out'
-            });
-          });
-          glowButton.addEventListener('mouseleave', () => {
-            gsap.to(glow, {
-              x: 0,
-              y: 0,
-              duration: 0.5,
-              ease: 'power3.out'
-            });
-          });
-        });
-        const rotations = 4;
-        const degrees = rotations * 360;
-        const sticky = document.querySelector("#comparison");
-        sticky.style.height = `${rotations * window.innerHeight}px`;
-        gsap.to(".petals-circle", {
-          rotate: degrees,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#comparison",
-            start: "top+=250 top",
-            end: "bottom bottom",
-            scrub: true
-          }
-        });
-        gsap.to(".petals-circle_inner", {
-          rotate: -degrees,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#comparison",
-            start: "top+=250 top",
-            end: "bottom bottom",
-            scrub: true
-          }
-        });
-        const circleTexts = gsap.utils.toArray(".petals-circle_text");
-        gsap.set(circleTexts, { scale: 0.8, opacity: 0 });
-        gsap.set(circleTexts[0], { scale: 1, opacity: 1 });
-        const textDelay = 0.5;
-        const textTimeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: "#comparison",
-            start: "top top",
-            end: "bottom bottom",
-            scrub: true
-          }
-        });
-        circleTexts.forEach((cur, i) => {
-          const next = circleTexts[i + 1];
-          if (!next) return;
-          textTimeline.to(cur, {
-            scale: 0.8,
-            opacity: 0,
-            ease: "none",
-            duration: 0.5
-          }, textDelay + i);
-          textTimeline.fromTo(next,
-                              { scale: 0.8, opacity: 0 },
-                              { scale: 1, opacity: 1, ease: "none", duration: 0.5 },
-                              textDelay + i + 0.5
-                             );
-        });
-        document.querySelectorAll(".petal-texts_wrapper").forEach(wrapper => {
-          const texts = gsap.utils.toArray(wrapper.querySelectorAll(".petal-text"));
-          gsap.set(texts, { scale: 0.8, y: "1rem", opacity: 0 });
-          gsap.set(texts[0], { scale: 1, y: "0rem", opacity: 1 });
-          texts.forEach((cur, i) => {
-            const next = texts[i + 1];
-            if (!next) return;
-            textTimeline.to(cur, {
-              scale: 0.8,
-              y: "-1rem",
-              opacity: 0,
-              ease: "none",
-              duration: 0.5
-            }, textDelay + i);
-            textTimeline.fromTo(next,
-                                { scale: 0.8, y: "1rem", opacity: 0 },
-                                { scale: 1, y: "0rem", opacity: 1, ease: "none", duration: 0.5 },
-                                textDelay + i + 0.5
-                               );
-          });
-        });
-        gsap.timeline({
-          scrollTrigger: {
-            trigger: "#comparison",
-            start: "top bottom",
-            end: "top top",
-            scrub: true
-          }
-        })
-          .fromTo(".petals-row.is-top .petal:first-child",
-                  { opacity: 0, x: "-5rem", y: "-2rem" },
-                  { opacity: 1, x: "0rem", y: "0rem", ease: "none" }
-                 )
-          .fromTo(".petals-row.is-top .petal:last-child",
-                  { opacity: 0, x: "5rem", y: "-2rem" },
-                  { opacity: 1, x: "0rem", y: "0rem", ease: "none" },
-                  "<"
-                 )
-          .fromTo(".petals-row.is-bottom .petal:first-child",
-                  { opacity: 0, x: "-5rem", y: "2rem" },
-                  { opacity: 1, x: "0rem", y: "0rem", ease: "none" },
-                  "<"
-                 )
-          .fromTo(".petals-row.is-bottom .petal:last-child",
-                  { opacity: 0, x: "5rem", y: "2rem" },
-                  { opacity: 1, x: "0rem", y: "0rem", ease: "none" },
-                  "<"
-                 );
-        gsap.timeline({
-          scrollTrigger: {
-            trigger: "#comparison",
-            start: "bottom 80%",
-            end: "bottom top",
-            scrub: true
-          }
-        })
-          .to(".petals-row.is-top .petal:first-child",
-              { opacity: 0, x: "-5rem", y: "-2rem", ease: "none" }
-             )
-          .to(".petals-row.is-top .petal:last-child",
-              { opacity: 0, x: "5rem", y: "-2rem", ease: "none" },
-              "<"
-             )
-          .to(".petals-row.is-bottom .petal:first-child",
-              { opacity: 0, x: "-5rem", y: "2rem", ease: "none" },
-              "<"
-             )
-          .to(".petals-row.is-bottom .petal:last-child",
-              { opacity: 0, x: "5rem", y: "2rem", ease: "none" },
-              "<"
-             );
+        if (numbersWrapper) { ScrollTrigger.create({ trigger: numbersWrapper, start: "top 90%", once: true, onEnter: () => { document.querySelectorAll('[data-counter]').forEach(numberSpan => { const finalNumber = parseInt(numberSpan.getAttribute('data-count')); if (isNaN(finalNumber)) return; numberSpan.textContent = '0'; const obj = { val: 0 }; gsap.to(obj, { val: finalNumber, duration: 10, ease: "power3.out", onUpdate: () => { numberSpan.textContent = Math.floor(obj.val).toLocaleString('en-US'); } }); }); } }); gsap.utils.toArray('.numbers_wrapper .numbers_line-overlay').forEach(overlay => { gsap.fromTo(overlay, { height: '100%' }, { height: '0%', scrollTrigger: { trigger: numbersWrapper, start: "top bottom", end: "top top", scrub: true } } ); }); }
+        document.querySelectorAll('.button').forEach(glowButton => { const glow = glowButton.querySelector('.glow'); if (!glow || glowButton.dataset.glowAttached) return; glowButton.dataset.glowAttached = true; glowButton.addEventListener('mousemove', (e) => { const rect = glowButton.getBoundingClientRect(); const x = e.clientX - rect.left; const y = e.clientY - rect.top; gsap.to(glow, { x: x, y: y, duration: 0.3, ease: 'power3.out' }); }); glowButton.addEventListener('mouseleave', () => { gsap.to(glow, { x: 0, y: 0, duration: 0.5, ease: 'power3.out' }); }); });
+        const rotations = 4; const degrees = rotations * 360; const sticky = document.querySelector("#comparison"); sticky.style.height = `${rotations * window.innerHeight}px`;
+        gsap.to(".petals-circle", { rotate: degrees, ease: "none", scrollTrigger: { trigger: "#comparison", start: "top+=250 top", end: "bottom bottom", scrub: true } });
+        gsap.to(".petals-circle_inner", { rotate: -degrees, ease: "none", scrollTrigger: { trigger: "#comparison", start: "top+=250 top", end: "bottom bottom", scrub: true } });
+        const circleTexts = gsap.utils.toArray(".petals-circle_text"); gsap.set(circleTexts, { scale: 0.8, opacity: 0 }); gsap.set(circleTexts[0], { scale: 1, opacity: 1 });
+        const textDelay = 0.5; const textTimeline = gsap.timeline({ scrollTrigger: { trigger: "#comparison", start: "top top", end: "bottom bottom", scrub: true } });
+        circleTexts.forEach((cur, i) => { const next = circleTexts[i + 1]; if (!next) return; textTimeline.to(cur, { scale: 0.8, opacity: 0, ease: "none", duration: 0.5 }, textDelay + i); textTimeline.fromTo(next, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, ease: "none", duration: 0.5 }, textDelay + i + 0.5 ); });
+        document.querySelectorAll(".petal-texts_wrapper").forEach(wrapper => { const texts = gsap.utils.toArray(wrapper.querySelectorAll(".petal-text")); gsap.set(texts, { scale: 0.8, y: "1rem", opacity: 0 }); gsap.set(texts[0], { scale: 1, y: "0rem", opacity: 1 }); texts.forEach((cur, i) => { const next = texts[i + 1]; if (!next) return; textTimeline.to(cur, { scale: 0.8, y: "-1rem", opacity: 0, ease: "none", duration: 0.5 }, textDelay + i); textTimeline.fromTo(next, { scale: 0.8, y: "1rem", opacity: 0 }, { scale: 1, y: "0rem", opacity: 1, ease: "none", duration: 0.5 }, textDelay + i + 0.5 ); }); });
+        gsap.timeline({ scrollTrigger: { trigger: "#comparison", start: "top bottom", end: "top top", scrub: true } }).fromTo(".petals-row.is-top .petal:first-child", { opacity: 0, x: "-5rem", y: "-2rem" }, { opacity: 1, x: "0rem", y: "0rem", ease: "none" } ).fromTo(".petals-row.is-top .petal:last-child", { opacity: 0, x: "5rem", y: "-2rem" }, { opacity: 1, x: "0rem", y: "0rem", ease: "none" }, "<" ).fromTo(".petals-row.is-bottom .petal:first-child", { opacity: 0, x: "-5rem", y: "2rem" }, { opacity: 1, x: "0rem", y: "0rem", ease: "none" }, "<" ).fromTo(".petals-row.is-bottom .petal:last-child", { opacity: 0, x: "5rem", y: "2rem" }, { opacity: 1, x: "0rem", y: "0rem", ease: "none" }, "<" );
+        gsap.timeline({ scrollTrigger: { trigger: "#comparison", start: "bottom 80%", end: "bottom top", scrub: true } }).to(".petals-row.is-top .petal:first-child", { opacity: 0, x: "-5rem", y: "-2rem", ease: "none" } ).to(".petals-row.is-top .petal:last-child", { opacity: 0, x: "5rem", y: "-2rem", ease: "none" }, "<" ).to(".petals-row.is-bottom .petal:first-child", { opacity: 0, x: "-5rem", y: "2rem", ease: "none" }, "<" ).to(".petals-row.is-bottom .petal:last-child", { opacity: 0, x: "5rem", y: "2rem", ease: "none" }, "<" );
         const isMobile = window.innerWidth <= 991;
-        gsap.fromTo(".stages_wrapper", { opacity: 0 }, {
-          opacity: 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".stages_wrapper",
-            start: "top 80%",
-            end: "top center",
-            scrub: true
-          }
-        });
-        const guideSection = document.querySelector("#guide");
-        const track = document.querySelector(".stages_track");
-        const progressOverlay = document.querySelector(".stages_progress-overaly");
-        let trackScrollTrigger = null;
-        let overlayScrollTrigger = null;
-        function setupDesktopScroll() {
-          if (!guideSection || !track) return;
-          const trackWidth = track.scrollWidth;
-          const containerWidth = track.parentElement.offsetWidth;
-          const scrollDistance = trackWidth - containerWidth;
-          const marginOffset = 15 * 16;
-          guideSection.style.height = `${scrollDistance + window.innerHeight - marginOffset}px`;
-          trackScrollTrigger = ScrollTrigger.create({
-            trigger: guideSection,
-            start: "top top",
-            end: `+=${scrollDistance}`,
-            scrub: true,
-            pin: ".horizontal-sticky",
-            anticipatePin: 1,
-            animation: gsap.to(track, {
-              x: `-${scrollDistance}px`,
-              ease: "none",
-              overwrite: true
-            })
-          });
-          if (progressOverlay) {
-            overlayScrollTrigger = ScrollTrigger.create({
-              trigger: guideSection,
-              start: "top top",
-              end: `+=${scrollDistance}`,
-              scrub: true,
-              animation: gsap.fromTo(progressOverlay,
-                                     { width: "100%" },
-                                     { width: "0%", ease: "none", overwrite: true }
-                                    )
-            });
-          }
-          ScrollTrigger.refresh();
-        }
-        function setupMobileScroll() {
-          if (!guideSection || !progressOverlay) return;
-          overlayScrollTrigger = gsap.fromTo(progressOverlay,
-                                             { height: "100%" },
-                                             {
-            height: "0%",
-            ease: "none",
-            scrollTrigger: {
-              trigger: guideSection,
-              start: "top center",
-              end: "bottom center",
-              scrub: true
-            }
-          }
-                                            );
-        }
-        if (isMobile) {
-          setupMobileScroll();
-        } else {
-          setupDesktopScroll();
-        }
+        gsap.fromTo(".stages_wrapper", { opacity: 0 }, { opacity: 1, ease: "none", scrollTrigger: { trigger: ".stages_wrapper", start: "top 80%", end: "top center", scrub: true } });
+        const guideSection = document.querySelector("#guide"); const track = document.querySelector(".stages_track"); const progressOverlay = document.querySelector(".stages_progress-overaly");
+        let trackScrollTrigger = null; let overlayScrollTrigger = null;
+        function setupDesktopScroll() { if (!guideSection || !track) return; const trackWidth = track.scrollWidth; const containerWidth = track.parentElement.offsetWidth; const scrollDistance = trackWidth - containerWidth; const marginOffset = 15 * 16; guideSection.style.height = `${scrollDistance + window.innerHeight - marginOffset}px`; trackScrollTrigger = ScrollTrigger.create({ trigger: guideSection, start: "top top", end: `+=${scrollDistance}`, scrub: true, pin: ".horizontal-sticky", anticipatePin: 1, animation: gsap.to(track, { x: `-${scrollDistance}px`, ease: "none", overwrite: true }) }); if (progressOverlay) { overlayScrollTrigger = ScrollTrigger.create({ trigger: guideSection, start: "top top", end: `+=${scrollDistance}`, scrub: true, animation: gsap.fromTo(progressOverlay, { width: "100%" }, { width: "0%", ease: "none", overwrite: true } ) }); } ScrollTrigger.refresh(); }
+        function setupMobileScroll() { if (!guideSection || !progressOverlay) return; overlayScrollTrigger = gsap.fromTo(progressOverlay, { height: "100%" }, { height: "0%", ease: "none", scrollTrigger: { trigger: guideSection, start: "top center", end: "bottom center", scrub: true } } ); }
+        if (isMobile) { setupMobileScroll(); } else { setupDesktopScroll(); }
         let lastIsMobile = isMobile;
-        window.addEventListener("resize", () => {
-          const nowIsMobile = window.innerWidth <= 991;
-          if (nowIsMobile !== lastIsMobile) {
-            window.location.reload();
-          }
-        });
-
-        // C0Di3 Mailchimp AJAX Form Submission
+        window.addEventListener("resize", () => { const nowIsMobile = window.innerWidth <= 991; if (nowIsMobile !== lastIsMobile) { window.location.reload(); } });
         $('#waitlistForm').on('submit', function(e) {
-            e.preventDefault();
-            var form = $(this);
-            var successMessage = $('#successMessage');
-            var url = form.attr('action').replace('/post?', '/post-json?').concat('&c=?');
-            
-            $.ajax({
-                url: url,
-                method: 'GET',
-                data: form.serialize(),
-                dataType: 'json',
-                contentType: "application/json; charset=utf-8",
-                success: function(data) {
-                    if (data.result === "success") {
-                        successMessage.text('🎉 Success! You\'re on the waitlist.').slideDown();
-                    } else {
-                        successMessage.text('Error: ' + data.msg).slideDown();
-                    }
-                    form[0].reset();
-                    setTimeout(function() {
-                        successMessage.slideUp();
-                    }, 5000);
-                },
-                error: function() {
-                    successMessage.text('An unknown error occurred. Please try again.').slideDown();
-                     setTimeout(function() {
-                        successMessage.slideUp();
-                    }, 5000);
-                }
+            e.preventDefault(); var form = $(this); var successMessage = $('#successMessage'); var url = form.attr('action').replace('/post?', '/post-json?').concat('&c=?');
+            $.ajax({ url: url, method: 'GET', data: form.serialize(), dataType: 'json', contentType: "application/json; charset=utf-8",
+                success: function(data) { if (data.result === "success") { successMessage.text('🎉 Success! You\'re on the waitlist.').slideDown(); } else { successMessage.text('Error: ' + data.msg).slideDown(); } form[0].reset(); setTimeout(function() { successMessage.slideUp(); }, 5000); },
+                error: function() { successMessage.text('An unknown error occurred. Please try again.').slideDown(); setTimeout(function() { successMessage.slideUp(); }, 5000); }
             });
         });
       });
