@@ -159,7 +159,7 @@
           opacity: 1;
       }
 
-      /* --- RESTORED: Animated Grid Background --- */
+      /* --- Animated Grid Background --- */
       .cyber-grid {
           position: fixed;
           top: 0;
@@ -297,10 +297,17 @@
       .mastermind-card h4 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
       .mastermind-card p { color: #9ca3af; }
 
-      /* --- FIXED: Layout Bug Fix --- */
+      /* --- FIXED: Layout and Menu Bug Fixes --- */
       #guide {
         position: relative;
-        z-index: 5; /* This ensures the pinned section and its animation render above the following content */
+        z-index: 5; /* Ensures the pinned section renders above the following content */
+      }
+      .menu-toggle {
+        position: relative; /* Required for z-index to work */
+        z-index: 10000; /* Ensures the button is on top of the menu overlay */
+      }
+      .menu_link {
+        color: #fff !important; /* Ensures menu links are visible on black background */
       }
     </style>
 </head>
