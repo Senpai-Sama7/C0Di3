@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!-- 
+  This site was created by merging two templates as requested.
+  The base structure, animations, and scripts from the first "Bitcoin" template have been fully preserved.
+  The content, branding, and specific features (like the form, entrance animation, and background) from the "C0Di3" template have been integrated and refined.
+-->
 <html lang="en">
 <head>
     <style>.wf-force-outline-none[tabindex="-1"]:focus{outline:none;}</style>
@@ -12,7 +17,7 @@
     <meta content="An advanced AI agent designed to proactively detect, analyze, and neutralize cyber threats. C0Di3 is your ever-vigilant partner in the digital battlefield." property="twitter:description">
     <meta property="og:type" content="website">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-
+    
     <!-- Google Analytics Tag -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8KSJQ3RHD8"></script>
     <script>
@@ -453,12 +458,10 @@
         color: #9ca3af;
       }
 
-      /* --- FIXED: Layout and Menu Bug Fixes --- */
-      .menu-toggle {
-        position: fixed; /* Lifts the button out of the normal document flow */
-        top: 1rem; /* Adjust as needed */
-        right: 1rem; /* Adjust as needed */
-        z-index: 10001 !important; /* Ensures it's on top of the menu overlay (which is at 9999) */
+      /* --- Layout and Menu Bug Fixes --- */
+      #guide {
+        position: relative;
+        z-index: 5;
       }
       .menu_link {
         color: #fff !important;
@@ -475,8 +478,8 @@
       }
       .stages_wrapper {
         margin-top: 2rem;
-        overflow-x: auto; /* Allows horizontal scrolling on touch devices */
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
       }
       .headline-wrapper {
         margin-bottom: 3rem;
@@ -939,7 +942,7 @@
       function createDynamicParticles() {
         const container = document.getElementById('particlesContainer');
         if (!container) return;
-        container.innerHTML = ''; // Clear existing particles
+        container.innerHTML = '';
         for (let i = 0; i < 50; i++) {
           const particle = document.createElement('div');
           particle.className = 'particle';
@@ -1034,7 +1037,7 @@
         tl.fromTo(".hero_content-bottom", { opacity: 0 }, { opacity: 1, duration: 1, ease: "power2.out" }, "-=1.2");
       }
       document.querySelectorAll('[data-animation="text-reveal"]').forEach(el => {
-        gsap.fromTo(el, { opacity: 0 }, { opacity: 1, ease: "none", scrollTrigger: { trigger: el, start: "top 80%", end: "top 40%", scrub: true } });
+        gsap.fromTo(el, { opacity: 0 }, { opacity: 1, ease: "none", scrollTrigger: { trigger: el, start: "top 90%", end: "top 50%", scrub: true } });
       });
       const overlay = document.querySelector(".headline_circle-overlay");
       const circle = document.querySelector(".headline_circle");
@@ -1045,7 +1048,7 @@
         document.querySelectorAll('.benefit-card').forEach(card => {
           const isLeft = card.classList.contains('is-left');
           const from = { x: isLeft ? '-2rem' : '2rem', y: '2rem', opacity: 0 };
-          gsap.fromTo(card, from, { x: '0rem', y: '0rem', opacity: 1, ease: 'power2.out', scrollTrigger: { trigger: card, start: 'top 80%', end: 'top 20%', scrub: true } });
+          gsap.fromTo(card, from, { x: '0rem', y: '0rem', opacity: 1, ease: 'power2.out', scrollTrigger: { trigger: card, start: 'top 90%', end: 'top 20%', scrub: true } });
         });
       }
       const navbar = document.querySelector(".navbar");
