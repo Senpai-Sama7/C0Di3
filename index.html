@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-
 <html lang="en">
 <head>
     <style>.wf-force-outline-none[tabindex="-1"]:focus{outline:none;}</style>
@@ -263,6 +261,7 @@
         gap: 1rem;
         justify-content: center;
         margin-top: 2rem;
+        flex-wrap: wrap; /* Added for better responsiveness */
       }
       .btn {
         padding: 0.8rem 2rem;
@@ -371,6 +370,16 @@
       .mastermind-card p {
         color: #9ca3af;
       }
+      .halo-glow-box {
+        border-radius: 16px;
+        padding: 2.5rem;
+        border: 1px solid rgba(59, 130, 246, 0.25);
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.1), 0 0 60px rgba(59, 130, 246, 0.15);
+        background: rgba(10, 10, 10, 0.6);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        margin-top: 3rem;
+      }
       
       /* --- Layout and Menu Fixes --- */
       #guide {
@@ -388,12 +397,16 @@
         min-width: 300px;
         max-width: 400px;
         flex-shrink: 0;
+        flex-grow: 1; /* Allow items to grow and fill space */
       }
       .stages_wrapper {
         margin-top: 2rem;
       }
       .headline-wrapper {
         margin-bottom: 3rem;
+      }
+      .mobile-logo-footer {
+        display: none; /* Hide by default */
       }
       
       /* --- FIXED: Standard Mobile Navbar --- */
@@ -405,6 +418,8 @@
         .navbar_links-wrapper {
           display: flex !important; /* Ensure it's always visible */
           gap: 1rem;
+          flex-wrap: wrap; /* Allow links to wrap on small screens */
+          justify-content: center;
         }
         .navbar .w-nav-brand {
             display: none; /* Hides the logo in the navbar on mobile */
@@ -412,6 +427,11 @@
         .hero-buttons { flex-direction: column; }
         .stages_track { flex-direction: column; gap: 2rem; width: 100%; }
         .stages_section { min-width: auto; max-width: none; }
+        .mobile-logo-footer {
+            display: block; /* Show on mobile */
+            text-align: center;
+            margin-top: 2rem;
+        }
       }
     </style>
 </head>
@@ -434,6 +454,7 @@
                 <a href="#team" class="navbar_link">About</a>
                 <a href="#waitlist" class="navbar_link">Join Waitlist</a>
                 <a href="https://www.instagram.com/c0di3_ai/" target="_blank" rel="noopener noreferrer" class="navbar_link">Instagram</a>
+                <a href="https://github.com/Senpai-Sama7/Project-C0Di3" target="_blank" rel="noopener noreferrer" class="navbar_link">GitHub</a>
             </div>
             <!-- REMOVED: The menu-toggle button is no longer needed -->
         </nav>
@@ -452,6 +473,7 @@
                             <div class="hero-buttons">
                                 <a href="#waitlist" class="btn btn-primary">Join the Waitlist</a>
                                 <a href="https://www.instagram.com/c0di3_ai/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Instagram</a>
+                                <a href="https://github.com/Senpai-Sama7/Project-C0Di3" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">GitHub</a>
                             </div>
                         </div>
                     </div>
@@ -628,13 +650,13 @@
             </div>
             <div id="guide" class="section">
                 <div class="container">
-                    <div class="headline-wrapper">
+                    <div class="headline-wrapper" style="margin-bottom: 0;">
                         <div class="vertical-gap-8">
                             <p data-animation="text-reveal" class="eyebrow-heading" style="opacity: 1;">Process</p>
                             <h2 data-animation="text-reveal" style="opacity: 1;">How C0Di3 Works</h2>
                         </div>
                     </div>
-                    <div class="stages_wrapper" style="opacity: 1;">
+                    <div class="stages_wrapper halo-glow-box" style="opacity: 1;">
                         <div class="stages_track">
                             <div class="stages_section"><h3>Integrate & Scan</h3><p>Connect C0Di3 to your systems, code repositories, or networks. It begins by establishing a baseline and performing a comprehensive initial scan for existing vulnerabilities.</p></div>
                             <div class="stages_section"><h3>Detect & Analyze</h3><p>Using behavioral analysis and machine learning, C0Di3 monitors activity in real-time. It detects anomalies and analyzes potential threats, correlating data points to understand the full context.</p></div>
@@ -644,32 +666,33 @@
                     </div>
                 </div>
             </div>
+            <!-- FIXED SECTION: Removed conflicting inline 'style' attributes -->
             <div id="options" class="section">
                 <div class="container">
                     <div class="petals-grid">
                         <div class="petals_headline">
                             <div class="vertical-gap-8 align-right">
-                                <p data-animation="text-reveal" class="eyebrow-heading" style="opacity: 1;">Audience</p>
-                                <h2 data-animation="text-reveal" style="opacity: 1;">Who can use C0Di3</h2>
-                                <div class="max-width-480"><p data-animation="text-reveal" style="opacity: 0.3529;">With the autonomous technology of C0Di3, everyone gets the protection that suits them best.</p></div>
+                                <p data-animation="text-reveal" class="eyebrow-heading">Audience</p>
+                                <h2 data-animation="text-reveal">Who can use C0Di3</h2>
+                                <div class="max-width-480"><p data-animation="text-reveal">With the autonomous technology of C0Di3, everyone gets the protection that suits them best.</p></div>
                             </div>
                         </div>
                         <div class="petals-grid_item is-1">
                             <div class="petals_grid-item_inner">
-                                <h3 data-animation="text-reveal" style="opacity: 0.6029;">Individuals</h3>
-                                <p data-animation="text-reveal" style="opacity: 0;">Protect your personal devices and online identity with an AI guardian that never sleeps.</p>
+                                <h3 data-animation="text-reveal">Individuals</h3>
+                                <p data-animation="text-reveal">Protect your personal devices and online identity with an AI guardian that never sleeps.</p>
                             </div>
                         </div>
                         <div id="w-node-_9a690c3e-5c88-628e-ff08-055e516b47be-e31578ab" class="petals-grid_item is-2">
                             <div class="petals_grid-item_inner is-inverse">
-                                <h3 data-animation="text-reveal" style="opacity: 0;">Businesses</h3>
-                                <p data-animation="text-reveal" style="opacity: 0;">Secure your assets and customer data with an inexpensive and highly effective autonomous security operations center.</p>
+                                <h3 data-animation="text-reveal">Businesses</h3>
+                                <p data-animation="text-reveal">Secure your assets and customer data with an inexpensive and highly effective autonomous security operations center.</p>
                             </div>
                         </div>
                         <div id="w-node-_9a690c3e-5c88-628e-ff08-055e516b47c7-e31578ab" class="petals-grid_item is-3">
                             <div class="petals_grid-item_inner">
-                                <h3 data-animation="text-reveal" style="opacity: 0;">Developers</h3>
-                                <p data-animation="text-reveal" style="opacity: 0;">Integrate C0Di3 into your CI/CD pipeline to find and fix vulnerabilities before they ever reach production.</p>
+                                <h3 data-animation="text-reveal">Developers</h3>
+                                <p data-animation="text-reveal">Integrate C0Di3 into your CI/CD pipeline to find and fix vulnerabilities before they ever reach production.</p>
                             </div>
                         </div>
                     </div>
@@ -725,7 +748,8 @@
                             </div>
                             <p>© 2024 C0Di3 Project. All Rights Reserved.</p>
                             <a href="https://github.com/Senpai-Sama7" target="_blank" class="eyebrow-heading" style="text-decoration: none; margin-top: 0.5rem; display: inline-block;">An open-source initiative by Douglas Mitchell</a>
-                            <div class="mobile-logo-footer" style="text-align: center; margin-top: 2rem; display: none;">
+                            <!-- ADDED: Mobile Footer Logo -->
+                            <div class="mobile-logo-footer">
                                 <a href="https://github.com/Senpai-Sama7/Project-C0Di3" target="_blank" rel="noopener noreferrer">
                                     <img src="C0Di3.PNG" loading="lazy" alt="C0Di3 Logo" style="height: 40px; border-radius: 50%;">
                                 </a>
@@ -947,24 +971,7 @@
           .to(".petals-row.is-bottom .petal:first-child", { opacity: 0, x: "-5rem", y: "2rem", ease: "none" }, "<")
           .to(".petals-row.is-bottom .petal:last-child", { opacity: 0, x: "5rem", y: "2rem", ease: "none" }, "<");
         
-        const isMobile = window.innerWidth <= 768;
-        const guideSection = document.querySelector("#guide");
-        if (!isMobile && guideSection) {
-          const track = guideSection.querySelector(".stages_track");
-          const scrollDistance = track.scrollWidth - guideSection.offsetWidth;
-          gsap.to(track, {
-            x: -scrollDistance,
-            ease: "none",
-            scrollTrigger: {
-              trigger: guideSection,
-              start: "center center",
-              end: () => "+=" + scrollDistance,
-              scrub: true,
-              pin: true,
-              anticipatePin: 1
-            }
-          });
-        }
+        // REMOVED: GSAP pinning logic for the #guide section to make it static.
 
         $('#waitlistForm').on('submit', function(e) {
             e.preventDefault();
