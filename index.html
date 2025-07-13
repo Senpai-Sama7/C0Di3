@@ -134,7 +134,7 @@
       width: 100%;
       height: 100%;
       background-repeat: repeat;
-      animation: zoom 3.5s ease-in-out forwards;
+      animation: zoom 2.5 ease-in-out forwards;
     }
 
     .starfield-1 {
@@ -191,12 +191,15 @@
     .page-content {
       transform: scale(0.95);
       opacity: 0;
-      transition: transform 1.2s ease-out, opacity 1.2s ease-out;
+      visibility: hidden;
+      transition: transform 1.2s ease-out, opacity 1.2s ease-out, visibility 0s 1.2s;
     }
 
     body.loaded .page-content {
       transform: scale(1);
       opacity: 1;
+      visibility: visible;
+      transition: transform 1.2s ease-out, opacity 1.2s ease-out, visibility 0s 0s;
     }
 
     /* --- RESTORED: Animated Grid Background --- */
@@ -773,6 +776,9 @@
     <div class="starfield starfield-1"></div>
     <div class="starfield starfield-2"></div>
     <div class="starfield starfield-3"></div>
+    <button id="skip-entrance"
+      style="position: absolute; bottom: 20px; right: 20px; background: rgba(0,255,255,0.2); border: 1px solid rgba(0,255,255,0.5); color: #00ffff; padding: 10px 20px; cursor: pointer; border-radius: 5px; font-family: monospace; z-index: 10000;">Skip
+      Intro</button>
   </div>
 
   <div class="page-wrapper page-content">
@@ -1416,10 +1422,39 @@
       // Initialize particles
       createParticles();
 
+      // Primary entrance animation
       setTimeout(function () {
         $('#entrance-overlay').addClass('hidden');
         $('body').addClass('loaded');
+
+        // Ensure page content is visible
+        setTimeout(function () {
+          $('.page-content').css({
+            'opacity': '1',
+            'transform': 'scale(1)',
+            'visibility': 'visible'
+          });
+        }, 100);
       }, 3500);
+
+      // Fallback to ensure overlay disappears
+      setTimeout(function () {
+        if ($('#entrance-overlay').is(':visible')) {
+          $('#entrance-overlay').addClass('hidden');
+          $('body').addClass('loaded');
+        }
+      }, 5000);
+
+      // Skip entrance button
+      $('#skip-entrance').on('click', function () {
+        $('#entrance-overlay').addClass('hidden');
+        $('body').addClass('loaded');
+        $('.page-content').css({
+          'opacity': '1',
+          'transform': 'scale(1)',
+          'visibility': 'visible'
+        });
+      });
 
       if (window.innerWidth <= 991) return;
       const canvasOne = document.getElementById("canvasOne");
