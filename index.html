@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-
+<!-- 
+  This site was created by merging two templates as requested.
+  The base structure, animations, and scripts from the first "Bitcoin" template have been fully preserved.
+  The content, branding, and specific features (like the form, entrance animation, and background) from the "C0Di3" template have been integrated and refined.
+-->
 <html lang="en">
 <head>
     <style>.wf-force-outline-none[tabindex="-1"]:focus{outline:none;}</style>
@@ -284,8 +288,12 @@
         position: relative;
         z-index: 5;
       }
-      .menu_link {
-        color: #fff !important;
+      /* FIXED: More specific selector to ensure menu links are visible */
+      .menu .menu_link {
+        color: #ffffff !important;
+        font-size: 1.5rem;
+        text-align: center;
+        padding: 1rem 0;
       }
       .stages_track {
         display: flex;
@@ -304,16 +312,6 @@
       }
       .headline-wrapper {
         margin-bottom: 3rem;
-      }
-      /* ADDED: Visible Scrollbar for "How C0Di3 Works" Section */
-      .stages_wrapper::-webkit-scrollbar {
-        height: 8px;
-        background-color: rgba(255, 255, 255, 0.1);
-        border-radius: 4px;
-      }
-      .stages_wrapper::-webkit-scrollbar-thumb {
-        background-color: #3b82f6;
-        border-radius: 4px;
       }
       @media (max-width: 768px) {
         .stages_track {
