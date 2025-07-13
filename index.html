@@ -158,6 +158,24 @@
           transform: scale(1);
           opacity: 1;
       }
+
+      /* --- RESTORED: Animated Grid Background --- */
+      .cyber-grid {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image:
+              linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+          background-size: 60px 60px;
+          z-index: -1;
+          animation: gridMove 60s linear infinite;
+      }
+      @keyframes gridMove {
+          to { background-position: 120px 120px; }
+      }
     </style>
     <style>
       /* --- Styles from Original Template --- */
@@ -272,13 +290,18 @@
       .success-message { background: linear-gradient(45deg, rgba(0, 255, 0, 0.1), rgba(0, 128, 0, 0.1)); border: 1px solid rgba(0, 255, 0, 0.3); color: #0f0; padding: 1rem; border-radius: 8px; margin-top: 1rem; text-align: center; display: none; }
       .social-links a { color: #9ca3af; text-decoration: none; margin: 0 0.75rem; transition: color 0.3s ease; font-size: 0.9rem; font-weight: 300; }
       .social-links a:hover { color: #00ffff; }
-      /* ADDED: Mastermind Section Styles */
       .mastermind-card { text-align: center; margin-top: 3rem; }
       .mastermind-card a { text-decoration: none; color: inherit; display: inline-block; }
       .mastermind-card img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid #3b82f6; margin-bottom: 1.5rem; transition: transform 0.3s ease; }
       .mastermind-card a:hover img { transform: scale(1.1); }
       .mastermind-card h4 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
       .mastermind-card p { color: #9ca3af; }
+
+      /* --- FIXED: Layout Bug Fix --- */
+      #guide {
+        position: relative;
+        z-index: 5; /* This ensures the pinned section and its animation render above the following content */
+      }
     </style>
 </head>
 <body>
@@ -289,6 +312,7 @@
     </div>
 
     <div class="page-wrapper page-content">
+        <div class="cyber-grid"></div>
         <div class="styles w-embed"></div>
         <nav data-lenis-prevent="" class="menu" style="translate: none; rotate: none; scale: none; pointer-events: none; opacity: 0; transform: translate(0px, -100%);">
             <div class="spacing-div"></div>
@@ -414,7 +438,6 @@
                 </div>
             </div>
             
-            <!-- ADDED: Mastermind Section -->
             <div id="team" class="section">
                 <div class="container">
                     <div class="headline-wrapper">
@@ -717,7 +740,6 @@
         });
       });
       document.addEventListener("DOMContentLoaded", function () {
-        // MODIFIED: Entrance Animation Trigger with longer duration
         setTimeout(function() {
             $('#entrance-overlay').addClass('hidden');
             $('body').addClass('loaded');
