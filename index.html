@@ -263,7 +263,6 @@
       .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4); }
       .btn-secondary { background-color: transparent; border-color: #3b82f6; color: #3b82f6; }
       .btn-secondary:hover { background-color: #3b82f6; color: white; transform: translateY(-3px); }
-      @media (max-width: 768px) { .hero-buttons { flex-direction: column; } }
       .waitlist-form { max-width: 500px; margin: 2rem auto 0; display: grid; gap: 1.5rem; }
       .form-group { text-align: left; }
       .form-group label { color: #e5e7eb; font-weight: 500; margin-bottom: 0.5rem; display: block; }
@@ -279,21 +278,10 @@
       .mastermind-card h4 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
       .mastermind-card p { color: #9ca3af; }
       
-      /* --- FIXED: Menu Button and Layout Fixes --- */
-      .navbar {
-        position: relative;
-        z-index: 10000; /* Lifts the entire navbar above the menu overlay */
-      }
+      /* --- Layout and Menu Fixes --- */
       #guide {
         position: relative;
         z-index: 5;
-      }
-      /* FIXED: More specific selector to ensure menu links are visible */
-      .menu .menu_link {
-        color: #ffffff !important;
-        font-size: 1.5rem;
-        text-align: center;
-        padding: 1rem 0;
       }
       .stages_track {
         display: flex;
@@ -313,16 +301,23 @@
       .headline-wrapper {
         margin-bottom: 3rem;
       }
-      @media (max-width: 768px) {
-        .stages_track {
-          flex-direction: column;
-          gap: 2rem;
+      /* --- FIXED: Standard Mobile Navbar --- */
+      @media (max-width: 991px) {
+        .navbar {
+          justify-content: center; /* Center items on mobile */
+          flex-wrap: wrap; /* Allow items to wrap */
+          padding: 1rem;
+        }
+        .navbar_links-wrapper {
+          display: flex !important; /* Ensure it's always visible */
           width: 100%;
+          justify-content: center;
+          gap: 1rem;
+          margin-top: 1rem;
         }
-        .stages_section {
-          min-width: auto;
-          max-width: none;
-        }
+        .hero-buttons { flex-direction: column; }
+        .stages_track { flex-direction: column; gap: 2rem; width: 100%; }
+        .stages_section { min-width: auto; max-width: none; }
       }
     </style>
 </head>
@@ -335,23 +330,7 @@
 
     <div class="page-wrapper page-content">
         <div class="styles w-embed"></div>
-        <nav data-lenis-prevent="" class="menu" style="translate: none; rotate: none; scale: none; pointer-events: none; opacity: 0; transform: translate(0px, -100%);">
-            <div class="spacing-div"></div>
-            <div class="menu_links-wrapper">
-                <div class="menu_link-wrapper"><a href="#features" class="menu_link">Features</a></div>
-                <div class="menu_link-wrapper"><a href="#team" class="menu_link">About</a></div>
-                <div class="menu_link-wrapper"><a href="#waitlist" class="menu_link">Join Waitlist</a></div>
-                <div class="menu_link-wrapper"><a href="https://github.com/Senpai-Sama7/Project-C0Di3" target="_blank" rel="noopener noreferrer" class="menu_link">GitHub</a></div>
-            </div>
-            <div class="menu_bottom">
-                <a href="#waitlist" class="button_link full-width w-inline-block">
-                    <button type="button" class="button full-width" style="width: 0%;" data-glow-attached="true">
-                        <div class="button_inner"><p class="button_text">Join Waitlist</p></div>
-                        <div class="glow"></div>
-                    </button>
-                </a>
-            </div>
-        </nav>
+        <!-- REMOVED: Animated Menu and its JavaScript logic are no longer needed -->
         <nav class="navbar" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); background-color: transparent;">
             <a href="#" class="w-nav-brand" style="padding-left: 1rem; text-decoration: none;">
                 <img src="C0Di3.PNG" loading="lazy" alt="C0Di3 Logo" style="height: 40px; border-radius: 50%;">
@@ -362,11 +341,7 @@
                 <a href="#waitlist" class="navbar_link">Join Waitlist</a>
                 <a href="https://github.com/Senpai-Sama7/Project-C0Di3" target="_blank" rel="noopener noreferrer" class="navbar_link">GitHub</a>
             </div>
-            <button type="button" data-lenis-toggle="" class="menu-toggle">
-                <div class="menu-toggle_line"></div>
-                <div class="menu-toggle_line"></div>
-                <div class="menu-toggle_line"></div>
-            </button>
+            <!-- REMOVED: The menu-toggle button is no longer needed -->
         </nav>
         <main class="content-wrapper">
             <section class="section is-hero">
@@ -692,62 +667,9 @@
       $("[data-lenis-stop]").on("click", function () {
         lenis.stop();
       });
-      $("[data-lenis-toggle]").on("click", function () {
-        $(this).toggleClass("stop-scroll");
-        if ($(this).hasClass("stop-scroll")) {
-          lenis.stop();
-        } else {
-          lenis.start();
-        }
-      });
-      const menu = document.querySelector(".menu");
-      const toggleBtn = document.querySelector(".menu-toggle");
-      const menuLines = document.querySelectorAll(".menu-toggle_line");
-      const menuLinks = document.querySelectorAll(".menu_link, .navbar_link");
-      const menuButton = document.querySelector(".menu_bottom .button");
-      gsap.set(menu, { y: "-100%", opacity: 0, pointerEvents: "none" });
-      gsap.set(gsap.utils.toArray('.menu_link'), { y: "100%" });
-      gsap.set(menuButton, { width: "0%" });
-      const lineHeight = menuLines[0].offsetHeight;
-      const moveY = lineHeight + 4;
-      const menuTl = gsap.timeline({
-        paused: true,
-        reversed: true,
-        defaults: { ease: "power3.inOut" }
-      });
-      menuTl
-        .set(menu, { opacity: 1, pointerEvents: "auto" })
-        .to(menu, { y: "0%", duration: 1 })
-        .to(menuLines[0], { y: moveY, rotate: 45, duration: 0.5 }, "<")
-        .to(menuLines[1], { opacity: 0, duration: 0.3 }, "<")
-        .to(menuLines[2], { y: -moveY, rotate: -45, duration: 0.5 }, "<")
-        .to(gsap.utils.toArray('.menu_link'), { y: "0%", duration: 0.5, ease: "power3.out", stagger: 0.08 }, "-=0.2")
-        .to(menuButton, { width: "100%", duration: 0.7, ease: "power4.inOut" }, "<+0.2");
-      toggleBtn.addEventListener("click", () => {
-        if (menuTl.reversed()) {
-          menuTl.play();
-        } else {
-          menuTl.reverse();
-        }
-      });
-      function closeMenu() {
-        if (!menuTl.reversed()) {
-          toggleBtn.click();
-        }
-      }
-      menuLinks.forEach(link => {
-        link.addEventListener("click", (e) => {
-            const href = link.getAttribute('href');
-            if (href && href.startsWith('#')) {
-                e.preventDefault();
-                const targetEl = document.querySelector(href);
-                if (targetEl) {
-                    lenis.scrollTo(targetEl, { offset: -80 });
-                }
-                closeMenu();
-            }
-        });
-      });
+      
+      // REMOVED: All JavaScript related to the menu toggle button
+      
       document.addEventListener("DOMContentLoaded", function () {
         setTimeout(function() {
             $('#entrance-overlay').addClass('hidden');
