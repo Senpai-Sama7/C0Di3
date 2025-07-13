@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<!-- 
-  This site was created by merging two templates as requested.
-  The base structure, animations, and scripts from the first "Bitcoin" template have been fully preserved.
-  The content, branding, and specific features (like the form, entrance animation, and background) from the "C0Di3" template have been integrated and refined.
--->
+
 <html lang="en">
 <head>
     <style>.wf-force-outline-none[tabindex="-1"]:focus{outline:none;}</style>
@@ -279,10 +275,56 @@
       .mastermind-card h4 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
       .mastermind-card p { color: #9ca3af; }
       
-      /* --- FIXED: Menu Button Fix --- */
+      /* --- FIXED: Menu Button and Layout Fixes --- */
       .navbar {
         position: relative;
-        z-index: 10000; /* This lifts the entire navbar above the menu overlay */
+        z-index: 10000; /* Lifts the entire navbar above the menu overlay */
+      }
+      #guide {
+        position: relative;
+        z-index: 5;
+      }
+      .menu_link {
+        color: #fff !important;
+      }
+      .stages_track {
+        display: flex;
+        gap: 2rem;
+        width: max-content;
+      }
+      .stages_section {
+        min-width: 300px;
+        max-width: 400px;
+        flex-shrink: 0;
+      }
+      .stages_wrapper {
+        margin-top: 2rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .headline-wrapper {
+        margin-bottom: 3rem;
+      }
+      /* ADDED: Visible Scrollbar for "How C0Di3 Works" Section */
+      .stages_wrapper::-webkit-scrollbar {
+        height: 8px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+      }
+      .stages_wrapper::-webkit-scrollbar-thumb {
+        background-color: #3b82f6;
+        border-radius: 4px;
+      }
+      @media (max-width: 768px) {
+        .stages_track {
+          flex-direction: column;
+          gap: 2rem;
+          width: 100%;
+        }
+        .stages_section {
+          min-width: auto;
+          max-width: none;
+        }
       }
     </style>
 </head>
@@ -713,40 +755,6 @@
             $('#entrance-overlay').addClass('hidden');
             $('body').addClass('loaded');
         }, 2500);
-
-        function createDynamicParticles() {
-          const container = document.getElementById('particlesContainer');
-          if (!container) return;
-          container.innerHTML = '';
-          for (let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.width = (Math.random() * 4 + 2) + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.animationDelay = (Math.random() * 6) + 's';
-            container.appendChild(particle);
-          }
-          for (let i = 0; i < 8; i++) {
-            const orb = document.createElement('div');
-            orb.className = 'floating-orb';
-            orb.style.left = Math.random() * 100 + '%';
-            orb.style.top = Math.random() * 100 + '%';
-            orb.style.width = (Math.random() * 60 + 40) + 'px';
-            orb.style.height = orb.style.width;
-            orb.style.animationDelay = (Math.random() * 15) + 's';
-            container.appendChild(orb);
-          }
-          for (let i = 0; i < 5; i++) {
-            const stream = document.createElement('div');
-            stream.className = 'data-stream';
-            stream.style.left = Math.random() * 100 + '%';
-            stream.style.animationDelay = (Math.random() * 3) + 's';
-            container.appendChild(stream);
-          }
-        }
-        createDynamicParticles();
 
         if (window.innerWidth <= 991) return;
         const canvasOne = document.getElementById("canvasOne");
