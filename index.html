@@ -134,7 +134,7 @@
       width: 100%;
       height: 100%;
       background-repeat: repeat;
-      animation: zoom 2.5 ease-in-out forwards;
+      animation: zoom 2.5s ease-in-out forwards;
     }
 
     .starfield-1 {
@@ -146,7 +146,7 @@
         radial-gradient(1px 1px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
         radial-gradient(1px 1px at 130px 80px, #fff, rgba(0, 0, 0, 0)),
         radial-gradient(1px 1px at 160px 120px, #ddd, rgba(0, 0, 0, 0));
-      animation-duration: 3.5s;
+      animation-duration: 2.5s;
     }
 
     .starfield-2 {
@@ -156,7 +156,7 @@
         radial-gradient(2px 2px at 100px 100px, #fff, rgba(0, 0, 0, 0)),
         radial-gradient(1px 1px at 200px 150px, #ddd, rgba(0, 0, 0, 0)),
         radial-gradient(1px 1px at 250px 90px, #fff, rgba(0, 0, 0, 0));
-      animation-duration: 3.2s;
+      animation-duration: 2.2s;
     }
 
     .starfield-3 {
@@ -165,7 +165,7 @@
         radial-gradient(2px 2px at 10px 200px, #eee, rgba(0, 0, 0, 0)),
         radial-gradient(2px 2px at 300px 300px, #fff, rgba(0, 0, 0, 0)),
         radial-gradient(3px 3px at 150px 250px, #ddd, rgba(0, 0, 0, 0));
-      animation-duration: 3s;
+      animation-duration: 2s;
     }
 
     @keyframes zoom {
@@ -230,16 +230,18 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -2;
+      z-index: 1;
       overflow: hidden;
+      pointer-events: none;
     }
 
     .particle {
       position: absolute;
-      background: radial-gradient(circle, rgba(0, 255, 255, 0.8) 0%, rgba(0, 255, 255, 0.4) 50%, transparent 100%);
+      background: radial-gradient(circle, rgba(0, 255, 255, 1) 0%, rgba(0, 255, 255, 0.6) 50%, transparent 100%);
       border-radius: 50%;
       pointer-events: none;
       animation: float 6s ease-in-out infinite;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
     }
 
     .particle:nth-child(odd) {
@@ -285,9 +287,10 @@
     .floating-orb {
       position: absolute;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, rgba(99, 102, 241, 0.3) 50%, transparent 100%);
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.8) 0%, rgba(99, 102, 241, 0.5) 50%, transparent 100%);
       animation: orbFloat 15s ease-in-out infinite;
       pointer-events: none;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
     }
 
     @keyframes orbFloat {
@@ -776,9 +779,6 @@
     <div class="starfield starfield-1"></div>
     <div class="starfield starfield-2"></div>
     <div class="starfield starfield-3"></div>
-    <button id="skip-entrance"
-      style="position: absolute; bottom: 20px; right: 20px; background: rgba(0,255,255,0.2); border: 1px solid rgba(0,255,255,0.5); color: #00ffff; padding: 10px 20px; cursor: pointer; border-radius: 5px; font-family: monospace; z-index: 10000;">Skip
-      Intro</button>
   </div>
 
   <div class="page-wrapper page-content">
@@ -1426,35 +1426,9 @@
       setTimeout(function () {
         $('#entrance-overlay').addClass('hidden');
         $('body').addClass('loaded');
+      }, 2500);
 
-        // Ensure page content is visible
-        setTimeout(function () {
-          $('.page-content').css({
-            'opacity': '1',
-            'transform': 'scale(1)',
-            'visibility': 'visible'
-          });
-        }, 100);
-      }, 3500);
 
-      // Fallback to ensure overlay disappears
-      setTimeout(function () {
-        if ($('#entrance-overlay').is(':visible')) {
-          $('#entrance-overlay').addClass('hidden');
-          $('body').addClass('loaded');
-        }
-      }, 5000);
-
-      // Skip entrance button
-      $('#skip-entrance').on('click', function () {
-        $('#entrance-overlay').addClass('hidden');
-        $('body').addClass('loaded');
-        $('.page-content').css({
-          'opacity': '1',
-          'transform': 'scale(1)',
-          'visibility': 'visible'
-        });
-      });
 
       if (window.innerWidth <= 991) return;
       const canvasOne = document.getElementById("canvasOne");
