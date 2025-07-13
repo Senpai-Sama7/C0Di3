@@ -219,6 +219,118 @@
         background-position: 120px 120px;
       }
     }
+
+    /* --- Particle Effects --- */
+    .particles-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      background: radial-gradient(circle, rgba(0, 255, 255, 0.8) 0%, rgba(0, 255, 255, 0.4) 50%, transparent 100%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .particle:nth-child(odd) {
+      animation-duration: 8s;
+      animation-delay: -2s;
+    }
+
+    .particle:nth-child(3n) {
+      animation-duration: 10s;
+      animation-delay: -4s;
+    }
+
+    .particle:nth-child(4n) {
+      animation-duration: 12s;
+      animation-delay: -6s;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px) translateX(0px) scale(1);
+        opacity: 0.3;
+      }
+
+      25% {
+        transform: translateY(-20px) translateX(10px) scale(1.1);
+        opacity: 0.6;
+      }
+
+      50% {
+        transform: translateY(-40px) translateX(-5px) scale(0.9);
+        opacity: 0.8;
+      }
+
+      75% {
+        transform: translateY(-20px) translateX(-15px) scale(1.2);
+        opacity: 0.5;
+      }
+    }
+
+    /* Floating orbs */
+    .floating-orb {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, rgba(99, 102, 241, 0.3) 50%, transparent 100%);
+      animation: orbFloat 15s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes orbFloat {
+
+      0%,
+      100% {
+        transform: translateY(0px) translateX(0px) scale(1);
+        opacity: 0.2;
+      }
+
+      33% {
+        transform: translateY(-50px) translateX(30px) scale(1.2);
+        opacity: 0.4;
+      }
+
+      66% {
+        transform: translateY(-100px) translateX(-20px) scale(0.8);
+        opacity: 0.6;
+      }
+    }
+
+    /* Data stream effect */
+    .data-stream {
+      position: absolute;
+      width: 2px;
+      height: 100px;
+      background: linear-gradient(to bottom, transparent, rgba(0, 255, 255, 0.8), transparent);
+      animation: dataFlow 3s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes dataFlow {
+      0% {
+        transform: translateY(-100px);
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
   </style>
   <style>
     /* --- Styles from Original Template --- */
@@ -566,21 +678,47 @@
       .menu {
         background: rgba(0, 0, 0, 0.95) !important;
         backdrop-filter: blur(10px);
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100vh !important;
+        z-index: 9999 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
       }
 
       .menu_links-wrapper {
         padding: 2rem 1rem;
+        text-align: center;
+        width: 100%;
       }
 
       .menu_link {
         display: block;
-        padding: 1rem 0;
+        padding: 1.5rem 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        font-size: 1.2rem;
+        font-size: 1.5rem;
+        color: #fff !important;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .menu_link:hover {
+        color: #00ffff !important;
+        transform: translateX(10px);
       }
 
       .menu_bottom {
-        padding: 1rem;
+        padding: 2rem 1rem;
+        width: 100%;
+        text-align: center;
+      }
+
+      .menu-toggle {
+        z-index: 10001 !important;
       }
     }
 
@@ -639,6 +777,7 @@
 
   <div class="page-wrapper page-content">
     <div class="cyber-grid"></div>
+    <div class="particles-container" id="particlesContainer"></div>
     <div class="styles w-embed"></div>
     <nav data-lenis-prevent="" class="menu"
       style="translate: none; rotate: none; scale: none; pointer-events: none; opacity: 0; transform: translate(0px, -100%);">
@@ -664,7 +803,7 @@
     <nav class="navbar"
       style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); background-color: transparent;">
       <a href="#" class="w-nav-brand" style="padding-left: 1rem; text-decoration: none;">
-        <img src="C0Di3.PNG" loading="lazy" alt="C0Di3 Logo" style="height: 90px; border-radius: 90%;">
+        <img src="C0Di3.PNG" loading="lazy" alt="C0Di3 Logo" style="height: 80px; border-radius: 90%;">
       </a>
       <div class="navbar_links-wrapper">
         <a href="#features" class="navbar_link">Features</a>
@@ -1196,6 +1335,31 @@
       }
     });
 
+    // Touch events for mobile
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartY = e.changedTouches[0].screenY;
+    });
+
+    document.addEventListener('touchend', (e) => {
+      touchEndY = e.changedTouches[0].screenY;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartY - touchEndY;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0 && !menuTl.reversed()) {
+          // Swipe up - close menu
+          closeMenu();
+        }
+      }
+    }
+
     menuLinks.forEach(link => {
       link.addEventListener("click", (e) => {
         const href = link.getAttribute('href');
@@ -1210,6 +1374,48 @@
       });
     });
     document.addEventListener("DOMContentLoaded", function () {
+      // Create particle effects
+      function createParticles() {
+        const container = document.getElementById('particlesContainer');
+        if (!container) return;
+
+        // Create particles
+        for (let i = 0; i < 50; i++) {
+          const particle = document.createElement('div');
+          particle.className = 'particle';
+          particle.style.left = Math.random() * 100 + '%';
+          particle.style.top = Math.random() * 100 + '%';
+          particle.style.width = (Math.random() * 4 + 2) + 'px';
+          particle.style.height = particle.style.width;
+          particle.style.animationDelay = (Math.random() * 6) + 's';
+          container.appendChild(particle);
+        }
+
+        // Create floating orbs
+        for (let i = 0; i < 8; i++) {
+          const orb = document.createElement('div');
+          orb.className = 'floating-orb';
+          orb.style.left = Math.random() * 100 + '%';
+          orb.style.top = Math.random() * 100 + '%';
+          orb.style.width = (Math.random() * 60 + 40) + 'px';
+          orb.style.height = orb.style.width;
+          orb.style.animationDelay = (Math.random() * 15) + 's';
+          container.appendChild(orb);
+        }
+
+        // Create data streams
+        for (let i = 0; i < 5; i++) {
+          const stream = document.createElement('div');
+          stream.className = 'data-stream';
+          stream.style.left = Math.random() * 100 + '%';
+          stream.style.animationDelay = (Math.random() * 3) + 's';
+          container.appendChild(stream);
+        }
+      }
+
+      // Initialize particles
+      createParticles();
+
       setTimeout(function () {
         $('#entrance-overlay').addClass('hidden');
         $('body').addClass('loaded');
