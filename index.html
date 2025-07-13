@@ -1,9 +1,6 @@
 <!DOCTYPE html>
-<!-- 
-  This site was created by merging two templates as requested.
-  The base structure, animations, and scripts from the first "Bitcoin" template have been fully preserved.
-  The content, branding, and specific features (like the form, entrance animation, and background) from the "C0Di3" template have been integrated and refined.
--->
+
+
 <html lang="en">
 <head>
     <style>.wf-force-outline-none[tabindex="-1"]:focus{outline:none;}</style>
@@ -55,12 +52,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
 
     <style>
-      /* --- Base Styles from Original Template --- */
+      /* --- Base Styles --- */
       body {
-        overflow-y: hidden; /* Hide scrollbar during entrance animation */
+        overflow-y: hidden;
       }
       body.loaded {
-        overflow-y: auto; /* Restore scrollbar after animation */
+        overflow-y: auto;
       }
       html.lenis {
         height: auto;
@@ -89,74 +86,77 @@
         opacity: 0;
       }
 
-      /* --- Entrance Animation CSS --- */
+      /* --- Entrance Animation --- */
       #entrance-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: #000;
-          z-index: 10001;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: opacity 0.5s ease-out;
-          overflow: hidden;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 10001;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.5s ease-out;
+        overflow: hidden;
       }
       #entrance-overlay.hidden {
-          opacity: 0;
-          pointer-events: none;
+        opacity: 0;
+        pointer-events: none;
       }
       .starfield {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background-repeat: repeat;
-          animation: zoom 3.5s ease-in-out forwards;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-repeat: repeat;
+        animation: zoom 2.5s ease-in-out forwards;
       }
       .starfield-1 {
-          background-size: 200px 200px;
-          background-image: 
-              radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)),
-              radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
-              radial-gradient(1px 1px at 50px 160px, #ddd, rgba(0,0,0,0)),
-              radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
-              radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0)),
-              radial-gradient(1px 1px at 160px 120px, #ddd, rgba(0,0,0,0));
-          animation-duration: 3.5s;
+        background-size: 200px 200px;
+        background-image:
+          radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 50px 160px, #ddd, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 160px 120px, #ddd, rgba(0,0,0,0));
+        animation-duration: 2.5s;
       }
       .starfield-2 {
-          background-size: 300px 300px;
-          background-image:
-              radial-gradient(1px 1px at 50px 50px, #eee, rgba(0,0,0,0)),
-              radial-gradient(2px 2px at 100px 100px, #fff, rgba(0,0,0,0)),
-              radial-gradient(1px 1px at 200px 150px, #ddd, rgba(0,0,0,0)),
-              radial-gradient(1px 1px at 250px 90px, #fff, rgba(0,0,0,0));
-          animation-duration: 3.2s;
+        background-size: 300px 300px;
+        background-image:
+          radial-gradient(1px 1px at 50px 50px, #eee, rgba(0,0,0,0)),
+          radial-gradient(2px 2px at 100px 100px, #fff, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 200px 150px, #ddd, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 250px 90px, #fff, rgba(0,0,0,0));
+        animation-duration: 2.2s;
       }
       .starfield-3 {
-          background-size: 400px 400px;
-          background-image:
-              radial-gradient(2px 2px at 10px 200px, #eee, rgba(0,0,0,0)),
-              radial-gradient(2px 2px at 300px 300px, #fff, rgba(0,0,0,0)),
-              radial-gradient(3px 3px at 150px 250px, #ddd, rgba(0,0,0,0));
-          animation-duration: 3s;
+        background-size: 400px 400px;
+        background-image:
+          radial-gradient(2px 2px at 10px 200px, #eee, rgba(0,0,0,0)),
+          radial-gradient(2px 2px at 300px 300px, #fff, rgba(0,0,0,0)),
+          radial-gradient(3px 3px at 150px 250px, #ddd, rgba(0,0,0,0));
+        animation-duration: 2s;
       }
       @keyframes zoom {
-          0% { transform: scale(0.2); opacity: 0; }
-          40% { opacity: 1; }
-          60% { opacity: 1; }
-          100% { transform: scale(3); opacity: 0; }
+        0% { transform: scale(0.2); opacity: 0; }
+        40% { opacity: 1; }
+        60% { opacity: 1; }
+        100% { transform: scale(3); opacity: 0; }
       }
       .page-content {
-          transform: scale(0.95);
-          opacity: 0;
-          transition: transform 1.2s ease-out, opacity 1.2s ease-out;
+        transform: scale(0.95);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 1.2s ease-out, opacity 1.2s ease-out, visibility 0s 1.2s;
       }
       body.loaded .page-content {
-          transform: scale(1);
-          opacity: 1;
+        transform: scale(1);
+        opacity: 1;
+        visibility: visible;
+        transition: transform 1.2s ease-out, opacity 1.2s ease-out, visibility 0s 0s;
       }
     </style>
     <style>
@@ -178,28 +178,13 @@
         inset: 0;
         padding: 2px;
         border-radius: inherit;
-        background: radial-gradient(
-          ellipse 80% 80% at 50% 20%,
-          rgba(0, 255, 255, 0.9),
-          rgba(59, 130, 246, 0.5),
-          rgba(59, 130, 246, 0)
-        );
+        background: radial-gradient(ellipse 80% 80% at 50% 20%, rgba(0, 255, 255, 0.9), rgba(59, 130, 246, 0.5), rgba(59, 130, 246, 0));
       }
       [radial-border="right"]::after {
-        background: radial-gradient(
-          ellipse 80% 80% at 95% 20%,
-          rgba(0, 255, 255, 0.9),
-          rgba(59, 130, 246, 0.5),
-          rgba(59, 130, 246, 0)
-        );
+        background: radial-gradient(ellipse 80% 80% at 95% 20%, rgba(0, 255, 255, 0.9), rgba(59, 130, 246, 0.5), rgba(59, 130, 246, 0));
       }
       [radial-border="left"]::after {
-        background: radial-gradient(
-          ellipse 80% 80% at 5% 20%,
-          rgba(0, 255, 255, 0.9),
-          rgba(59, 130, 246, 0.5),
-          rgba(59, 130, 246, 0)
-        );
+        background: radial-gradient(ellipse 80% 80% at 5% 20%, rgba(0, 255, 255, 0.9), rgba(59, 130, 246, 0.5), rgba(59, 130, 246, 0));
       }
       [glow-border="card"]::before {
         content: "";
@@ -220,12 +205,7 @@
         transition-timing-function: ease;
         transition-delay: 0s;
         transition-property: opacity;
-        background: radial-gradient(
-          circle 10rem at var(--cursor-x) var(--cursor-y),
-          rgba(0, 255, 255, 1),
-          rgba(59, 130, 246, 0.5),
-          rgba(59, 130, 246, 0)
-        );
+        background: radial-gradient(circle 10rem at var(--cursor-x) var(--cursor-y), rgba(0, 255, 255, 1), rgba(59, 130, 246, 0.5), rgba(59, 130, 246, 0));
         background-size: auto;
         background-origin: padding-box;
         z-index: 0;
@@ -240,43 +220,157 @@
         opacity: 1;
       }
       @keyframes pulse {
-        0% { opacity: 0.2; } 50% { opacity: 0.3; } 100% { opacity: 0.2; }
+        0% { opacity: 0.2; }
+        50% { opacity: 0.3; }
+        100% { opacity: 0.2; }
       }
-      .hero_light { animation: pulse 6s infinite ease-in-out; }
+      .hero_light {
+        animation: pulse 6s infinite ease-in-out;
+      }
       @media screen and (max-width: 768px) {
-        @keyframes pulse { 0% { opacity: 0.1; } 50% { opacity: 0.2; } 100% { opacity: 0.1; } }
-        .hero_light { animation: pulse 6s infinite ease-in-out; }
+        @keyframes pulse {
+          0% { opacity: 0.1; }
+          50% { opacity: 0.2; }
+          100% { opacity: 0.1; }
+        }
+        .hero_light {
+          animation: pulse 6s infinite ease-in-out;
+        }
       }
       @keyframes heroAurora {
-        0% { transform: translate(-50%, -1%) rotateZ(0deg); } 25% { transform: translate(-50%, -1%) rotateZ(-7deg); } 50% { transform: translate(-50%, -1%) rotateZ(0deg); } 75% { transform: translate(-50%, -1%) rotateZ(7deg); } 100% { transform: translate(-50%, -1%) rotateZ(0deg); }
+        0% { transform: translate(-50%, -1%) rotateZ(0deg); }
+        25% { transform: translate(-50%, -1%) rotateZ(-7deg); }
+        50% { transform: translate(-50%, -1%) rotateZ(0deg); }
+        75% { transform: translate(-50%, -1%) rotateZ(7deg); }
+        100% { transform: translate(-50%, -1%) rotateZ(0deg); }
       }
-      .hero_aurora.is-blured { animation: heroAurora 14s infinite ease-in-out; }
+      .hero_aurora.is-blured {
+        animation: heroAurora 14s infinite ease-in-out;
+      }
       @keyframes footerAurora {
-        0% { transform: rotateZ(-10deg); } 50% { transform: rotateZ(10deg); } 100% { transform: rotateZ(-10deg); }
+        0% { transform: rotateZ(-10deg); }
+        50% { transform: rotateZ(10deg); }
+        100% { transform: rotateZ(-10deg); }
       }
-      .footer_aurora.is-blured { animation: footerAurora 6s infinite ease-in-out; }
+      .footer_aurora.is-blured {
+        animation: footerAurora 6s infinite ease-in-out;
+      }
 
       /* C0Di3 Specific Styles */
-      .hero-buttons { display: flex; flex-direction: row; gap: 1rem; justify-content: center; margin-top: 2rem; }
-      .btn { padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; display: inline-block; border: 2px solid transparent; }
-      .btn-primary { background: linear-gradient(90deg, #3b82f6, #6366f1); color: white; }
-      .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4); }
-      .btn-secondary { background-color: transparent; border-color: #3b82f6; color: #3b82f6; }
-      .btn-secondary:hover { background-color: #3b82f6; color: white; transform: translateY(-3px); }
-      .waitlist-form { max-width: 500px; margin: 2rem auto 0; display: grid; gap: 1.5rem; }
-      .form-group { text-align: left; }
-      .form-group label { color: #e5e7eb; font-weight: 500; margin-bottom: 0.5rem; display: block; }
-      .form-input { width: 100%; background: rgba(10, 10, 10, 0.8); border: 1px solid rgba(59, 130, 246, 0.4); outline: none; padding: 0.75rem 1rem; border-radius: 0.5rem; font-size: 1rem; color: #fff; backdrop-filter: blur(8px); transition: all 0.25s ease; }
-      .form-input:focus { box-shadow: 0 0 15px rgba(0, 255, 255, 0.5); border-color: rgba(0, 255, 255, 0.8); }
-      .success-message { background: linear-gradient(45deg, rgba(0, 255, 0, 0.1), rgba(0, 128, 0, 0.1)); border: 1px solid rgba(0, 255, 0, 0.3); color: #0f0; padding: 1rem; border-radius: 8px; margin-top: 1rem; text-align: center; display: none; }
-      .social-links a { color: #9ca3af; text-decoration: none; margin: 0 0.75rem; transition: color 0.3s ease; font-size: 0.9rem; font-weight: 300; }
-      .social-links a:hover { color: #00ffff; }
-      .mastermind-card { text-align: center; margin-top: 3rem; }
-      .mastermind-card a { text-decoration: none; color: inherit; display: inline-block; }
-      .mastermind-card img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid #3b82f6; margin-bottom: 1.5rem; transition: transform 0.3s ease; }
-      .mastermind-card a:hover img { transform: scale(1.1); }
-      .mastermind-card h4 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
-      .mastermind-card p { color: #9ca3af; }
+      .hero-buttons {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+      .btn {
+        padding: 0.8rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-block;
+        border: 2px solid transparent;
+      }
+      .btn-primary {
+        background: linear-gradient(90deg, #3b82f6, #6366f1);
+        color: white;
+      }
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
+      }
+      .btn-secondary {
+        background-color: transparent;
+        border-color: #3b82f6;
+        color: #3b82f6;
+      }
+      .btn-secondary:hover {
+        background-color: #3b82f6;
+        color: white;
+        transform: translateY(-3px);
+      }
+      .waitlist-form {
+        max-width: 500px;
+        margin: 2rem auto 0;
+        display: grid;
+        gap: 1.5rem;
+      }
+      .form-group {
+        text-align: left;
+      }
+      .form-group label {
+        color: #e5e7eb;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+      .form-input {
+        width: 100%;
+        background: rgba(10, 10, 10, 0.8);
+        border: 1px solid rgba(59, 130, 246, 0.4);
+        outline: none;
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        color: #fff;
+        backdrop-filter: blur(8px);
+        transition: all 0.25s ease;
+      }
+      .form-input:focus {
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        border-color: rgba(0, 255, 255, 0.8);
+      }
+      .success-message {
+        background: linear-gradient(45deg, rgba(0, 255, 0, 0.1), rgba(0, 128, 0, 0.1));
+        border: 1px solid rgba(0, 255, 0, 0.3);
+        color: #0f0;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 1rem;
+        text-align: center;
+        display: none;
+      }
+      .social-links a {
+        color: #9ca3af;
+        text-decoration: none;
+        margin: 0 0.75rem;
+        transition: color 0.3s ease;
+        font-size: 0.9rem;
+        font-weight: 300;
+      }
+      .social-links a:hover {
+        color: #00ffff;
+      }
+      .mastermind-card {
+        text-align: center;
+        margin-top: 3rem;
+      }
+      .mastermind-card a {
+        text-decoration: none;
+        color: inherit;
+        display: inline-block;
+      }
+      .mastermind-card img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 3px solid #3b82f6;
+        margin-bottom: 1.5rem;
+        transition: transform 0.3s ease;
+      }
+      .mastermind-card a:hover img {
+        transform: scale(1.1);
+      }
+      .mastermind-card h4 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+      .mastermind-card p {
+        color: #9ca3af;
+      }
       
       /* --- Layout and Menu Fixes --- */
       #guide {
@@ -286,7 +380,9 @@
       .stages_track {
         display: flex;
         gap: 2rem;
-        width: max-content;
+        width: 100%;
+        flex-wrap: wrap; /* Allows items to wrap to the next line */
+        justify-content: center; /* Centers the items */
       }
       .stages_section {
         min-width: 300px;
@@ -295,25 +391,23 @@
       }
       .stages_wrapper {
         margin-top: 2rem;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
       }
       .headline-wrapper {
         margin-bottom: 3rem;
       }
+      
       /* --- FIXED: Standard Mobile Navbar --- */
       @media (max-width: 991px) {
         .navbar {
-          justify-content: center; /* Center items on mobile */
-          flex-wrap: wrap; /* Allow items to wrap */
+          justify-content: space-between; /* Keeps logo left, links right */
           padding: 1rem;
         }
         .navbar_links-wrapper {
           display: flex !important; /* Ensure it's always visible */
-          width: 100%;
-          justify-content: center;
           gap: 1rem;
-          margin-top: 1rem;
+        }
+        .navbar .w-nav-brand {
+            display: none; /* Hides the logo in the navbar on mobile */
         }
         .hero-buttons { flex-direction: column; }
         .stages_track { flex-direction: column; gap: 2rem; width: 100%; }
@@ -332,14 +426,14 @@
         <div class="styles w-embed"></div>
         <!-- REMOVED: Animated Menu and its JavaScript logic are no longer needed -->
         <nav class="navbar" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); background-color: transparent;">
-            <a href="#" class="w-nav-brand" style="padding-left: 1rem; text-decoration: none;">
+            <a href="https://github.com/Senpai-Sama7/Project-C0Di3" target="_blank" rel="noopener noreferrer" class="w-nav-brand" style="padding-left: 1rem; text-decoration: none;">
                 <img src="C0Di3.PNG" loading="lazy" alt="C0Di3 Logo" style="height: 40px; border-radius: 50%;">
             </a>
             <div class="navbar_links-wrapper">
                 <a href="#features" class="navbar_link">Features</a>
                 <a href="#team" class="navbar_link">About</a>
                 <a href="#waitlist" class="navbar_link">Join Waitlist</a>
-                <a href="https://github.com/Senpai-Sama7/Project-C0Di3" target="_blank" rel="noopener noreferrer" class="navbar_link">GitHub</a>
+                <a href="https://www.instagram.com/c0di3_ai/" target="_blank" rel="noopener noreferrer" class="navbar_link">Instagram</a>
             </div>
             <!-- REMOVED: The menu-toggle button is no longer needed -->
         </nav>
@@ -348,14 +442,16 @@
                 <div class="container is-hero">
                     <div class="hero_content-wrapper" style="text-align: center;">
                         <div class="hero_content-top" style="translate: none; rotate: none; scale: none; transform: translate3d(0px, 0px, 0rem); opacity: 1;">
-                            <img src="C0Di3.PNG" alt="C0Di3 Logo" class="logo-image" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 2rem; box-shadow: 0 0 40px rgba(59, 130, 246, 0.5);">
+                            <a href="https://www.instagram.com/c0di3_ai/" target="_blank" rel="noopener noreferrer">
+                                <img src="C0Di3.PNG" alt="C0Di3 Logo" class="logo-image" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 2rem; box-shadow: 0 0 40px rgba(59, 130, 246, 0.5);">
+                            </a>
                             <h1 class="hero_heading">Meet C0Di3: Your AI Cybersecurity Guardian</h1>
                         </div>
                         <div class="hero_content-bottom" style="opacity: 1;">
                             <p>An advanced AI agent designed to proactively detect, analyze, and neutralize cyber threats. C0Di3 is your ever-vigilant partner in the digital battlefield.</p>
                             <div class="hero-buttons">
                                 <a href="#waitlist" class="btn btn-primary">Join the Waitlist</a>
-                                <a href="https://github.com/Senpai-Sama7/Project-C0Di3" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">View on GitHub</a>
+                                <a href="https://www.instagram.com/c0di3_ai/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Instagram</a>
                             </div>
                         </div>
                     </div>
@@ -629,6 +725,11 @@
                             </div>
                             <p>© 2024 C0Di3 Project. All Rights Reserved.</p>
                             <a href="https://github.com/Senpai-Sama7" target="_blank" class="eyebrow-heading" style="text-decoration: none; margin-top: 0.5rem; display: inline-block;">An open-source initiative by Douglas Mitchell</a>
+                            <div class="mobile-logo-footer" style="text-align: center; margin-top: 2rem; display: none;">
+                                <a href="https://github.com/Senpai-Sama7/Project-C0Di3" target="_blank" rel="noopener noreferrer">
+                                    <img src="C0Di3.PNG" loading="lazy" alt="C0Di3 Logo" style="height: 40px; border-radius: 50%;">
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="footer_aurora is-blured"><div class="hero_aurora-inner"></div></div>
@@ -661,14 +762,6 @@
         requestAnimationFrame(raf);
       }
       requestAnimationFrame(raf);
-      $("[data-lenis-start]").on("click", function () {
-        lenis.start();
-      });
-      $("[data-lenis-stop]").on("click", function () {
-        lenis.stop();
-      });
-      
-      // REMOVED: All JavaScript related to the menu toggle button
       
       document.addEventListener("DOMContentLoaded", function () {
         setTimeout(function() {
