@@ -439,27 +439,14 @@
         from { transform: translateY(0px); }
         to { transform: translateY(-2000px); }
       }
-      
-      .solid-background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #050508; /* A very dark blue/black */
-        z-index: -3; /* Furthest back layer */
-      }
-
       #stars-container {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: -1; /* Above solid background, below content */
+        z-index: -2;
         overflow: hidden;
-        /* FIX: Increased opacity for better visibility */
-        opacity: 1; 
       }
       .stars {
         position: absolute;
@@ -489,61 +476,9 @@
         position: relative;
         overflow: hidden; /* Contain the aurora */
       }
-      
-      /* FIX: Added glowing effect for audience modules */
-      .petals_grid-item_inner {
-        box-shadow: 0 0 25px rgba(0, 255, 255, 0.1), 0 0 50px rgba(59, 130, 246, 0.15);
-        transition: box-shadow 0.4s ease-in-out;
-      }
-
-      .petals_grid-item_inner:hover {
-          box-shadow: 0 0 40px rgba(0, 255, 255, 0.25), 0 0 80px rgba(59, 130, 246, 0.25);
-      }
-    </style>
-    <!-- FIX: Added new style block for performance optimizations -->
-    <style>
-      /* --- Performance Optimizations --- */
-      /* Hint to the browser about upcoming transformations to prevent rendering glitches */
-      .hero_content-top,
-      .hero_content-bottom,
-      .benefit-card,
-      .petals-circle,
-      .petals-row .petal,
-      .navbar {
-        will-change: transform, opacity;
-      }
-
-      /* Force elements onto their own compositing layer for smoother animation */
-      [data-animation="text-reveal"],
-      [glow-border="card"],
-      .stages_section,
-      .mastermind-card {
-        transform: translateZ(0);
-      }
-
-      /* Disable expensive effects on mobile for performance */
-      @media (max-width: 991px) {
-        .halo-glow-box,
-        .form-input {
-          backdrop-filter: none !important;
-          -webkit-backdrop-filter: none !important;
-          /* Provide a fallback background */
-          background: rgba(10, 10, 10, 0.85);
-        }
-        .form-input {
-          background: rgba(10, 10, 10, 0.9);
-        }
-      }
-
-      /* FIX: Ensure main content wrapper is transparent to see background animation */
-      .page-wrapper {
-        background-color: transparent !important;
-      }
     </style>
 </head>
 <body>
-    <div class="solid-background"></div>
-
     <div id="stars-container">
         <div id="stars1" class="stars"></div>
         <div id="stars2" class="stars"></div>
@@ -557,6 +492,7 @@
 
     <div class="page-wrapper page-content">
         <div class="styles w-embed"></div>
+        <!-- REMOVED: Animated Menu and its JavaScript logic are no longer needed -->
         <nav class="navbar" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); background-color: transparent;">
             <a href="https://github.com/Senpai-Sama7/Project-C0Di3" target="_blank" rel="noopener noreferrer" class="w-nav-brand" style="padding-left: 1rem; text-decoration: none;">
                 <img src="C0Di3.PNG" loading="lazy" alt="C0Di3 Logo" style="height: 40px; border-radius: 50%;">
@@ -568,6 +504,7 @@
                 <a href="https://www.instagram.com/c0di3_ai/" target="_blank" rel="noopener noreferrer" class="navbar_link">Instagram</a>
                 <a href="https://github.com/Senpai-Sama7/Project-C0Di3" target="_blank" rel="noopener noreferrer" class="navbar_link">GitHub</a>
             </div>
+            <!-- REMOVED: The menu-toggle button is no longer needed -->
         </nav>
         <main class="content-wrapper">
             <section class="section is-hero">
@@ -691,41 +628,41 @@
                     <div class="container">
                         <div class="headline-wrapper">
                             <div class="vertical-gap-8">
-                                <p data-animation="text-reveal" class="eyebrow-heading">comparison</p>
-                                <h2 data-animation="text-reveal">C0Di3 vs Traditional<br>Cybersecurity</h2>
+                                <p data-animation="text-reveal" class="eyebrow-heading" style="opacity: 1;">comparison</p>
+                                <h2 data-animation="text-reveal" style="opacity: 1;">C0Di3 vs Traditional<br>Cybersecurity</h2>
                             </div>
                         </div>
                         <div class="petals-layout">
                             <div class="petals-row is-top">
-                                <div class="petal"><div class="subheading">Traditional</div><h3>Security</h3></div>
-                                <div class="petal inverse"><div class="subheading">AI-Powered</div><h3>C0Di3</h3></div>
+                                <div class="petal" style="opacity: 0; transform: translate(-5rem, -2rem);"><div class="subheading">Traditional</div><h3>Security</h3></div>
+                                <div class="petal inverse" style="opacity: 0; transform: translate(5rem, -2rem);"><div class="subheading">AI-Powered</div><h3>C0Di3</h3></div>
                             </div>
-                            <div class="petals-circle">
-                                <div class="petals-circle_inner">
-                                    <p class="petals-circle_text">Response Time</p>
-                                    <p class="petals-circle_text">Approach</p>
-                                    <p class="petals-circle_text">Scalability</p>
-                                    <p class="petals-circle_text">Adaptability</p>
-                                    <p class="petals-circle_text">Human Factor</p>
+                            <div class="petals-circle" style="transform: rotate(1440deg);">
+                                <div class="petals-circle_inner" style="transform: rotate(-1440deg);">
+                                    <p class="petals-circle_text" style="opacity: 0; transform: scale(0.8);">Response Time</p>
+                                    <p class="petals-circle_text" style="opacity: 0; transform: scale(0.8);">Approach</p>
+                                    <p class="petals-circle_text" style="opacity: 0; transform: scale(0.8);">Scalability</p>
+                                    <p class="petals-circle_text" style="opacity: 0; transform: scale(0.8);">Adaptability</p>
+                                    <p class="petals-circle_text" style="opacity: 1; transform: translate(0px);">Human Factor</p>
                                 </div>
                             </div>
                             <div class="petals-row is-bottom">
-                                <div class="petal inverse">
+                                <div class="petal inverse" style="opacity: 0; transform: translate(-5rem, 2rem);">
                                     <div class="petal-texts_wrapper">
-                                        <p class="petal-text">Manual, measured in hours or days</p>
-                                        <p class="petal-text">Reactive, based on known signatures</p>
-                                        <p class="petal-text">Limited by team size and budget</p>
-                                        <p class="petal-text">Slow to adapt to new zero-day threats</p>
-                                        <p class="petal-text">Reliant on human analysts, prone to error</p>
+                                        <p class="petal-text" style="opacity: 0; transform: translate(0px, -1rem) scale(0.8);">Manual, measured in hours or days</p>
+                                        <p class="petal-text" style="opacity: 0; transform: translate(0px, -1rem) scale(0.8);">Reactive, based on known signatures</p>
+                                        <p class="petal-text" style="opacity: 0; transform: translate(0px, -1rem) scale(0.8);">Limited by team size and budget</p>
+                                        <p class="petal-text" style="opacity: 0; transform: translate(0px, -1rem) scale(0.8);">Slow to adapt to new zero-day threats</p>
+                                        <p class="petal-text" style="opacity: 1; transform: translate(0px);">Reliant on human analysts, prone to error</p>
                                     </div>
                                 </div>
-                                <div class="petal">
+                                <div class="petal" style="opacity: 0; transform: translate(5rem, 2rem);">
                                     <div class="petal-texts_wrapper">
-                                        <p class="petal-text">Automated, measured in seconds</p>
-                                        <p class="petal-text">Proactive, based on behavioral analysis</p>
-                                        <p class="petal-text">Infinitely scalable with the network</p>
-                                        <p class="petal-text">Learns and adapts to new threats in real-time</p>
-                                        <p class="petal-text">Augments human teams, reduces fatigue</p>
+                                        <p class="petal-text" style="opacity: 0; transform: translate(0px, -1rem) scale(0.8);">Automated, measured in seconds</p>
+                                        <p class="petal-text" style="opacity: 0; transform: translate(0px, -1rem) scale(0.8);">Proactive, based on behavioral analysis</p>
+                                        <p class="petal-text" style="opacity: 0; transform: translate(0px, -1rem) scale(0.8);">Infinitely scalable with the network</p>
+                                        <p class="petal-text" style="opacity: 0; transform: translate(0px, -1rem) scale(0.8);">Learns and adapts to new threats in real-time</p>
+                                        <p class="petal-text" style="opacity: 1; transform: translate(0px);">Augments human teams, reduces fatigue</p>
                                     </div>
                                 </div>
                             </div>
@@ -777,6 +714,7 @@
                     </div>
                 </div>
             </div>
+            <!-- FIXED SECTION: Removed conflicting inline 'style' attributes -->
             <div id="options" class="section">
                 <div class="container">
                     <div class="petals-grid" style="position: relative; z-index: 2;">
@@ -807,7 +745,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- FIX: Removed the footer_aurora divs that created the eclipse effect -->
+                <div class="footer_aurora is-blured"><div class="hero_aurora-inner"></div></div>
+                <div class="footer_aurora"><div class="hero_aurora-inner"></div></div>
             </div>
             <div id="waitlist" class="section is-footer">
                 <div class="container">
@@ -859,6 +798,7 @@
                             </div>
                             <p>© 2024 C0Di3 Project. All Rights Reserved.</p>
                             <a href="https://github.com/Senpai-Sama7" target="_blank" class="eyebrow-heading" style="text-decoration: none; margin-top: 0.5rem; display: inline-block;">An open-source initiative by Douglas Mitchell</a>
+                            <!-- ADDED: Mobile Footer Logo -->
                             <div class="mobile-logo-footer">
                                 <a href="https://github.com/Senpai-Sama7/Project-C0Di3" target="_blank" rel="noopener noreferrer">
                                     <img src="C0Di3.PNG" loading="lazy" alt="C0Di3 Logo" style="height: 40px; border-radius: 50%;">
@@ -883,21 +823,19 @@
 
     <script>
       "use strict";
-      if (window.innerWidth > 991) {
-        const lenis = new Lenis({
-          lerp: 0.15,
-          wheelMultiplier: 0.9,
-          infinite: false,
-          gestureOrientation: "vertical",
-          normalizeWheel: false,
-          smoothTouch: false
-        });
-        function raf(time) {
-          lenis.raf(time);
-          requestAnimationFrame(raf);
-        }
+      const lenis = new Lenis({
+        lerp: 0.15,
+        wheelMultiplier: 0.9,
+        infinite: false,
+        gestureOrientation: "vertical",
+        normalizeWheel: false,
+        smoothTouch: false
+      });
+      function raf(time) {
+        lenis.raf(time);
         requestAnimationFrame(raf);
       }
+      requestAnimationFrame(raf);
       
       document.addEventListener("DOMContentLoaded", function () {
         setTimeout(function() {
@@ -932,7 +870,7 @@
           this.move = function () { this.x += this.vx * this.direction.x; this.y += this.vy * this.direction.y; this.rotation += this.valpha; };
           this.changeDirection = function (axis) { this.direction[axis] *= -1; this.valpha *= -1; };
           this.boundaryCheck = function () { if (this.x >= W * 1.2 || this.x <= -W * 0.2) { this.changeDirection("x"); } if (this.y >= H * 1.2 || this.y <= -H * 0.2) { this.changeDirection("y"); } };
-          this.draw = function () { ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.rotation); ctx.scale(1, this.scale); const grad = ctx.createRadialGradient(0, 0, this.radius, 0, 0, 0); grad.addColorStop(1, this.color); grad.addColorStop(0, this.shadowcolor); ctx.beginPath(); ctx.fillStyle = grad; ctx.arc(0, 0, Math.PI * 2, false); ctx.fill(); ctx.restore(); };
+          this.draw = function () { ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.rotation); ctx.scale(1, this.scale); const grad = ctx.createRadialGradient(0, 0, this.radius, 0, 0, 0); grad.addColorStop(1, this.color); grad.addColorStop(0, this.shadowcolor); ctx.beginPath(); ctx.fillStyle = grad; ctx.arc(0, 0, this.radius, 0, Math.PI * 2, false); ctx.fill(); ctx.restore(); };
         }
         function animateCanvasParticles() {
           ctx.clearRect(0, 0, W, H);
@@ -947,9 +885,6 @@
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         gsap.registerPlugin(ScrollTrigger);
-        
-        const isDesktop = window.innerWidth > 991;
-
         function cardGlowBorder() {
           document.querySelectorAll('[glow-border="wrapper"]').forEach(wrapper => {
             wrapper.addEventListener("mousemove", function (event) {
@@ -961,7 +896,7 @@
             });
           });
         }
-        if (isDesktop && document.querySelectorAll('[glow-border="wrapper"]').length) {
+        if (document.querySelectorAll('[glow-border="wrapper"]').length) {
           cardGlowBorder();
         }
         const tl = gsap.timeline();
@@ -972,14 +907,14 @@
           tl.fromTo(".hero_content-bottom", { opacity: 0 }, { opacity: 1, duration: 1, ease: "power2.out" }, "-=1.2");
         }
         document.querySelectorAll('[data-animation="text-reveal"]').forEach(el => {
-          gsap.fromTo(el, { opacity: 0 }, { opacity: 1, ease: "none", scrollTrigger: { trigger: el, start: "top 90%", end: "top 50%", scrub: isDesktop ? true : 0.5 } });
+          gsap.fromTo(el, { opacity: 0 }, { opacity: 1, ease: "none", scrollTrigger: { trigger: el, start: "top 90%", end: "top 50%", scrub: true } });
         });
         const overlay = document.querySelector(".headline_circle-overlay");
         const circle = document.querySelector(".headline_circle");
         if (overlay && circle) {
-          gsap.fromTo(overlay, { y: "0%" }, { y: "100%", ease: "none", scrollTrigger: { trigger: circle, start: "top 90%", end: "bottom 40%", scrub: isDesktop ? true : 0.5 } });
+          gsap.fromTo(overlay, { y: "0%" }, { y: "100%", ease: "none", scrollTrigger: { trigger: circle, start: "top 90%", end: "bottom 40%", scrub: true } });
         }
-        if (isDesktop) {
+        if (window.innerWidth >= 991) {
           document.querySelectorAll('.benefit-card').forEach(card => {
             const isLeft = card.classList.contains('is-left');
             const from = { x: isLeft ? '-2rem' : '2rem', y: '2rem', opacity: 0 };
@@ -1008,8 +943,8 @@
               trigger: ".section.is-hero",
               start: "bottom top",
               end: "bottom top",
-              onEnter: () => { navbar.style.backgroundColor = "rgba(10, 10, 10, 0.7)"; navbar.style.backdropFilter = "blur(10px)"; },
-              onLeaveBack: () => { navbar.style.backgroundColor = "transparent"; navbar.style.backdropFilter = "none"; }
+              onEnter: () => { navbar.style.backgroundColor = "var(--background-primary)"; },
+              onLeaveBack: () => { navbar.style.backgroundColor = "transparent"; }
             });
           }
         }
@@ -1030,7 +965,7 @@
             }
           });
           gsap.utils.toArray('.numbers_wrapper .numbers_line-overlay').forEach(overlay => {
-            gsap.fromTo(overlay, { height: '100%' }, { height: '0%', scrollTrigger: { trigger: numbersWrapper, start: "top bottom", end: "top top", scrub: isDesktop ? true : 0.5 } });
+            gsap.fromTo(overlay, { height: '100%' }, { height: '0%', scrollTrigger: { trigger: numbersWrapper, start: "top bottom", end: "top top", scrub: true } });
           });
         }
         document.querySelectorAll('.button').forEach(glowButton => {
@@ -1047,49 +982,47 @@
             gsap.to(glow, { x: 0, y: 0, duration: 0.5, ease: 'power3.out' });
           });
         });
-
-        if (isDesktop) {
-            const rotations = 4;
-            const degrees = rotations * 360;
-            const sticky = document.querySelector("#comparison");
-            sticky.style.height = `${rotations * window.innerHeight}px`;
-            const scrubValue = isDesktop ? true : 1;
-            gsap.to(".petals-circle", { rotate: degrees, ease: "none", scrollTrigger: { trigger: "#comparison", start: "top+=250 top", end: "bottom bottom", scrub: scrubValue } });
-            gsap.to(".petals-circle_inner", { rotate: -degrees, ease: "none", scrollTrigger: { trigger: "#comparison", start: "top+=250 top", end: "bottom bottom", scrub: scrubValue } });
-            const circleTexts = gsap.utils.toArray(".petals-circle_text");
-            gsap.set(circleTexts, { scale: 0.8, opacity: 0 });
-            gsap.set(circleTexts[0], { scale: 1, opacity: 1 });
-            const textDelay = 0.5;
-            const textTimeline = gsap.timeline({ scrollTrigger: { trigger: "#comparison", start: "top top", end: "bottom bottom", scrub: scrubValue } });
-            circleTexts.forEach((cur, i) => {
-              const next = circleTexts[i + 1];
-              if (!next) return;
-              textTimeline.to(cur, { scale: 0.8, opacity: 0, ease: "none", duration: 0.5 }, textDelay + i);
-              textTimeline.fromTo(next, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, ease: "none", duration: 0.5 }, textDelay + i + 0.5);
-            });
-            document.querySelectorAll(".petal-texts_wrapper").forEach(wrapper => {
-              const texts = gsap.utils.toArray(wrapper.querySelectorAll(".petal-text"));
-              gsap.set(texts, { scale: 0.8, y: "1rem", opacity: 0 });
-              gsap.set(texts[0], { scale: 1, y: "0rem", opacity: 1 });
-              texts.forEach((cur, i) => {
-                const next = texts[i + 1];
-                if (!next) return;
-                textTimeline.to(cur, { scale: 0.8, y: "-1rem", opacity: 0, ease: "none", duration: 0.5 }, textDelay + i);
-                textTimeline.fromTo(next, { scale: 0.8, y: "1rem", opacity: 0 }, { scale: 1, y: "0rem", opacity: 1, ease: "none", duration: 0.5 }, textDelay + i + 0.5);
-              });
-            });
-            gsap.timeline({ scrollTrigger: { trigger: "#comparison", start: "top bottom", end: "top top", scrub: scrubValue } })
-              .fromTo(".petals-row.is-top .petal:first-child", { opacity: 0, x: "-5rem", y: "-2rem" }, { opacity: 1, x: "0rem", y: "0rem", ease: "none" })
-              .fromTo(".petals-row.is-top .petal:last-child", { opacity: 0, x: "5rem", y: "-2rem" }, { opacity: 1, x: "0rem", y: "0rem", ease: "none" }, "<")
-              .fromTo(".petals-row.is-bottom .petal:first-child", { opacity: 0, x: "-5rem", y: "2rem" }, { opacity: 1, x: "0rem", y: "0rem", ease: "none" }, "<")
-              .fromTo(".petals-row.is-bottom .petal:last-child", { opacity: 0, x: "5rem", y: "2rem" }, { opacity: 1, x: "0rem", y: "0rem", ease: "none" }, "<");
-            gsap.timeline({ scrollTrigger: { trigger: "#comparison", start: "bottom 80%", end: "bottom top", scrub: scrubValue } })
-              .to(".petals-row.is-top .petal:first-child", { opacity: 0, x: "-5rem", y: "-2rem", ease: "none" })
-              .to(".petals-row.is-top .petal:last-child", { opacity: 0, x: "5rem", y: "-2rem", ease: "none" }, "<")
-              .to(".petals-row.is-bottom .petal:first-child", { opacity: 0, x: "-5rem", y: "2rem", ease: "none" }, "<")
-              .to(".petals-row.is-bottom .petal:last-child", { opacity: 0, x: "5rem", y: "2rem", ease: "none" }, "<");
-        }
+        const rotations = 4;
+        const degrees = rotations * 360;
+        const sticky = document.querySelector("#comparison");
+        sticky.style.height = `${rotations * window.innerHeight}px`;
+        gsap.to(".petals-circle", { rotate: degrees, ease: "none", scrollTrigger: { trigger: "#comparison", start: "top+=250 top", end: "bottom bottom", scrub: true } });
+        gsap.to(".petals-circle_inner", { rotate: -degrees, ease: "none", scrollTrigger: { trigger: "#comparison", start: "top+=250 top", end: "bottom bottom", scrub: true } });
+        const circleTexts = gsap.utils.toArray(".petals-circle_text");
+        gsap.set(circleTexts, { scale: 0.8, opacity: 0 });
+        gsap.set(circleTexts[0], { scale: 1, opacity: 1 });
+        const textDelay = 0.5;
+        const textTimeline = gsap.timeline({ scrollTrigger: { trigger: "#comparison", start: "top top", end: "bottom bottom", scrub: true } });
+        circleTexts.forEach((cur, i) => {
+          const next = circleTexts[i + 1];
+          if (!next) return;
+          textTimeline.to(cur, { scale: 0.8, opacity: 0, ease: "none", duration: 0.5 }, textDelay + i);
+          textTimeline.fromTo(next, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, ease: "none", duration: 0.5 }, textDelay + i + 0.5);
+        });
+        document.querySelectorAll(".petal-texts_wrapper").forEach(wrapper => {
+          const texts = gsap.utils.toArray(wrapper.querySelectorAll(".petal-text"));
+          gsap.set(texts, { scale: 0.8, y: "1rem", opacity: 0 });
+          gsap.set(texts[0], { scale: 1, y: "0rem", opacity: 1 });
+          texts.forEach((cur, i) => {
+            const next = texts[i + 1];
+            if (!next) return;
+            textTimeline.to(cur, { scale: 0.8, y: "-1rem", opacity: 0, ease: "none", duration: 0.5 }, textDelay + i);
+            textTimeline.fromTo(next, { scale: 0.8, y: "1rem", opacity: 0 }, { scale: 1, y: "0rem", opacity: 1, ease: "none", duration: 0.5 }, textDelay + i + 0.5);
+          });
+        });
+        gsap.timeline({ scrollTrigger: { trigger: "#comparison", start: "top bottom", end: "top top", scrub: true } })
+          .fromTo(".petals-row.is-top .petal:first-child", { opacity: 0, x: "-5rem", y: "-2rem" }, { opacity: 1, x: "0rem", y: "0rem", ease: "none" })
+          .fromTo(".petals-row.is-top .petal:last-child", { opacity: 0, x: "5rem", y: "-2rem" }, { opacity: 1, x: "0rem", y: "0rem", ease: "none" }, "<")
+          .fromTo(".petals-row.is-bottom .petal:first-child", { opacity: 0, x: "-5rem", y: "2rem" }, { opacity: 1, x: "0rem", y: "0rem", ease: "none" }, "<")
+          .fromTo(".petals-row.is-bottom .petal:last-child", { opacity: 0, x: "5rem", y: "2rem" }, { opacity: 1, x: "0rem", y: "0rem", ease: "none" }, "<");
+        gsap.timeline({ scrollTrigger: { trigger: "#comparison", start: "bottom 80%", end: "bottom top", scrub: true } })
+          .to(".petals-row.is-top .petal:first-child", { opacity: 0, x: "-5rem", y: "-2rem", ease: "none" })
+          .to(".petals-row.is-top .petal:last-child", { opacity: 0, x: "5rem", y: "-2rem", ease: "none" }, "<")
+          .to(".petals-row.is-bottom .petal:first-child", { opacity: 0, x: "-5rem", y: "2rem", ease: "none" }, "<")
+          .to(".petals-row.is-bottom .petal:last-child", { opacity: 0, x: "5rem", y: "2rem", ease: "none" }, "<");
         
+        // REMOVED: GSAP pinning logic for the #guide section to make it static.
+
         $('#waitlistForm').on('submit', function(e) {
             e.preventDefault();
             var form = $(this);
